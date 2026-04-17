@@ -1,15 +1,15 @@
 # OpenPaper
 
-论文、播客、优质教程/博客等学习资源收集与笔记。
+论文、书籍与播客等学习资源收集与笔记。
 
 ## 目录结构
 
 ```
-├── README.md          # 项目说明
-├── README.open.md     # 待看资源列表
-├── README.closed.md   # 已看资源列表
-├── README.more.open.md   # 待看书籍与播客
-├── README.more.closed.md # 已看书籍与播客
+├── README.md              # 项目说明
+├── README.open.md         # 待看论文
+├── README.closed.md       # 已看论文
+├── README.more.open.md    # 待看书籍与播客
+├── README.more.closed.md  # 已看书籍与播客
 ├── ai/                # AI 相关论文与笔记
 │   ├── attention-is-all-you-need.pdf
 │   ├── bert.pdf
@@ -29,8 +29,8 @@
 
 ## 使用方式
 
-- [待看资源](README.open.md) — 还没看、计划看的论文/播客/博客等
-- [已看资源](README.closed.md) — 已完成阅读的内容及笔记
+- [待看论文](README.open.md) — 计划阅读的论文
+- [已看论文](README.closed.md) — 已完成阅读的论文及笔记
 - [待看书籍与播客](README.more.open.md) — 计划看的书籍和播客
 - [已看书籍与播客](README.more.closed.md) — 已完成阅读的书籍和播客
 

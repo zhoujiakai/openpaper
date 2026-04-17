@@ -1,4 +1,4 @@
-# paper
+# 待看论文
 
 ## Web3
 
@@ -110,3 +110,13 @@ R-CNN: Regions with Convolutional Neural Network Features
 - 链接：https://arxiv.org/abs/1311.2524
 - 被引用数：28,000+（Google Scholar，截止2026年4月6日）
 - 说明：两阶段目标检测开山之作，后续发展出 Fast R-CNN、Faster R-CNN、Mask R-CNN
+
+<!-- 格式参考：
+**论文名**
+- 类型：论文/开源项目，YYYY年发布
+- 作者：
+- 来源：会议/期刊/GitHub
+- 链接：
+- 被引用数：（可选）
+- 说明：
+-->
