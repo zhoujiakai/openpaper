@@ -5,12 +5,12 @@
 ## 目录结构
 
 ```
+├── paper-reading-skill.tar.gz  # AI 辅助论文精读 skill 封装
 ├── README.md              # 项目说明
 ├── README.open.md         # 待看论文
 ├── README.closed.md       # 已看论文
 ├── README.more.open.md    # 待看书籍与播客
 ├── README.more.closed.md  # 已看书籍与播客
-├── paper-reading-skill.tar.gz  # AI 辅助论文精读 skill 封装
 ├── ai/                # AI 相关论文与笔记
 │   ├── Attention_Is_All_You_Need/  # 含原论文、中文翻译、精读笔记
 │   ├── bert.pdf
