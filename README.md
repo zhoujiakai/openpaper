@@ -11,7 +11,7 @@
 ├── README.more.open.md    # 待看书籍与播客
 ├── README.more.closed.md  # 已看书籍与播客
 ├── ai/                # AI 相关论文与笔记
-│   ├── attention-is-all-you-need.pdf
+│   ├── Attention_Is_All_You_Need/  # 含原论文、中文翻译、精读笔记
 │   ├── bert.pdf
 │   └── ……
 ├── cv/                # 计算机视觉相关论文与笔记
