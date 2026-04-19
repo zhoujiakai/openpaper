@@ -35,6 +35,12 @@
 - [待看书籍与播客](README.more.open.md) — 计划看的书籍和播客
 - [已看书籍与播客](README.more.closed.md) — 已完成阅读的书籍和播客
 
+## 论文精读工具
+
+`paper-reading-skill.tar.gz` 是一个封装好的 AI 论文精读 skill，解压后导入 Claude Code 即可使用。它会引导你逐节阅读论文，通过提问和纠正帮助理解核心概念，并自动生成学习笔记和保存进度。适合论文初学者使用。
+
+> 提示：搭配 [Typeless](https://www.typeless.com/zh-cn) 语音输入使用体验更佳，口述回答比打字更轻松自然。
+
 ## 分类
 
 - **ai/** — 人工智能（Transformer、BERT、LLM 等）
