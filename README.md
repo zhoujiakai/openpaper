@@ -5,12 +5,14 @@
 ## 目录结构
 
 ```
-├── paper-reading-skill.tar.gz  # AI 辅助论文精读 skill 封装
 ├── README.md              # 项目说明
 ├── README.open.md         # 待看论文
 ├── README.closed.md       # 已看论文
 ├── README.more.open.md    # 待看书籍与播客
 ├── README.more.closed.md  # 已看书籍与播客
+├── skills/            # Claude Code 技能封装
+│   ├── paper-reading/     # 吴恩达式论文精读助手
+│   └── interview-baguwen/ # 面试八股文生成器
 ├── ai/                # AI 相关论文与笔记
 │   ├── Attention_Is_All_You_Need/  # 含原论文、中文翻译、精读笔记
 │   ├── bert.pdf
@@ -35,9 +37,12 @@
 - [待看书籍与播客](README.more.open.md) — 计划看的书籍和播客
 - [已看书籍与播客](README.more.closed.md) — 已完成阅读的书籍和播客
 
-## 论文精读工具
+## AI 辅助工具（Claude Code Skills）
 
-`paper-reading-skill.tar.gz` 是一个封装好的 AI 论文精读 skill，解压后导入 Claude Code 即可使用。它会引导你逐节阅读论文，通过提问和纠正帮助理解核心概念，并自动生成学习笔记和保存进度。适合论文初学者使用。
+`skills/` 目录下封装了两个 Claude Code 技能，复制到 `~/.claude/skills/` 即可使用：
+
+- **paper-reading** — 吴恩达式论文精读助手，引导你逐节阅读论文，通过提问和纠正帮助理解核心概念，自动生成学习笔记和保存进度
+- **interview-baguwen** — 面试八股文生成器，基于简历技术技能生成全面的面试问答准备指南
 
 > 提示：搭配 [Typeless](https://www.typeless.com/zh-cn) 语音输入使用体验更佳，口述回答比打字更轻松自然。
 
