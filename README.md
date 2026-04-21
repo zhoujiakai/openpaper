@@ -6,36 +6,36 @@
 
 ```
 ├── README.md              # 项目说明
-├── README.open.md         # 待看论文
-├── README.closed.md       # 已看论文
-├── README.more.open.md    # 待看书籍与播客
-├── README.more.closed.md  # 已看书籍与播客
-├── skills/            # Claude Code 技能封装
+├── skills/                # Claude Code 技能封装
 │   ├── paper-reading/     # 吴恩达式论文精读助手
 │   └── interview-baguwen/ # 面试八股文生成器
-├── ai/                # AI 相关论文与笔记
-│   ├── Attention_Is_All_You_Need/  # 含原论文、中文翻译、精读笔记
+├── open/                  # 待看资源
+│   ├── README.md          # 待看论文列表
+│   ├── README.cv.md       # 待看 CV 论文
+│   ├── README.web3.md     # 待看 Web3 资源
 │   ├── bert.pdf
-│   └── ……
-├── cv/                # 计算机视觉相关论文与笔记
-│   ├── README.cv.md
 │   ├── rcnn.pdf
 │   ├── yolov1.pdf
 │   ├── openpose.pdf
 │   ├── deepsort.pdf
-│   └── ……
-└── web3/              # Web3 相关论文与笔记
-    ├── README.web3.md
-    ├── bitcoin.pdf
-    └── ……
+│   └── notes_by_ai/      # 论文预读笔记
+│       ├── bitcoin.pdf
+│       └── ……
+├── closed/                # 已完成
+│   ├── README.md          # 已看论文列表
+│   └── Attention_Is_All_You_Need/  # 含原论文、中文翻译、精读笔记
+│       └── ……
+└── more/                  # 书籍与播客
+    ├── README.more.open.md    # 待看书籍与播客
+    └── README.more.closed.md  # 已看书籍与播客
 ```
 
 ## 使用方式
 
-- [待看论文](README.open.md) — 计划阅读的论文
-- [已看论文](README.closed.md) — 已完成阅读的论文及笔记
-- [待看书籍与播客](README.more.open.md) — 计划看的书籍和播客
-- [已看书籍与播客](README.more.closed.md) — 已完成阅读的书籍和播客
+- [待看论文](open/README.md) — 计划阅读的论文
+- [已看论文](closed/README.md) — 已完成阅读的论文及笔记
+- [待看书籍与播客](more/README.more.open.md) — 计划看的书籍和播客
+- [已看书籍与播客](more/README.more.closed.md) — 已完成阅读的书籍和播客
 
 ## AI 辅助工具（Claude Code Skills）
 
@@ -45,12 +45,6 @@
 - **interview-baguwen** — 面试八股文生成器，基于简历技术技能生成全面的面试问答准备指南
 
 > 提示：搭配 [Typeless](https://www.typeless.com/zh-cn) 语音输入使用体验更佳，口述回答比打字更轻松自然。
-
-## 分类
-
-- **ai/** — 人工智能（Transformer、BERT、LLM 等）
-- **cv/** — 计算机视觉（YOLO、R-CNN、OpenPose、DeepSORT 等）
-- **web3/** — 区块链与 Web3（Bitcoin 等）
 
 ## 推荐资源
 
