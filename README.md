@@ -10,21 +10,15 @@
 │   ├── paper-reading/     # 吴恩达式论文精读助手
 │   └── interview-baguwen/ # 面试八股文生成器
 ├── open/                  # 待看资源
-│   ├── README.md          # 待看论文列表
-│   ├── README.cv.md       # 待看 CV 论文
-│   ├── README.web3.md     # 待看 Web3 资源
-│   ├── bert.pdf
-│   ├── rcnn.pdf
-│   ├── yolov1.pdf
-│   ├── openpose.pdf
-│   ├── deepsort.pdf
-│   └── notes_by_ai/      # 论文预读笔记
-│       ├── bitcoin.pdf
-│       └── ……
+│   ├── README.md          # 待看资源列表（Web3 / AI / CV / 软件工程）
+│   ├── README.cv.md       # CV 学习路线
+│   ├── bert.pdf / rcnn.pdf / yolov1.pdf / openpose.pdf / deepsort.pdf
+│   ├── bitcoin/           # 比特币白皮书（原文、中英对照、学习指南）
+│   ├── learn_blockchains _by_building_one/  # Python 区块链实践项目
+│   └── leetcode-top-100-liked/  # LeetCode 热题100 题解（Python 3，17 主题）
 ├── closed/                # 已完成
 │   ├── README.md          # 已看论文列表
-│   └── Attention_Is_All_You_Need/  # 含原论文、中文翻译、精读笔记
-│       └── ……
+│   └── Attention_Is_All_You_Need/  # Transformer 论文精读（原文、翻译、笔记）
 └── more/                  # 书籍与播客
     ├── README.more.open.md    # 待看书籍与播客
     └── README.more.closed.md  # 已看书籍与播客
