@@ -10,11 +10,12 @@
 │   ├── paper-reading/     # 吴恩达式论文精读助手
 │   └── interview-baguwen/ # 面试八股文生成器
 ├── open/                  # 待看资源
-│   ├── README.md          # 待看资源列表（Web3 / AI / CV / 软件工程）
+│   ├── README.md          # 待看资源列表（Web3 / AI / CV / 英语 / 软件工程）
 │   ├── README.cv.md       # CV 学习路线
 │   ├── bert.pdf / rcnn.pdf / yolov1.pdf / openpose.pdf / deepsort.pdf
 │   ├── bitcoin/           # 比特币白皮书（原文、中英对照、学习指南）
 │   ├── learn_blockchains _by_building_one/  # Python 区块链实践项目
+│   ├── liuxiaoyan-vocab-book/  # 刘晓燕《考研英语你还在背单词吗》词汇笔记
 │   └── leetcode-top-100-liked/  # LeetCode 热题100 题解（Python 3，17 主题）
 ├── closed/                # 已完成
 │   ├── README.md          # 已看论文列表

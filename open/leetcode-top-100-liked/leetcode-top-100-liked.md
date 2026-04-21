@@ -1,11 +1,6 @@
-> 引用：
->
-> - LeetCode热题100（100道题17个主题）：https://leetcode.cn/studyplan/top-100-liked/
->- 剑指offer（50道题）：https://leetcode.cn/problem-list/XApvNy3p/
-
-
-
 # LeetCode热题100
+
+> LeetCode热题100（100道题17个主题）：https://leetcode.cn/studyplan/top-100-liked/
 
 解题语言使用python3。目录：
 
