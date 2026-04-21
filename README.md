@@ -22,7 +22,8 @@
 │   └── Attention_Is_All_You_Need/  # Transformer 论文精读（原文、翻译、笔记）
 └── more/                  # 书籍与播客
     ├── README.more.open.md    # 待看书籍与播客
-    └── README.more.closed.md  # 已看书籍与播客
+    ├── README.more.closed.md  # 已看书籍与播客
+    └── mao-selected-works/    # 毛泽东选集读书笔记
 ```
 
 ## 使用方式
