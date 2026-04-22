@@ -6,6 +6,7 @@
 
 ```
 ├── README.md              # 项目说明
+├── MEMORY.md              # AI 上下文记忆，供 AI 助手快速加载仓库信息
 ├── skills/                # Claude Code 技能封装
 │   ├── paper-reading/     # 吴恩达式论文精读助手
 │   └── interview-baguwen/ # 面试八股文生成器
