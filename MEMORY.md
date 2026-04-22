@@ -18,12 +18,11 @@ openpaper/
 │   └── interview-baguwen/ # 基于简历的面试八股文生成器（SKILL.md）
 ├── open/                  # 待读/进行中资源
 │   ├── README.md          # 待读论文清单（按领域分类）
-│   ├── README.cv.md       # 计算机视觉学习路线图（YOLO 系列、PaddleOCR）
 │   ├── web3-bitcoin/               # 比特币白皮书（英文/中文/双语/学习指南）
 │   ├── web3-learn-blockchains-by-building-one/  # Python 区块链实战项目
 │   ├── ai-bert/                    # BERT 论文 PDF
 │   ├── ai-claude-skill-guide/      # Claude Skills 构建教程（PDF）
-│   ├── cv-yolov1/                  # YOLOv1 论文 PDF
+│   ├── cv-yolov1/                  # YOLOv1 论文 + CV 学习路线图
 │   ├── cv-rcnn/                    # R-CNN 论文 PDF
 │   ├── cv-openpose/                # OpenPose 论文 PDF
 │   ├── cv-deepsort/                # DeepSORT 论文 PDF
@@ -56,7 +55,7 @@ openpaper/
 |------|------|
 | `README.md` | 项目主索引 |
 | `open/README.md` | 待读论文清单（按 AI/CV/NLP 等分类） |
-| `open/README.cv.md` | CV 学习路线图（YOLOv5/v8/v11/v26、PaddleOCR） |
+| `open/cv-yolov1/README.cv.md` | CV 学习路线图（YOLOv5/v8/v11/v26、PaddleOCR） |
 | `closed/README.md` | 已完成论文清单 |
 | `more/README.more.open.md` | 待读书籍（12本，含完整元数据） |
 | `more/README.more.closed.md` | 已读书籍/播客 |

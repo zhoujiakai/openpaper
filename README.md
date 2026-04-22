@@ -12,12 +12,11 @@
 │   └── interview-baguwen/ # 面试八股文生成器
 ├── open/                  # 待看资源
 │   ├── README.md          # 待看资源列表（Web3 / AI / CV / 英语 / 软件工程）
-│   ├── README.cv.md       # CV 学习路线
 │   ├── web3-bitcoin/               # 比特币白皮书（原文、中英对照、学习指南）
 │   ├── web3-learn-blockchains-by-building-one/  # Python 区块链实践项目
 │   ├── ai-bert/                    # BERT 论文
 │   ├── ai-claude-skill-guide/      # Claude Code Skills 构建官方教程
-│   ├── cv-yolov1/                  # YOLOv1 论文
+│   ├── cv-yolov1/                  # YOLOv1 论文 + CV 学习路线
 │   ├── cv-rcnn/                    # R-CNN 论文
 │   ├── cv-openpose/                # OpenPose 论文
 │   ├── cv-deepsort/                # DeepSORT 论文
