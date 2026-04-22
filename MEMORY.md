@@ -17,19 +17,18 @@ openpaper/
 │   ├── paper-reading/     # 吴恩达式论文精读助手（SKILL.md）
 │   └── interview-baguwen/ # 基于简历的面试八股文生成器（SKILL.md）
 ├── open/                  # 待读/进行中资源
-│   ├── README.md          # 待读论文清单（按领域分类，约152行）
+│   ├── README.md          # 待读论文清单（按领域分类）
 │   ├── README.cv.md       # 计算机视觉学习路线图（YOLO 系列、PaddleOCR）
-│   ├── bitcoin/           # 比特币白皮书（英文/中文/双语/学习指南）
-│   ├── learn_blockchains_by_building_one/  # Python 区块链实战项目
-│   ├── leetcode-top-100-liked/  # LeetCode 热题100题解（Python3，17个专题）
-│   ├── liuxiaoyan-vocab-book/   # 刘晓燕考研英语词汇笔记
-│   ├── sword-to-offer/          # 剑指Offer 50题
-│   ├── claude-skill-guide/      # Claude Code Skills 构建官方教程（PDF）
-│   ├── bert/               # BERT 论文 PDF
-│   ├── rcnn/               # R-CNN 论文 PDF
-│   ├── yolov1/             # YOLOv1 论文 PDF
-│   ├── openpose/           # OpenPose 论文 PDF
-│   ├── deepsort/           # DeepSORT 论文 PDF
+│   ├── web3-bitcoin/               # 比特币白皮书（英文/中文/双语/学习指南）
+│   ├── web3-learn-blockchains-by-building-one/  # Python 区块链实战项目
+│   ├── ai-bert/                    # BERT 论文 PDF
+│   ├── ai-claude-skill-guide/      # Claude Skills 构建教程（PDF）
+│   ├── cv-yolov1/                  # YOLOv1 论文 PDF
+│   ├── cv-rcnn/                    # R-CNN 论文 PDF
+│   ├── cv-openpose/                # OpenPose 论文 PDF
+│   ├── cv-deepsort/                # DeepSORT 论文 PDF
+│   ├── eng-liuxiaoyan-vocab-book/  # 刘晓燕考研英语词汇笔记
+│   └── se-leetcode-top-100-liked/  # LeetCode 热题100题解（Python3，17个专题）
 ├── closed/                # 已完成资源
 │   ├── README.md          # 已读论文清单
 │   └── Attention_Is_All_You_Need/  # Transformer 论文精读（原文/翻译/笔记/对话记录/图表）
@@ -63,10 +62,9 @@ openpaper/
 | `more/README.more.closed.md` | 已读书籍/播客 |
 | `skills/paper-reading/SKILL.md` | 论文精读技能定义（约293行） |
 | `skills/interview-baguwen/SKILL.md` | 面试八股文技能定义（约79行） |
-| `open/leetcode-top-100-liked/leetcode-top-100-liked.md` | LeetCode 题解 |
-| `open/liuxiaoyan-vocab-book/liuxiaoyan-vocab-book.md` | 英语词汇笔记 |
-| `open/sword-to-offer/sword-to-offer.md` | 剑指 Offer 题解 |
-| `open/claude-skill-guide/The-Complete-Guide-to-Building-Skill-for-Claude.pdf` | Claude Skills 构建教程 |
+| `open/se-leetcode-top-100-liked/leetcode-top-100-liked.md` | LeetCode 题解 |
+| `open/eng-liuxiaoyan-vocab-book/liuxiaoyan-vocab-book.md` | 英语词汇笔记 |
+| `open/ai-claude-skill-guide/The-Complete-Guide-to-Building-Skill-for-Claude.pdf` | Claude Skills 构建教程 |
 | `more/mao-selected-works/mao-selected-works.md` | 毛选读书笔记 |
 
 ## Claude Code 技能

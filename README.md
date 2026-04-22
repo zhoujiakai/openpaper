@@ -13,16 +13,16 @@
 ├── open/                  # 待看资源
 │   ├── README.md          # 待看资源列表（Web3 / AI / CV / 英语 / 软件工程）
 │   ├── README.cv.md       # CV 学习路线
-│   ├── bert/                # BERT 论文
-│   ├── rcnn/               # R-CNN 论文
-│   ├── yolov1/             # YOLOv1 论文
-│   ├── openpose/           # OpenPose 论文
-│   ├── deepsort/           # DeepSORT 论文
-│   ├── bitcoin/           # 比特币白皮书（原文、中英对照、学习指南）
-│   ├── learn_blockchains _by_building_one/  # Python 区块链实践项目
-│   ├── liuxiaoyan-vocab-book/  # 刘晓燕《考研英语你还在背单词吗》词汇笔记
-│   ├── leetcode-top-100-liked/  # LeetCode 热题100 题解（Python 3，17 主题）
-│   └── claude-skill-guide/      # Claude Code Skills 构建官方教程
+│   ├── web3-bitcoin/               # 比特币白皮书（原文、中英对照、学习指南）
+│   ├── web3-learn-blockchains-by-building-one/  # Python 区块链实践项目
+│   ├── ai-bert/                    # BERT 论文
+│   ├── ai-claude-skill-guide/      # Claude Code Skills 构建官方教程
+│   ├── cv-yolov1/                  # YOLOv1 论文
+│   ├── cv-rcnn/                    # R-CNN 论文
+│   ├── cv-openpose/                # OpenPose 论文
+│   ├── cv-deepsort/                # DeepSORT 论文
+│   ├── eng-liuxiaoyan-vocab-book/  # 刘晓燕《考研英语你还在背单词吗》词汇笔记
+│   └── se-leetcode-top-100-liked/  # LeetCode 热题100 题解（Python 3，17 主题）
 ├── closed/                # 已完成
 │   ├── README.md          # 已看论文列表
 │   └── Attention_Is_All_You_Need/  # Transformer 论文精读（原文、翻译、笔记）
