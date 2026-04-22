@@ -28,6 +28,15 @@
 - 被引用数：112,481+（Semantic Scholar，截止2026年4月6日）
 - 说明：提出了 BERT 模型，使用双向 Transformer 编码器进行预训练，刷新了 11 项 NLP 任务记录
 
+### MIT 6.034: Artificial Intelligence
+- 类型：课程（MIT OCW），Fall 2010
+- 讲师：Professor Patrick Winston
+- 来源：MIT OpenCourseWare
+- 链接：
+  - OCW: https://ocw.mit.edu/courses/6-034-artificial-intelligence-fall-2010/
+  - YouTube: https://www.youtube.com/playlist?list=PLUl4u3cNGP63gFHB6xb-kVBiQHYe_4hSi
+- 说明：MIT 经典人工智能本科课程，涵盖知识表示、问题求解、搜索算法、约束满足、机器学习、神经网络、概率推理等核心 AI 主题
+
 ## CV
 
 ### YOLOv1: You Only Look Once: Unified, Real-Time Object Detection
