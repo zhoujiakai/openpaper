@@ -37,6 +37,11 @@
   - YouTube: https://www.youtube.com/playlist?list=PLUl4u3cNGP63gFHB6xb-kVBiQHYe_4hSi
 - 说明：MIT 经典人工智能本科课程，涵盖知识表示、问题求解、搜索算法、约束满足、机器学习、神经网络、概率推理等核心 AI 主题
 
+### The Complete Guide to Building Skills for Claude
+- 类型：官方教程（PDF）
+- 来源：Anthropic 官方
+- 说明：Claude Code Skills 完整构建指南，涵盖技能基础概念（SKILL.md 结构、渐进式加载）、规划与设计（用例识别、三大类别）、测试与迭代、分发与共享、常见模式与问题排查、资源与参考
+
 ## CV
 
 ### YOLOv1: You Only Look Once: Unified, Real-Time Object Detection

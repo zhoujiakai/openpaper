@@ -24,6 +24,7 @@ openpaper/
 │   ├── leetcode-top-100-liked/  # LeetCode 热题100题解（Python3，17个专题）
 │   ├── liuxiaoyan-vocab-book/   # 刘晓燕考研英语词汇笔记
 │   ├── sword-to-offer/          # 剑指Offer 50题
+│   ├── claude-skill-guide/      # Claude Code Skills 构建官方教程（PDF）
 │   └── *.pdf              # 待读论文 PDF（BERT, R-CNN, YOLOv1, OpenPose, DeepSORT）
 ├── closed/                # 已完成资源
 │   ├── README.md          # 已读论文清单
@@ -38,7 +39,7 @@ openpaper/
 
 | 领域 | 内容 | 状态 |
 |------|------|------|
-| AI/NLP | Transformer（精读完成）、BERT（待读） | closed/open |
+| AI/NLP | Transformer（精读完成）、BERT（待读）、Claude Skills 教程（待读） | closed/open |
 | 计算机视觉 | YOLOv1, R-CNN, OpenPose, DeepSORT | open |
 | Web3/区块链 | 比特币白皮书（中英双语+学习指南）、区块链 Python 实战 | open |
 | 算法 | LeetCode 热题100（Python3 题解）、剑指 Offer 50 题 | open |
@@ -61,6 +62,7 @@ openpaper/
 | `open/leetcode-top-100-liked/leetcode-top-100-liked.md` | LeetCode 题解 |
 | `open/liuxiaoyan-vocab-book/liuxiaoyan-vocab-book.md` | 英语词汇笔记 |
 | `open/sword-to-offer/sword-to-offer.md` | 剑指 Offer 题解 |
+| `open/claude-skill-guide/The-Complete-Guide-to-Building-Skill-for-Claude.pdf` | Claude Skills 构建教程 |
 | `more/mao-selected-works/mao-selected-works.md` | 毛选读书笔记 |
 
 ## Claude Code 技能
@@ -78,6 +80,9 @@ openpaper/
 - Git 分支策略：单分支 `main`，直接提交
 
 ## 最近提交
+
+- `7756f3b` 添加 MIT 6.034 人工智能课程到待读清单
+- `470d054` 添加《论持久战》读书笔记，更新 README 目录结构
 
 - `470d054` 添加《论持久战》读书笔记，更新 README 目录结构
 - `5c89c8b` 添加刘晓燕考研英语词汇笔记和剑指 Offer 题集
