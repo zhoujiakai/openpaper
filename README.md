@@ -13,7 +13,11 @@
 ├── open/                  # 待看资源
 │   ├── README.md          # 待看资源列表（Web3 / AI / CV / 英语 / 软件工程）
 │   ├── README.cv.md       # CV 学习路线
-│   ├── bert.pdf / rcnn.pdf / yolov1.pdf / openpose.pdf / deepsort.pdf
+│   ├── bert/                # BERT 论文
+│   ├── rcnn/               # R-CNN 论文
+│   ├── yolov1/             # YOLOv1 论文
+│   ├── openpose/           # OpenPose 论文
+│   ├── deepsort/           # DeepSORT 论文
 │   ├── bitcoin/           # 比特币白皮书（原文、中英对照、学习指南）
 │   ├── learn_blockchains _by_building_one/  # Python 区块链实践项目
 │   ├── liuxiaoyan-vocab-book/  # 刘晓燕《考研英语你还在背单词吗》词汇笔记

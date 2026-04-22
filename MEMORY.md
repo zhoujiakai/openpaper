@@ -25,7 +25,11 @@ openpaper/
 │   ├── liuxiaoyan-vocab-book/   # 刘晓燕考研英语词汇笔记
 │   ├── sword-to-offer/          # 剑指Offer 50题
 │   ├── claude-skill-guide/      # Claude Code Skills 构建官方教程（PDF）
-│   └── *.pdf              # 待读论文 PDF（BERT, R-CNN, YOLOv1, OpenPose, DeepSORT）
+│   ├── bert/               # BERT 论文 PDF
+│   ├── rcnn/               # R-CNN 论文 PDF
+│   ├── yolov1/             # YOLOv1 论文 PDF
+│   ├── openpose/           # OpenPose 论文 PDF
+│   ├── deepsort/           # DeepSORT 论文 PDF
 ├── closed/                # 已完成资源
 │   ├── README.md          # 已读论文清单
 │   └── Attention_Is_All_You_Need/  # Transformer 论文精读（原文/翻译/笔记/对话记录/图表）
