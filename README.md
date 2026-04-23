@@ -9,7 +9,8 @@
 ├── MEMORY.md              # AI 上下文记忆，供 AI 助手快速加载仓库信息
 ├── skills/                # Claude Code 技能封装
 │   ├── paper-reading/     # 吴恩达式论文精读助手
-│   └── interview-baguwen/ # 面试八股文生成器
+│   ├── interview-baguwen/ # 面试八股文生成器
+│   └── knowledge-mastery/ # 知识精通学习工作流
 ├── open/                  # 待看资源
 │   ├── README.md          # 待看资源列表（Web3 / AI / CV / 英语 / 软件工程）
 │   ├── web3-bitcoin/               # 比特币白皮书（原文、中英对照、学习指南）
@@ -40,10 +41,11 @@
 
 ## AI 辅助工具（Claude Code Skills）
 
-`skills/` 目录下封装了两个 Claude Code 技能，复制到 `~/.claude/skills/` 即可使用：
+`skills/` 目录下封装了三个 Claude Code 技能，复制到 `~/.claude/skills/` 即可使用：
 
 - **paper-reading** — 吴恩达式论文精读助手，引导你逐节阅读论文，通过提问和纠正帮助理解核心概念，自动生成学习笔记和保存进度
 - **interview-baguwen** — 面试八股文生成器，基于简历技术技能生成全面的面试问答准备指南
+- **knowledge-mastery** — 技术知识精通学习工作流，三阶段闭环（输入→思考→输出），支持内容发现、AI 笔记生成、苏格拉底式问答、模拟题测试、A4 默写检验、间隔重复回测（周/月/年）
 
 > 提示：搭配 [Typeless](https://www.typeless.com/zh-cn) 语音输入使用体验更佳，口述回答比打字更轻松自然。
 

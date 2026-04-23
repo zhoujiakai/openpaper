@@ -15,7 +15,8 @@ openpaper/
 ├── MEMORY.md              # AI 上下文记忆（本文件）
 ├── skills/                # Claude Code 技能定义
 │   ├── paper-reading/     # 吴恩达式论文精读助手（SKILL.md）
-│   └── interview-baguwen/ # 基于简历的面试八股文生成器（SKILL.md）
+│   ├── interview-baguwen/ # 基于简历的面试八股文生成器（SKILL.md）
+│   └── knowledge-mastery/ # 技术知识精通学习工作流（SKILL.md + output-templates.md）
 ├── open/                  # 待读/进行中资源
 │   ├── README.md          # 待读论文清单（按领域分类）
 │   ├── web3-bitcoin/               # 比特币白皮书（英文/中文/双语/学习指南）
@@ -61,6 +62,8 @@ openpaper/
 | `more/README.more.closed.md` | 已读书籍/播客 |
 | `skills/paper-reading/SKILL.md` | 论文精读技能定义（约293行） |
 | `skills/interview-baguwen/SKILL.md` | 面试八股文技能定义（约79行） |
+| `skills/knowledge-mastery/SKILL.md` | 知识精通学习工作流（约171行） |
+| `skills/knowledge-mastery/references/output-templates.md` | 学习产出模板（AI笔记/个人笔记/题库/进度/报告） |
 | `open/se-leetcode-top-100-liked/leetcode-top-100-liked.md` | LeetCode 题解 |
 | `open/eng-liuxiaoyan-vocab-book/liuxiaoyan-vocab-book.md` | 英语词汇笔记 |
 | `open/ai-claude-skill-guide/The-Complete-Guide-to-Building-Skill-for-Claude.pdf` | Claude Skills 构建教程 |
@@ -70,6 +73,7 @@ openpaper/
 
 1. **paper-reading**：吴恩达式论文精读助手，支持逐节引导、提问纠正、自动搜索补充资料、保存/恢复学习进度
 2. **interview-baguwen**：读取简历（.docx/.pdf），提取技术技能，生成初/中/高级面试问答
+3. **knowledge-mastery**：技术知识精通学习工作流，三阶段闭环（输入→思考→输出），支持内容发现、AI笔记、苏格拉底问答、模拟题测试、A4默写、间隔重复回测（周/月/年）
 
 安装方式：将 `skills/` 下的目录复制到 `~/.claude/skills/`
 
@@ -82,11 +86,8 @@ openpaper/
 
 ## 最近提交
 
+- `58c4cb6` 添加知识精通学习工作流 skill（knowledge-mastery）
 - `7756f3b` 添加 MIT 6.034 人工智能课程到待读清单
 - `470d054` 添加《论持久战》读书笔记，更新 README 目录结构
-
-- `470d054` 添加《论持久战》读书笔记，更新 README 目录结构
 - `5c89c8b` 添加刘晓燕考研英语词汇笔记和剑指 Offer 题集
-- `4c29b58` 更新根目录 README 目录结构
 - `d6c7b4f` 添加 LeetCode 热题100题解和区块链学习项目
-- `4161d92` 重命名 bitcoin 笔记目录
