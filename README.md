@@ -42,7 +42,7 @@
 - [待看书籍与播客](more/README.more.open.md) — 计划看的书籍和播客
 - [已看书籍与播客](more/README.more.closed.md) — 已完成阅读的书籍和播客
 
-## AI 辅助工具（Claude Code Skills）
+## Claude Code Skills
 
 `skills/` 目录下封装了三个 Claude Code 技能，复制到 `~/.claude/skills/` 即可使用：
 
@@ -51,6 +51,15 @@
 - **knowledge-mastery** — 技术知识精通学习工作流，三阶段闭环（输入→思考→输出），支持内容发现、AI 笔记生成、苏格拉底式问答、模拟题测试、A4 默写检验、间隔重复回测（周/月/年）
 
 > 提示：搭配 [Typeless](https://www.typeless.com/zh-cn) 语音输入使用体验更佳，口述回答比打字更轻松自然。
+
+## 工具推荐
+
+- [Typora](https://typora.io) — 所见即所得的 Markdown 编辑器，轻量流畅，适合日常阅读和编辑 Markdown 笔记
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) — Anthropic 官方 CLI 编程助手，擅长代码编写、文件操作和终端任务，本仓库的 Skills 和学习笔记均借助它完成
+- [flomo](https://flomoapp.com) — 轻量级卡片笔记，通过标签组织而非文件夹，支持微信输入，适合随手记录灵感和碎片想法
+- [GitHub](https://github.com) — 全球最大的代码托管平台，也可用于管理和版本控制 Markdown 笔记（本仓库即托管于此）
+- [百度网盘](https://pan.baidu.com) — 开启同步空间功能后可自动同步本地文件夹到云端，适合多设备间同步笔记和 PDF 等学习资料
+- [即刻](https://m.okjike.com) — 兴趣社区，聚集了大量技术和产品相关话题，适合发现好内容、分享学习心得
 
 ## 推荐资源
 
