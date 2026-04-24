@@ -25,7 +25,10 @@
 │   └── se-leetcode-top-100-liked/  # LeetCode 热题100 题解（Python 3，17 主题）
 ├── closed/                # 已完成
 │   ├── README.md          # 已看论文列表
-│   └── Attention_Is_All_You_Need/  # Transformer 论文精读（原文、翻译、笔记）
+│   ├── ai-attention-is-all-you-need/ # Transformer 论文精读（原文、翻译、笔记）
+│   ├── ai-transformer/             # Transformer 知识精通（掌握度 90%）
+│   ├── ai-prompt-engineering/      # Prompt Engineering 知识精通（掌握度 85%）
+│   └── ai-rag/                     # RAG 知识精通（掌握度 80%）
 └── more/                  # 书籍与播客
     ├── README.more.open.md    # 待看书籍与播客
     ├── README.more.closed.md  # 已看书籍与播客

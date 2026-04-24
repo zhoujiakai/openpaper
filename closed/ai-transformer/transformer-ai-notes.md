@@ -1,7 +1,7 @@
 # Transformer — AI 笔记
 
 > 来源：
-> - Attention Is All You Need（论文原文，已完成精读，位于 closed/Attention_Is_All_You_Need/）
+> - Attention Is All You Need（论文原文，已完成精读，位于 closed/ai-attention-is-all-you-need/）
 > - [3Blue1Brown: Attention in Transformers, Step-by-Step](https://www.3blue1brown.com/lessons/attention/)
 > - [3Blue1Brown: But what is a GPT?](https://www.3blue1brown.com/lessons/gpt)
 > - [Cameron R. Wolfe: Decoder-Only Transformers](https://cameronrwolfe.substack.com/p/decoder-only-transformers-the-workhorse)

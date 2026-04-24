@@ -1,6 +1,6 @@
-# 已看论文
+# 已完成学习
 
-## AI
+## AI 论文
 
 **Attention is all you need**
 - 类型：论文，2017年6月 arXiv 首发
@@ -11,4 +11,24 @@
   - NeurIPS: https://proceedings.neurips.cc/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html
 - 被引用数：171,777+（Semantic Scholar，截止2026年4月6日）
 - 阅读日期：2026-04-19（周日）~ 2026-04-20（周一）
-- 笔记：[ai/Attention_Is_All_You_Need/](ai/Attention_Is_All_You_Need/)（含中文翻译、精读笔记、学习对话记录）
+- 笔记：[ai-attention-is-all-you-need/](ai-attention-is-all-you-need/)（含中文翻译、精读笔记、学习对话记录）
+
+## AI 知识精通
+
+**Transformer**
+- 掌握度：90%
+- 完成日期：2026-04-24
+- 笔记：[ai-transformer/](ai-transformer/)（AI笔记、题库、进度、掌握度报告）
+- 周测：2026-05-01
+
+**Prompt Engineering**
+- 掌握度：85%
+- 完成日期：2026-04-24
+- 笔记：[ai-prompt-engineering/](ai-prompt-engineering/)（AI笔记、题库、进度、掌握度报告）
+- 周测：2026-05-01，个人笔记待写
+
+**RAG（检索增强生成）**
+- 掌握度：80%
+- 完成日期：2026-04-24
+- 笔记：[ai-rag/](ai-rag/)（AI笔记、题库、进度、掌握度报告）
+- 周测：2026-05-01

@@ -1,7 +1,7 @@
 # Attention Is All You Need — 学习进度
 
 > 学习方式：吴恩达式循循善诱教学
-> 论文材料：`papers/Attention_Is_All_You_Need-中文翻译.md`
+> 论文材料：`Attention_Is_All_You_Need-中文翻译.md`
 > 我的特点：基础薄弱并且很没有耐心
 > 学习状态：**全部学完**
 > 完成日期：2026-04-20

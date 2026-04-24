@@ -23,9 +23,6 @@ openpaper/
 │   ├── web3-learn-blockchains-by-building-one/  # Python 区块链实战项目
 │   ├── ai-bert/                    # BERT 论文 PDF
 │   ├── ai-claude-skill-guide/      # Claude Skills 构建教程（PDF）
-│   ├── ai-transformer/             # Transformer 知识精通（AI笔记/题库/进度/掌握度报告）✅已完成
-│   ├── ai-prompt-engineering/      # Prompt Engineering 知识精通（精读+模拟题+A4默写完成，掌握度 85%）✅已完成
-│   ├── ai-rag/                    # RAG 知识精通（精读+模拟题+A4默写+补强重测，掌握度 80%）✅已完成
 │   ├── cv-yolov1/                  # YOLOv1 论文 + CV 学习路线图
 │   ├── cv-rcnn/                    # R-CNN 论文 PDF
 │   ├── cv-openpose/                # OpenPose 论文 PDF
@@ -34,7 +31,10 @@ openpaper/
 │   └── se-leetcode-top-100-liked/  # LeetCode 热题100题解（Python3，17个专题）
 ├── closed/                # 已完成资源
 │   ├── README.md          # 已读论文清单
-│   └── Attention_Is_All_You_Need/  # Transformer 论文精读（原文/翻译/笔记/对话记录/图表）
+│   ├── ai-attention-is-all-you-need/  # Transformer 论文精读（原文/翻译/笔记/对话记录/图表）
+│   ├── ai-transformer/             # Transformer 知识精通（AI笔记/题库/进度/掌握度报告）掌握度 90%
+│   ├── ai-prompt-engineering/      # Prompt Engineering 知识精通（掌握度 85%）
+│   └── ai-rag/                     # RAG 知识精通（掌握度 80%）
 └── more/                  # 书籍与播客
     ├── README.more.open.md    # 待读书籍（12本，含哲学/文学/写作/心理学/商业）
     ├── README.more.closed.md  # 已读书籍与播客
