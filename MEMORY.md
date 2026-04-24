@@ -35,6 +35,10 @@ openpaper/
 │   ├── ai-transformer/             # Transformer 知识精通（AI笔记/题库/进度/掌握度报告）掌握度 90%
 │   ├── ai-prompt-engineering/      # Prompt Engineering 知识精通（掌握度 85%）
 │   └── ai-rag/                     # RAG 知识精通（掌握度 80%）
+├── tasks/                 # 零碎任务（学习练习、side project、日常事务）
+│   ├── README.md          # 任务索引
+│   ├── open/              # 进行中 / 待办
+│   └── closed/            # 已完成 / 放弃
 └── more/                  # 书籍与播客
     ├── README.more.open.md    # 待读书籍（12本，含哲学/文学/写作/心理学/商业）
     ├── README.more.closed.md  # 已读书籍与播客
@@ -82,7 +86,7 @@ openpaper/
 
 ## 组织约定
 
-- `open/` = 待读/进行中，`closed/` = 已完成，`more/` = 书籍播客
+- `open/` = 待读/进行中，`closed/` = 已完成，`more/` = 书籍播客，`tasks/` = 零碎任务
 - 每个子目录通常包含一个同名 `.md` 笔记文件
 - 论文目录通常包含：原文 PDF、中文翻译、学习笔记
 - Git 分支策略：单分支 `main`，直接提交

@@ -29,6 +29,10 @@
 │   ├── ai-transformer/             # Transformer 知识精通（掌握度 90%）
 │   ├── ai-prompt-engineering/      # Prompt Engineering 知识精通（掌握度 85%）
 │   └── ai-rag/                     # RAG 知识精通（掌握度 80%）
+├── tasks/                 # 零碎任务（学习练习、side project、日常事务）
+│   ├── README.md          # 任务索引
+│   ├── open/              # 进行中 / 待办
+│   └── closed/            # 已完成 / 放弃
 └── more/                  # 书籍与播客
     ├── README.more.open.md    # 待看书籍与播客
     ├── README.more.closed.md  # 已看书籍与播客
@@ -41,14 +45,15 @@
 - [已看论文](closed/README.md) — 已完成阅读的论文及笔记
 - [待看书籍与播客](more/README.more.open.md) — 计划看的书籍和播客
 - [已看书籍与播客](more/README.more.closed.md) — 已完成阅读的书籍和播客
+- [任务看板](tasks/README.md) — 零碎任务收集与追踪
 
 ## Claude Code Skills
 
 > 提示：搭配 [Typeless](https://www.typeless.com/zh-cn) 语音输入使用体验更佳，口述回答比打字更轻松自然。
 
-- **paper-reading** — 吴恩达式论文精读助手，引导你逐节阅读论文，通过提问和纠正帮助理解核心概念，自动生成学习笔记和保存进度
-- **interview-baguwen** — 面试八股文生成器，基于简历技术技能生成全面的面试问答准备指南
-- **knowledge-mastery** — 技术知识精通学习工作流，三阶段闭环（输入→思考→输出），支持内容发现、AI 笔记生成、苏格拉底式问答、模拟题测试、A4 默写检验、间隔重复回测（周/月/年）
+- [paper-reading](skills/paper-reading/) — 吴恩达式论文精读助手，引导你逐节阅读论文，通过提问和纠正帮助理解核心概念，自动生成学习笔记和保存进度
+- [interview-baguwen](skills/interview-baguwen/) — 面试八股文生成器，基于简历技术技能生成全面的面试问答准备指南
+- [knowledge-mastery](skills/knowledge-mastery/) — 技术知识精通学习工作流，三阶段闭环（输入→思考→输出），支持内容发现、AI 笔记生成、苏格拉底式问答、模拟题测试、A4 默写检验、间隔重复回测（周/月/年）
 
 ## 工具推荐
 
