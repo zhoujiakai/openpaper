@@ -103,6 +103,36 @@ openpaper/
 
 每个主题的文件结构：`open/ai-<topic>/` 下包含 `-ai-notes.md`、`-progress.md`、`-quiz.md`、`-mastery-report.md`
 
+### 主题 1: Transformer
+
+**定位：** 会用 LangChain 调 API，还需要理解 LLM 背后在做什么。面试中对 Transformer 熟悉度不够，需要理解并掌握。
+
+**学习资源：**
+- Attention Is All You Need（论文原文）
+- 3Blue1Brown 的 Transformer 可视化视频
+
+**目标问题：**
+- Transformer 的核心结构是什么？
+- Encoder 和 Decoder 各自的作用？
+- GPT 系列为什么只用 Decoder？
+- Multi-Head Attention 的意义是什么？
+
+### 主题 2: Prompt Engineering
+
+**定位：** 不是背提示词技巧，而是理解它们为什么有效。
+
+**学习资源：**
+- OpenAI 官方 Prompt Engineering
+- Anthropic 官方 Prompt Engineering
+- Prompt Engineering Guide
+
+**目标问题：**
+- Few-shot 为什么有效？
+- 什么是 In-Context Learning？
+- Chain-of-Thought 为什么能提升推理能力？
+- 结构化输出（JSON）的底层是怎么实现的？
+- System Prompt 和 User Prompt 的区别是什么？
+
 ### 主题 3: RAG
 
 **定位：** 做过 RAG，需要把每个环节背后的工程决策理解透。
