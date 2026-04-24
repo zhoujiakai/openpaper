@@ -23,6 +23,8 @@ openpaper/
 │   ├── web3-learn-blockchains-by-building-one/  # Python 区块链实战项目
 │   ├── ai-bert/                    # BERT 论文 PDF
 │   ├── ai-claude-skill-guide/      # Claude Skills 构建教程（PDF）
+│   ├── ai-transformer/             # Transformer 知识精通（AI笔记/题库/进度/掌握度报告）✅已完成
+│   ├── ai-prompt-engineering/      # Prompt Engineering 知识精通（精读+模拟题+A4默写完成，掌握度 85%）✅已完成
 │   ├── cv-yolov1/                  # YOLOv1 论文 + CV 学习路线图
 │   ├── cv-rcnn/                    # R-CNN 论文 PDF
 │   ├── cv-openpose/                # OpenPose 论文 PDF
@@ -83,6 +85,22 @@ openpaper/
 - 每个子目录通常包含一个同名 `.md` 笔记文件
 - 论文目录通常包含：原文 PDF、中文翻译、学习笔记
 - Git 分支策略：单分支 `main`，直接提交
+
+## 知识精通学习计划（2026-04-24 开始）
+
+7 个主题，面试准备导向，使用 knowledge-mastery skill 三阶段闭环。
+
+| # | 主题 | 状态 | 进度 |
+|---|------|------|------|
+| 1 | Transformer | ✅ 完成 | 掌握度 90%，周测 05-01 |
+| 2 | Prompt Engineering | ✅ 完成 | 掌握度 85%，周测 05-01，个人笔记待写 |
+| 3 | RAG | ⏳ 未开始 | — |
+| 4 | Agent 与工作流 | ⏳ 未开始 | — |
+| 5 | Python 异步 | ⏳ 未开始 | — |
+| 6 | 消息队列 | ⏳ 未开始 | — |
+| 7 | 微服务架构 | ⏳ 未开始 | — |
+
+每个主题的文件结构：`open/ai-<topic>/` 下包含 `-ai-notes.md`、`-progress.md`、`-quiz.md`、`-mastery-report.md`
 
 ## 最近提交
 
