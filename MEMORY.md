@@ -25,6 +25,7 @@ openpaper/
 │   ├── ai-claude-skill-guide/      # Claude Skills 构建教程（PDF）
 │   ├── ai-transformer/             # Transformer 知识精通（AI笔记/题库/进度/掌握度报告）✅已完成
 │   ├── ai-prompt-engineering/      # Prompt Engineering 知识精通（精读+模拟题+A4默写完成，掌握度 85%）✅已完成
+│   ├── ai-rag/                    # RAG 知识精通（精读+模拟题+A4默写+补强重测，掌握度 80%）✅已完成
 │   ├── cv-yolov1/                  # YOLOv1 论文 + CV 学习路线图
 │   ├── cv-rcnn/                    # R-CNN 论文 PDF
 │   ├── cv-openpose/                # OpenPose 论文 PDF
@@ -94,7 +95,7 @@ openpaper/
 |---|------|------|------|
 | 1 | Transformer | ✅ 完成 | 掌握度 90%，周测 05-01 |
 | 2 | Prompt Engineering | ✅ 完成 | 掌握度 85%，周测 05-01，个人笔记待写 |
-| 3 | RAG | ⏳ 未开始 | — |
+| 3 | RAG | ✅ 完成 | 掌握度 80%，周测 05-01 |
 | 4 | Agent 与工作流 | ⏳ 未开始 | — |
 | 5 | Python 异步 | ⏳ 未开始 | — |
 | 6 | 消息队列 | ⏳ 未开始 | — |
