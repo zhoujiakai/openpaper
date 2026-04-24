@@ -14,4 +14,4 @@
 
 技术知识精通学习工作流。三阶段闭环：输入（内容发现 + AI 笔记生成）→ 思考（互动问答 + 个人笔记 + 模拟题）→ 输出（A4 默写 + 掌握度测试）。支持间隔重复回测（周/月/年）。
 
-> AI 笔记的写作部分参考了 [ljg-paper](https://github.com/nicepkg/ljg-paper) skill 的 AI 写作模块，对写作红线、写作原则和笔记模板进行了优化。
+> AI 笔记的写作部分参考了 [ljg-paper](https://github.com/lijigang/ljg-skills/tree/master/skills/ljg-paper) skill 的 AI 写作模块，对写作红线、写作原则和笔记模板进行了优化。
