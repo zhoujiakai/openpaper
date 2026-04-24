@@ -44,13 +44,11 @@
 
 ## Claude Code Skills
 
-`skills/` 目录下封装了三个 Claude Code 技能，复制到 `~/.claude/skills/` 即可使用：
+> 提示：搭配 [Typeless](https://www.typeless.com/zh-cn) 语音输入使用体验更佳，口述回答比打字更轻松自然。
 
 - **paper-reading** — 吴恩达式论文精读助手，引导你逐节阅读论文，通过提问和纠正帮助理解核心概念，自动生成学习笔记和保存进度
 - **interview-baguwen** — 面试八股文生成器，基于简历技术技能生成全面的面试问答准备指南
 - **knowledge-mastery** — 技术知识精通学习工作流，三阶段闭环（输入→思考→输出），支持内容发现、AI 笔记生成、苏格拉底式问答、模拟题测试、A4 默写检验、间隔重复回测（周/月/年）
-
-> 提示：搭配 [Typeless](https://www.typeless.com/zh-cn) 语音输入使用体验更佳，口述回答比打字更轻松自然。
 
 ## 工具推荐
 
@@ -60,6 +58,7 @@
 - [GitHub](https://github.com) — 全球最大的代码托管平台，也可用于管理和版本控制 Markdown 笔记（本仓库即托管于此）
 - [百度网盘](https://pan.baidu.com) — 开启同步空间功能后可自动同步本地文件夹到云端，适合多设备间同步笔记和 PDF 等学习资料
 - [即刻](https://m.okjike.com) — 兴趣社区，聚集了大量技术和产品相关话题，适合发现好内容、分享学习心得
+- [Typeless](https://www.typeless.com/zh-cn) — 语音输入工具，支持多语言实时转文字，适合不想打字的场景
 
 ## 推荐资源
 
