@@ -102,6 +102,83 @@ openpaper/
 
 每个主题的文件结构：`open/ai-<topic>/` 下包含 `-ai-notes.md`、`-progress.md`、`-quiz.md`、`-mastery-report.md`
 
+### 主题 3: RAG
+
+**定位：** 做过 RAG，需要把每个环节背后的工程决策理解透。
+
+**学习资源：**
+- LangChain RAG 官方教程
+- Pinecone 的 RAG 学习指南
+
+**目标问题：**
+- RAG 的完整链路是什么？从文档入库到查询生成，经过哪些步骤？
+- 分块策略有哪几种（按字符、按句子、按语义）？各有什么优劣？
+- 纯向量检索 vs 混合检索各适合什么场景？
+- 什么是 Reranking？为什么检索后还需要重排？
+
+### 主题 4: Agent 与工作流
+
+**定位：** 用过 ReAct；Agent 有多种模式，不同场景需要不同架构，需要进一步掌握。
+
+**学习资源：**
+- LangGraph 官方文档的 Agent Architectures
+- LangChain 博客中关于 Multi-Agent 的文章
+
+**目标问题：**
+- ReAct 模式是什么？适合什么场景？
+- Plan-and-Execute 和 ReAct 的区别？
+- Multi-Agent 协作有哪些常见模式？各自优劣？
+- Function Calling 的底层机制是什么？
+
+### 主题 5: Python 异步
+
+**定位：** 需要理解事件循环在底层做了什么，否则遇到并发 bug 无从排查。
+
+**学习资源：**
+- Python 官方文档 asyncio
+- Real Python 的 asyncio 系列文章
+
+**目标问题：**
+- 事件循环（Event Loop）是什么？
+- 单线程怎么实现并发的？
+- await 的时候发生了什么？
+- asyncio.gather vs asyncio.TaskGroup 的区别？
+- 为什么数据库操作要用 AsyncSession？同步 Session 在异步代码里会怎样？
+- asyncio、多线程、多进程分别适合什么场景？
+
+### 主题 6: 消息队列
+
+**定位：** 用过 RocketMQ，RabbitMQ 和 Kafka 是业界另外两个主流选型。理解架构差异，才能正确技术选型。
+
+**学习资源：**
+- RabbitMQ 官方教程
+- aio-pika 文档
+- Kafka 官方文档
+
+**目标问题：**
+- RabbitMQ 的 Exchange 类型各适合什么场景？
+- prefetch_count 是什么？设大设小各有什么影响？
+- Kafka 的 Topic、Partition、Consumer Group 各是什么？Partition 怎么实现并行消费？
+- Kafka 为什么吞吐量比 RabbitMQ 高？
+- RabbitMQ 适合什么场景？Kafka 适合什么场景？
+- 幂等消费有哪些实现方式？各有什么优劣？
+
+### 主题 7: 微服务架构
+
+**定位：** 了解过 Spring 的微服务，较深的应用实践上还有空间。自行学习探索，理解概念为主。
+
+**学习资源：** 无专门资源，自行探索。Java 生态微服务概念完善，概念相通。
+
+**目标问题：**
+- 微服务和单体架构各有什么优劣？什么时候不该用微服务？
+- 服务拆分的依据是什么？怎么判断两个功能该放一个服务还是拆开？
+- 服务间通信用同步（HTTP/RPC）还是异步（消息队列），怎么选？
+- 什么是 API 网关？
+- 什么是服务熔断？
+- 什么是幂等性？为什么在微服务中特别重要？
+- 什么是分布式链路追踪？Trace ID 怎么在服务间传递？
+- 配置管理在微服务中怎么做？环境变量 vs 配置中心各适合什么场景？
+
 ## 最近提交
 
 - `58c4cb6` 添加知识精通学习工作流 skill（knowledge-mastery）
