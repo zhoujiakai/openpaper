@@ -58,7 +58,9 @@
 ## 工具推荐
 
 - [Typora](https://typora.io) — 所见即所得的 Markdown 编辑器，轻量流畅，适合日常阅读和编辑 Markdown 笔记
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) — Anthropic 官方 CLI 编程助手，擅长代码编写、文件操作和终端任务，本仓库的 Skills 和学习笔记均借助它完成
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) — Anthropic 官方 CLI 编程助手，擅长代码编写、文件操作和终端任务，本仓库的 Skills 和学习笔记均借助它完成；Max 套餐 $200/月
+- [GLM Coding Plan](https://open.bigmodel.cn/dev/howuse/codingplan) — 智谱AI 提供的编程套餐（lite / pro / max 三档），调用 GLM-5.1 大模型 API，供 Claude Code 等 CLI 工具使用；max 套餐 1266.3 元/季度（约 422 元/月）
+- [Gemini](https://gemini.google.com) — Google 的 AI 助手，内置 Imagen 3 图像生成能力，适合 AI 画图；AI Premium 套餐 $19.99/月
 - [flomo](https://flomoapp.com) — 轻量级卡片笔记，通过标签组织而非文件夹，支持微信输入，适合随手记录灵感和碎片想法
 - [GitHub](https://github.com) — 全球最大的代码托管平台，也可用于管理和版本控制 Markdown 笔记（本仓库即托管于此）
 - [百度网盘](https://pan.baidu.com) — 开启同步空间功能后可自动同步本地文件夹到云端，适合多设备间同步笔记和 PDF 等学习资料
