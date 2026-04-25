@@ -29,18 +29,78 @@ description: "基于简历技术技能生成全面的面试准备指南（八股
 
 在继续之前，将所有已识别的技能列出来供用户确认。
 
-### 第三步：调研（网络搜索）
+### 第三步：检查已有学习成果
 
-使用 WebSearch 验证并收集每项技术的最新信息。尽可能并行搜索。关键搜索模式：
+对每项技能，检查是否存在对应的 knowledge-mastery 学习目录：
 
 ```
-"{technology} 面试题 interview questions {current_year}"
-"{technology} V2 new features changes"
-"{technology} vs {alternative} differences"
-"{technology} optimization best practices production"
+检查路径：open/ai-<topic>/ 和 closed/ai-<topic>/
+查找文件：<topic>-ai-notes.md
 ```
 
-### 第四步：生成面试问答
+- **有 AI 笔记** → 读取内容，标记该项技术跳过调研，直接进入第五步
+- **没有** → 标记该项技术需要调研，进入第四步
+
+向用户展示检查结果：哪些技能已有学习成果可复用，哪些需要重新调研。
+
+### 第四步：调研（内容发现）
+
+> 仅对第三步中标记为"需要调研"的技能执行本步。
+
+采用 knowledge-mastery 阶段1 的内容发现流程，替换浅层面试题搜索。
+
+#### 4.1 搜索优质来源
+
+使用 WebSearch 搜索，按优先级排列：
+
+1. 原始论文（arXiv / 官方版）
+2. 官方文档
+3. 高质量博客（作者本人、知名技术博客）
+4. 经典教程（Stanford/MIT 等）
+
+搜索模式：
+
+```
+"{technology} official documentation tutorial"
+"{technology} how it works internals architecture"
+"{technology} vs {alternative} comparison"
+"{technology} best practices production optimization"
+"{technology} 面试 常见问题 深入理解"
+```
+
+对搜索结果按三个维度评估并呈现：
+
+```
+| # | 来源 | 类型 | 权威性 | 时效性 | 推荐理由 |
+```
+
+#### 4.2 读取来源并生成 AI 笔记
+
+读取筛选后的来源内容（PDF 用 `pdf` 技能，网页用 WebFetch），为每项技术生成结构化 AI 笔记。
+
+AI 笔记使用 knowledge-mastery 的 AI 笔记模板（`skills/knowledge-mastery/references/output-templates.md`），重点填写以下 section：
+
+- **核心概念**：该技术的核心机制和关键知识点
+- **面试高频考点**：每个考点用"面试官问的是___，他真正想知道的是___"的格式
+- **与其他方法的对比**：对比表格（如适用）
+
+写作遵循 knowledge-mastery 的写作红线（口语化、零术语先行、短词优先、一句一事）。
+
+#### 4.3 保存 AI 笔记
+
+将 AI 笔记保存到 `open/ai-<topic>/<topic>-ai-notes.md`，遵循 knowledge-mastery 的文件组织规范。
+
+这样如果用户后续对该技术启动 knowledge-mastery 学习，阶段1的 AI 笔记已经存在，可以直接从阶段2开始。
+
+### 第五步：基于 AI 笔记生成面试问答
+
+> AI 笔记来源：第四步新生成的，或第三步从已有 knowledge-mastery 成果中读取的。
+
+基于 AI 笔记中的结构化理解生成问答，而非凭搜索片段拼凑。具体映射关系：
+
+- AI 笔记「核心概念」section → 基础 + 中级题
+- AI 笔记「面试高频考点」section → 直接转为 Q&A 格式（"面试官问的是___"→ 面试问题，"回答要点"→ 答案）
+- AI 笔记「与其他方法的对比」section → 对比表格题
 
 针对每项技术，生成覆盖三个深度层次的问答：
 
@@ -49,13 +109,13 @@ description: "基于简历技术技能生成全面的面试准备指南（八股
 3. **高级**（2-3题）：生产实践、优化、边缘情况
 
 写作规则：
-- 每个答案必须事实准确——不得编造
+- 每个答案必须与 AI 笔记中的事实一致——不得编造
 - 包含语法正确的代码示例（Python、SQL、YAML、Nginx等）
 - 对相关概念使用对比表格（markdown表格）
 - 问题必须是求职者在面试中真实会遇到的问题
 - 答案简洁但完整——注重清晰而非冗长
 
-### 第五步：格式化与保存
+### 第六步：格式化与保存
 
 按照 `references/output-template.md` 中的输出模板设定文档结构和格式标准。
 
@@ -66,11 +126,22 @@ description: "基于简历技术技能生成全面的面试准备指南（八股
 
 将文件保存在源简历的**同一目录**下。
 
+### 第七步：可选深入学习
+
+八股文生成完毕后，询问用户：
+
+> "八股文已生成。如果某些技术你想深入学习（而不只是背面试答案），可以使用 knowledge-mastery skill 启动完整学习闭环。AI 笔记已保存在 `open/ai-<topic>/` 下，可以直接从阶段2（深度理解与互动）开始。"
+
+列出有 AI 笔记的技术供用户选择。用户确认后，提示其使用 `/knowledge-mastery` 并指定对应主题。
+
 ## 质量检查清单
 
 在最终完成前，验证：
 
 - [ ] 简历技能部分的每项技能均已覆盖
+- [ ] 已检查并复用了已有的 knowledge-mastery 学习成果
+- [ ] 每项技术的 AI 笔记已保存到 `open/ai-<topic>/` 下
+- [ ] 面试问答基于 AI 笔记生成，答案与笔记内容一致
 - [ ] 没有编造的API、方法或版本特性
 - [ ] 代码示例语法正确
 - [ ] 对比表格信息准确
