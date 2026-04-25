@@ -75,4 +75,5 @@
 - [anthropics/skills](https://github.com/anthropics/skills) — Anthropic 官方 Agent Skills 仓库，提供经过验证的 Claude Code 技能，可通过 `/plugin marketplace add anthropics/skills` 安装。
 - [awesome-claude-code](https://github.com/hesreallyhim/awesome-claude-code) — 社区最热门的 Claude Code 资源精选合集（38.8k stars），涵盖 Skills、Hooks、Slash Commands 等，适合发现和探索社区产出的优质技能。
 - [3Blue1Brown - Attention in Transformers](https://www.3blue1brown.com/lessons/attention) — 通过精美动画逐步可视化讲解 Transformer 中 Attention 机制的运作原理（Query、Key、Value、Attention Pattern、Multi-Head Attention），直观易懂，适合配合 Attention Is All You Need 论文一起学习。
+- [计算机视觉研究院](https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI0NTE0ODA5MA==) — 微信公众号，专注计算机视觉领域，持续分享 CV 前沿论文解读、技术实践和行业动态，适合跟踪 CV 方向的最新进展。
 
