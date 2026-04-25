@@ -30,10 +30,6 @@
 │   ├── ai-prompt-engineering/      # Prompt Engineering 知识精通（掌握度 85%）
 │   ├── ai-rag/                     # RAG 知识精通（掌握度 80%）
 │   └── ai-agent/                   # Agent 与工作流 知识精通（掌握度 75%）
-├── tasks/                 # 零碎任务（学习练习、side project、日常事务）
-│   ├── README.md          # 任务索引
-│   ├── open/              # 进行中 / 待办
-│   └── closed/            # 已完成 / 放弃
 └── more/                  # 书籍与播客
     ├── README.more.open.md    # 待看书籍与播客
     ├── README.more.closed.md  # 已看书籍与播客
@@ -46,7 +42,6 @@
 - [已看论文](closed/README.md) — 已完成阅读的论文及笔记
 - [待看书籍与播客](more/README.more.open.md) — 计划看的书籍和播客
 - [已看书籍与播客](more/README.more.closed.md) — 已完成阅读的书籍和播客
-- [任务看板](tasks/README.md) — 零碎任务收集与追踪
 
 ## Claude Code Skills
 
