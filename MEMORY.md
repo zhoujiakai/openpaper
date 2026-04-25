@@ -34,7 +34,8 @@ openpaper/
 │   ├── ai-attention-is-all-you-need/  # Transformer 论文精读（原文/翻译/笔记/对话记录/图表）
 │   ├── ai-transformer/             # Transformer 知识精通（AI笔记/题库/进度/掌握度报告）掌握度 90%
 │   ├── ai-prompt-engineering/      # Prompt Engineering 知识精通（掌握度 85%）
-│   └── ai-rag/                     # RAG 知识精通（掌握度 80%）
+│   ├── ai-rag/                     # RAG 知识精通（掌握度 80%）
+│   └── ai-agent/                   # Agent 与工作流 知识精通（掌握度 75%）
 ├── tasks/                 # 零碎任务（学习练习、side project、日常事务）
 │   ├── README.md          # 任务索引
 │   ├── open/              # 进行中 / 待办
@@ -100,7 +101,7 @@ openpaper/
 | 1 | Transformer | ✅ 完成 | 掌握度 90%，周测 05-01 |
 | 2 | Prompt Engineering | ✅ 完成 | 掌握度 85%，周测 05-01，个人笔记待写 |
 | 3 | RAG | ✅ 完成 | 掌握度 80%，周测 05-01 |
-| 4 | Agent 与工作流 | ⏳ 未开始 | — |
+| 4 | Agent 与工作流 | ✅ 完成 | 掌握度 75%，周测 05-02，个人笔记待写 |
 | 5 | Python 异步 | ⏳ 未开始 | — |
 | 6 | 消息队列 | ⏳ 未开始 | — |
 | 7 | 微服务架构 | ⏳ 未开始 | — |

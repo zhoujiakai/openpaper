@@ -28,7 +28,8 @@
 │   ├── ai-attention-is-all-you-need/ # Transformer 论文精读（原文、翻译、笔记）
 │   ├── ai-transformer/             # Transformer 知识精通（掌握度 90%）
 │   ├── ai-prompt-engineering/      # Prompt Engineering 知识精通（掌握度 85%）
-│   └── ai-rag/                     # RAG 知识精通（掌握度 80%）
+│   ├── ai-rag/                     # RAG 知识精通（掌握度 80%）
+│   └── ai-agent/                   # Agent 与工作流 知识精通（掌握度 75%）
 ├── tasks/                 # 零碎任务（学习练习、side project、日常事务）
 │   ├── README.md          # 任务索引
 │   ├── open/              # 进行中 / 待办

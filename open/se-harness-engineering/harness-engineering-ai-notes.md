@@ -2,8 +2,8 @@
 
 > 来源：
 > - [OpenAI: Harness Engineering](https://openai.com/index/harness-engineering/)（核心来源）
-> - Andrej Karpathy "Vibe Coding"（对比来源）
-> - Context Engineering 社区实践（补充来源）
+> - Andrej Karpathy "Vibe Coding"（对比来源）— [原始推文](https://x.com/karpathy/status/1886192184808216951)（2025-02）
+> - Philipp Schmid [Context Engineering](https://www.philschmid.de/context-engineering)（补充来源，2025-06-30）
 > 生成时间：2026-04-25
 > 学习目标：理解新编程范式的核心思想，判断是否是真正的范式转变
 
