@@ -34,7 +34,8 @@ openpaper/
 │   ├── ai-transformer/             # Transformer 知识精通（AI笔记/题库/进度/掌握度报告）掌握度 90%
 │   ├── ai-prompt-engineering/      # Prompt Engineering 知识精通（掌握度 85%）
 │   ├── ai-rag/                     # RAG 知识精通（掌握度 80%）
-│   └── ai-agent/                   # Agent 与工作流 知识精通（掌握度 75%）
+│   ├── ai-agent/                   # Agent 与工作流 知识精通（掌握度 75%）
+│   └── ai-python-async/            # Python 异步 知识精通（掌握度 85%）
 └── more/                  # 书籍与播客
     ├── README.more.open.md    # 待读书籍（12本，含哲学/文学/写作/心理学/商业）
     ├── README.more.closed.md  # 已读书籍与播客
@@ -95,8 +96,8 @@ openpaper/
 | 2 | Prompt Engineering | ✅ 完成 | 掌握度 85%，周测 05-01，个人笔记待写 |
 | 3 | RAG | ✅ 完成 | 掌握度 80%，周测 05-01 |
 | 4 | Agent 与工作流 | ✅ 完成 | 掌握度 75%，周测 05-02，个人笔记待写 |
-| 5 | Python 异步 | 🔜 进行中 | 阶段2：深度理解，AI笔记已完成 |
-| 6 | 消息队列 | ⏳ 未开始 | — |
+| 5 | Python 异步 | ✅ 完成 | 掌握度 85%，周测 05-03 |
+| 6 | 消息队列 | 🔜 进行中 | 阶段 1 完成，AI 笔记已生成 |
 | 7 | 微服务架构 | ⏳ 未开始 | — |
 
 每个主题的文件结构：`open/ai-<topic>/` 下包含 `-ai-notes.md`、`-progress.md`、`-quiz.md`、`-mastery-report.md`
