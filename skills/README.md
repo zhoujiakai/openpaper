@@ -132,10 +132,6 @@
 
 吴恩达式论文精读助手。引导用户逐节阅读学术论文，通过提问和纠正帮助理解核心概念，自动搜索补充资料，生成学习笔记，支持保存/恢复学习进度。
 
-## interview-baguwen
-
-面试八股文生成器。读取用户简历（.docx/.pdf），提取技术技能，生成初/中/高级面试问答准备指南。
-
 ## 引用
 
 - [ljg-paper](https://github.com/lijigang/ljg-skills/tree/master/skills/ljg-paper) — zjk-mastery 的 AI 笔记写作部分参考了该 skill 的 AI 写作模块

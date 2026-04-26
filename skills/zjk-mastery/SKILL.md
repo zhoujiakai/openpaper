@@ -187,4 +187,3 @@ open/<主题目录>/
 ## 与其他 Skill 协作
 
 - **paper-reading**：学术论文先精读教学，再用本 skill 管理测试和回测
-- **interview-baguwen**：面试准备时，baguwen 提供面试问答，本 skill 管理学习闭环

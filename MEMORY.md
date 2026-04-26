@@ -15,7 +15,6 @@ openpaper/
 ├── MEMORY.md              # AI 上下文记忆（本文件）
 ├── skills/                # Claude Code 技能定义
 │   ├── paper-reading/     # 吴恩达式论文精读助手（SKILL.md）
-│   ├── interview-baguwen/ # 基于简历的面试八股文生成器（SKILL.md）
 │   └── zjk-mastery/ # 技术知识精通学习工作流（SKILL.md + output-templates.md）
 ├── open/                  # 待读/进行中资源
 │   ├── README.md          # 待读论文清单（按领域分类）
@@ -65,7 +64,6 @@ openpaper/
 | `more/README.more.open.md` | 待读书籍（12本，含完整元数据） |
 | `more/README.more.closed.md` | 已读书籍/播客 |
 | `skills/paper-reading/SKILL.md` | 论文精读技能定义（约293行） |
-| `skills/interview-baguwen/SKILL.md` | 面试八股文技能定义（约79行） |
 | `skills/zjk-mastery/SKILL.md` | 知识精通学习工作流（约171行） |
 | `skills/zjk-mastery/references/output-templates.md` | 学习产出模板（AI笔记/个人笔记/题库/进度/报告） |
 | `open/se-leetcode-top-100-liked/leetcode-top-100-liked.md` | LeetCode 题解 |
@@ -76,8 +74,7 @@ openpaper/
 ## Claude Code 技能
 
 1. **paper-reading**：吴恩达式论文精读助手，支持逐节引导、提问纠正、自动搜索补充资料、保存/恢复学习进度
-2. **interview-baguwen**：读取简历（.docx/.pdf），提取技术技能，生成初/中/高级面试问答
-3. **zjk-mastery**：技术知识精通学习工作流，三阶段闭环（输入→思考→输出），支持内容发现、AI笔记、苏格拉底问答、模拟题测试、A4默写、间隔重复回测（周/月/年）
+2. **zjk-mastery**：技术知识精通学习工作流，三阶段闭环（输入→思考→输出），支持内容发现、AI笔记、苏格拉底问答、模拟题测试、A4默写、间隔重复回测（周/月/年）
 
 安装方式：将 `skills/` 下的目录复制到 `~/.claude/skills/`
 
