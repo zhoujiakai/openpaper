@@ -2,7 +2,7 @@
 
 本目录包含三个自建的 Claude Code 技能（Skills）。将对应目录复制到 `~/.claude/skills/` 即可在 Claude Code 中使用。
 
-## knowledge-mastery
+## zjk-mastery
 
 技术知识精通学习工作流。三阶段闭环：输入（内容发现 + AI 笔记生成）→ 思考（互动问答 + 个人笔记 + 模拟题）→ 输出（A4 默写 + 掌握度测试）。支持间隔重复回测（周/月/年）。
 
@@ -126,7 +126,7 @@
 - 每个推荐资源附一句"推荐理由"（不是"权威性高"这种空话，而是"这篇用动画演示了 attention 的计算过程"）
 - 如果用户提供了自己的材料，优先使用用户材料，搜索结果作为补充
 
-**实施范围：** 仅修改 `skills/knowledge-mastery/SKILL.md` 的 1.2 节，将上述策略写入 skill prompt。其他阶段和文件不动。
+**实施范围：** 仅修改 `skills/zjk-mastery/SKILL.md` 的 1.2 节，将上述策略写入 skill prompt。其他阶段和文件不动。
 
 ## paper-reading
 
@@ -138,4 +138,4 @@
 
 ## 引用
 
-- [ljg-paper](https://github.com/lijigang/ljg-skills/tree/master/skills/ljg-paper) — knowledge-mastery 的 AI 笔记写作部分参考了该 skill 的 AI 写作模块
+- [ljg-paper](https://github.com/lijigang/ljg-skills/tree/master/skills/ljg-paper) — zjk-mastery 的 AI 笔记写作部分参考了该 skill 的 AI 写作模块

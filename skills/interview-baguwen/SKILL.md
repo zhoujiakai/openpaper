@@ -31,7 +31,7 @@ description: "基于简历技术技能生成全面的面试准备指南（八股
 
 ### 第三步：检查已有学习成果
 
-对每项技能，检查是否存在对应的 knowledge-mastery 学习目录：
+对每项技能，检查是否存在对应的 zjk-mastery 学习目录：
 
 ```
 检查路径：open/ai-<topic>/ 和 closed/ai-<topic>/
@@ -47,7 +47,7 @@ description: "基于简历技术技能生成全面的面试准备指南（八股
 
 > 仅对第三步中标记为"需要调研"的技能执行本步。
 
-采用 knowledge-mastery 阶段1 的内容发现流程，替换浅层面试题搜索。
+采用 zjk-mastery 阶段1 的内容发现流程，替换浅层面试题搜索。
 
 #### 4.1 搜索优质来源
 
@@ -78,23 +78,23 @@ description: "基于简历技术技能生成全面的面试准备指南（八股
 
 读取筛选后的来源内容（PDF 用 `pdf` 技能，网页用 WebFetch），为每项技术生成结构化 AI 笔记。
 
-AI 笔记使用 knowledge-mastery 的 AI 笔记模板（`skills/knowledge-mastery/references/output-templates.md`），重点填写以下 section：
+AI 笔记使用 zjk-mastery 的 AI 笔记模板（`skills/zjk-mastery/references/output-templates.md`），重点填写以下 section：
 
 - **核心概念**：该技术的核心机制和关键知识点
 - **面试高频考点**：每个考点用"面试官问的是___，他真正想知道的是___"的格式
 - **与其他方法的对比**：对比表格（如适用）
 
-写作遵循 knowledge-mastery 的写作红线（口语化、零术语先行、短词优先、一句一事）。
+写作遵循 zjk-mastery 的写作红线（口语化、零术语先行、短词优先、一句一事）。
 
 #### 4.3 保存 AI 笔记
 
-将 AI 笔记保存到 `open/ai-<topic>/<topic>-ai-notes.md`，遵循 knowledge-mastery 的文件组织规范。
+将 AI 笔记保存到 `open/ai-<topic>/<topic>-ai-notes.md`，遵循 zjk-mastery 的文件组织规范。
 
-这样如果用户后续对该技术启动 knowledge-mastery 学习，阶段1的 AI 笔记已经存在，可以直接从阶段2开始。
+这样如果用户后续对该技术启动 zjk-mastery 学习，阶段1的 AI 笔记已经存在，可以直接从阶段2开始。
 
 ### 第五步：基于 AI 笔记生成面试问答
 
-> AI 笔记来源：第四步新生成的，或第三步从已有 knowledge-mastery 成果中读取的。
+> AI 笔记来源：第四步新生成的，或第三步从已有 zjk-mastery 成果中读取的。
 
 基于 AI 笔记中的结构化理解生成问答，而非凭搜索片段拼凑。具体映射关系：
 
@@ -130,16 +130,16 @@ AI 笔记使用 knowledge-mastery 的 AI 笔记模板（`skills/knowledge-master
 
 八股文生成完毕后，询问用户：
 
-> "八股文已生成。如果某些技术你想深入学习（而不只是背面试答案），可以使用 knowledge-mastery skill 启动完整学习闭环。AI 笔记已保存在 `open/ai-<topic>/` 下，可以直接从阶段2（深度理解与互动）开始。"
+> "八股文已生成。如果某些技术你想深入学习（而不只是背面试答案），可以使用 zjk-mastery skill 启动完整学习闭环。AI 笔记已保存在 `open/ai-<topic>/` 下，可以直接从阶段2（深度理解与互动）开始。"
 
-列出有 AI 笔记的技术供用户选择。用户确认后，提示其使用 `/knowledge-mastery` 并指定对应主题。
+列出有 AI 笔记的技术供用户选择。用户确认后，提示其使用 `/zjk-mastery` 并指定对应主题。
 
 ## 质量检查清单
 
 在最终完成前，验证：
 
 - [ ] 简历技能部分的每项技能均已覆盖
-- [ ] 已检查并复用了已有的 knowledge-mastery 学习成果
+- [ ] 已检查并复用了已有的 zjk-mastery 学习成果
 - [ ] 每项技术的 AI 笔记已保存到 `open/ai-<topic>/` 下
 - [ ] 面试问答基于 AI 笔记生成，答案与笔记内容一致
 - [ ] 没有编造的API、方法或版本特性
