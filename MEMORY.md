@@ -13,9 +13,6 @@ openpaper/
 ├── .gitignore
 ├── README.md              # 项目主索引，含目录树和导航链接
 ├── MEMORY.md              # AI 上下文记忆（本文件）
-├── skills/                # Claude Code 技能定义
-│   ├── paper-reading/     # 吴恩达式论文精读助手（SKILL.md）
-│   └── zjk-mastery/ # 技术知识精通学习工作流（SKILL.md + output-templates.md）
 ├── open/                  # 待读/进行中资源
 │   ├── README.md          # 待读论文清单（按领域分类）
 │   ├── web3-bitcoin/               # 比特币白皮书（英文/中文/双语/学习指南）
@@ -64,9 +61,6 @@ openpaper/
 | `closed/README.md` | 已完成论文清单 |
 | `more/README.more.open.md` | 待读书籍（12本，含完整元数据） |
 | `more/README.more.closed.md` | 已读书籍/播客 |
-| `skills/paper-reading/SKILL.md` | 论文精读技能定义（约293行） |
-| `skills/zjk-mastery/SKILL.md` | 知识精通学习工作流（约171行） |
-| `skills/zjk-mastery/references/output-templates.md` | 学习产出模板（AI笔记/个人笔记/题库/进度/报告） |
 | `open/se-leetcode-top-100-liked/leetcode-top-100-liked.md` | LeetCode 题解 |
 | `open/eng-liuxiaoyan-vocab-book/liuxiaoyan-vocab-book.md` | 英语词汇笔记 |
 | `open/ai-claude-skill-guide/The-Complete-Guide-to-Building-Skill-for-Claude.pdf` | Claude Skills 构建教程 |
@@ -74,10 +68,12 @@ openpaper/
 
 ## Claude Code 技能
 
-1. **paper-reading**：吴恩达式论文精读助手，支持逐节引导、提问纠正、自动搜索补充资料、保存/恢复学习进度
-2. **zjk-mastery**：技术知识精通学习工作流，三阶段闭环（输入→思考→输出），支持内容发现、AI笔记、苏格拉底问答、模拟题测试、A4默写、间隔重复回测（周/月/年）
+所有 Skill 在独立仓库 [openskill](https://github.com/zhoujiakai/openskill) 中维护。
 
-安装方式：将 `skills/` 下的目录复制到 `~/.claude/skills/`
+- [zjk-mastery](https://github.com/zhoujiakai/openskill/tree/main/zjk-mastery) — 技术知识精通学习工作流
+- [zjk-openpaper](https://github.com/zhoujiakai/openskill/tree/main/zjk-openpaper) — 个人知识库浏览器与管理工具
+- [zjk-kanban](https://github.com/zhoujiakai/openskill/tree/main/zjk-kanban) — 纯 Markdown 看板任务管理
+- [zjk-offer](https://github.com/zhoujiakai/openskill/tree/main/zjk-offer) — 求职全流程管理
 
 ## 组织约定
 
