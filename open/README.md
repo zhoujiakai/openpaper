@@ -16,6 +16,15 @@
 - 链接：https://hackernoon.com/learn-blockchains-by-building-one-117428612f46
 - 说明：基于python，写一个区块链应用，非常简单简短的代码，了解区块链。
 
+### 基于公链 + LoRa 的无人机机间安全通信，破解低空交通管理难题
+- 类型：论文解读（Sensors 2025），跨 Web3 + CV
+- 作者：计算机视觉研究院（公众号解读）
+- 来源：微信公众号「计算机视觉研究院」
+- 链接：
+  - 公众号文章: https://mp.weixin.qq.com/s/76p9ItqouBRPIvTrE-FG3w
+  - 原始论文 PDF: https://pmc.ncbi.nlm.nih.gov/articles/PMC12390230/pdf/sensors-25-05087.pdf
+- 说明：将 LoRa D2D 通信与以太坊公链 UTM 融合，提出轻量化安全协议解决无人机协同避障。核心亮点：SHA256+异或加密实现 0.01ms 级计算、544~800 位存储开销（行业最低）、AVISPA 形式化验证通过、抵御重放/中间人/追踪四大攻击。跨领域价值：区块链（去中心化 UTM + 智能合约）× CV（无人机视觉感知 + 低空交通管理）。
+
 ## AI
 
 ### BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding
@@ -41,6 +50,34 @@
 - 类型：官方教程（PDF）
 - 来源：Anthropic 官方
 - 说明：Claude Code Skills 完整构建指南，涵盖技能基础概念（SKILL.md 结构、渐进式加载）、规划与设计（用例识别、三大类别）、测试与迭代、分发与共享、常见模式与问题排查、资源与参考
+
+### 特征工程方法论
+- 类型：技术主题学习
+- 来源：特征工程方法论系统学习
+- 紧急程度：高
+- 关键词：特征提取、特征转换、特征编码、特征选择、特征构造、标准化、归一化、Embedding、TF-IDF
+- 说明：系统学习特征工程的完整流程（提取→转换→编码→选择→构造），掌握数值型/类别型/文本型/时间序列特征的处理方法，理解特征工程在 AI 应用开发中的实践（RAG 文档分块策略、元数据设计、向量检索中的特征表示）
+
+### 模型服务化部署（vLLM/Triton）
+- 类型：技术主题学习
+- 来源：模型服务化部署系统学习
+- 紧急程度：高
+- 关键词：vLLM、Triton Inference Server、模型量化、ONNX、dynamic batching、PagedAttention、推理优化、容器化部署
+- 说明：系统学习大模型的线上服务化部署方案，涵盖：① vLLM 推理引擎（PagedAttention、continuous batching）② Triton Inference Server（多框架支持、dynamic batching）③ 模型格式转换（PyTorch→ONNX→TensorRT）④ 量化策略（FP16/INT8）⑤ API 服务封装（FastAPI + 限流 + 监控）⑥ Docker/K8s 容器化部署与自动扩缩容
+
+### 机器学习基础算法（决策树/随机森林/SVM）
+- 类型：技术主题学习
+- 来源：经典机器学习算法系统学习
+- 紧急程度：中
+- 关键词：决策树、随机森林、SVM、KNN、朴素贝叶斯、梯度提升、XGBoost、过拟合、正则化、交叉验证
+- 说明：系统学习经典机器学习算法的原理和应用场景，重点掌握：① 决策树（信息增益/基尼系数、剪枝策略）② 集成学习（Bagging→随机森林、Boosting→XGBoost/LightGBM）③ SVM（核函数、间隔最大化、软间隔）④ 模型评估（混淆矩阵、ROC-AUC、交叉验证）⑤ 防过拟合策略（正则化、早停、Dropout）
+
+### 游戏 AI 应用场景
+- 类型：技术主题学习
+- 来源：AI 技术在行业场景中的落地实践
+- 紧急程度：低
+- 关键词：游戏 AI、AIGC、智能 NPC、内容生成、推荐系统、反作弊、游戏数据分析
+- 说明：了解 AI 技术在游戏行业的主要落地场景，包括：① AIGC 内容生产（美术生成、文案生成、音乐生成）② 智能 NPC 对话系统（RAG + 角色扮演）③ 游戏推荐系统（玩家画像、协同过滤）④ 反作弊系统（异常检测）⑤ 游戏数据分析（玩家行为分析、留存预测）⑥ AI 驱动的游戏玩法优化
 
 ## CV
 
@@ -153,6 +190,12 @@ https://github.com/CMU-Perceptual-Computing-Lab/openpose
 - 来源：LeetCode
 - 链接：https://leetcode.cn/problem-list/XApvNy3p/
 - 说明：《剑指 Offer》经典面试题 50 道
+
+### 爬虫反检测与验证码识别技术
+- 类型：技术主题学习
+- 来源：爬虫工程化方案与反爬虫应对策略
+- 关键词：打码平台 API、2Captcha、Playwright stealth、多模态验证码识别、Agentic 浏览器自动化、AI 自愈选择器
+- 说明：系统学习爬虫工程化方案与反爬虫应对策略，涵盖：① 打码平台 API（2Captcha、打码兔）原理与集成；② Playwright stealth 插件减少验证码触发；③ 多模态模型（GPT-4o）识别图形验证码；④ Agentic 浏览器自动化工具（Browser Use、Playwright MCP、OpenClaw）；⑤ 网站结构变化时的自愈策略（配置化选择器、AI 视觉降级）
 
 <!-- 格式参考：
 ### 论文名
