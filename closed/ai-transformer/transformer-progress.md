@@ -45,3 +45,13 @@
 
 - 用"低维度到高维度"描述残差连接 → 应为"浅层到深层"，维度不改变
 - 对 Encoder-Decoder 和 Decoder-Only 的数据区别，最初只想到长度问题 → 核心区别是"配对数据 vs 连续文本"
+
+## 文件清单
+
+| 文件 | 状态 |
+|------|------|
+| `transformer-ai-notes.md` | ✅ 已生成 |
+| `transformer-progress.md` | ✅ 本文件 |
+| `transformer-quiz.md` | ✅ 已生成 |
+| `transformer-mastery-report.md` | ✅ 已更新（掌握度 90% → 82%） |
+| `transformer-personal-notes.md` | ✅ 已创建（周测复习记录） |

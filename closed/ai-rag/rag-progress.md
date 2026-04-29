@@ -26,6 +26,16 @@
 | Section 7: RAG vs 微调 vs 长上下文 | ✅ 精读完成 | 完全掌握 |
 | Section 8: Agentic RAG — RAG 的进化方向 | ✅ 精读完成 | 完全掌握 |
 
+## 文件清单
+
+| 文件 | 状态 |
+|------|------|
+| `rag-ai-notes.md` | ✅ 已生成 |
+| `rag-progress.md` | ✅ 本文件 |
+| `rag-quiz.md` | ✅ 已生成 |
+| `rag-mastery-report.md` | ✅ 已更新（掌握度 80% → 83%） |
+| `rag-personal-notes.md` | ✅ 已创建（周测复习记录） |
+
 ## 下次从哪里继续
 
 进入间隔重复回测阶段：
