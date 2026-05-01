@@ -191,6 +191,22 @@ https://github.com/CMU-Perceptual-Computing-Lab/openpose
 - 链接：https://leetcode.cn/problem-list/XApvNy3p/
 - 说明：《剑指 Offer》经典面试题 50 道
 
+### Redis 深入掌握
+- 类型：技术主题学习（Mastery 三阶段工作流）
+- 来源：系统学习 Redis 核心原理
+- 紧急程度：高
+- 关键词：SDS、ziplist、skiplist、hashtable、RDB、AOF、缓存雪崩/穿透/击穿、Redlock、Sentinel
+- 说明：系统学习 Redis 核心原理，涵盖 5 大主题：数据结构底层实现、持久化策略、缓存三大问题、分布式锁、哨兵集群。
+- 进度：[se-redis](se-redis/)
+
+### FastAPI 深入掌握
+- 类型：技术主题学习（Mastery 三阶段工作流）
+- 来源：FastAPI 核心机制系统学习
+- 紧急程度：高
+- 关键词：依赖注入、中间件、生命周期、Pydantic、性能优化
+- 说明：系统学习 FastAPI 核心机制，涵盖 5 大主题：依赖注入机制、中间件执行顺序、生命周期事件、请求/响应模型设计、性能优化
+- 进度：[se-fastapi](se-fastapi/)
+
 ### 爬虫反检测与验证码识别技术
 - 类型：技术主题学习
 - 来源：爬虫工程化方案与反爬虫应对策略
