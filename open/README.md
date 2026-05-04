@@ -215,13 +215,7 @@ https://github.com/CMU-Perceptual-Computing-Lab/openpose
 - 说明：系统学习 Celery 异步任务队列，涵盖：架构原理（Worker/Broker/Backend）、任务调度策略、结果存储、重试与幂等、与 RabbitMQ 集成、Celery vs asyncio 场景选择
 - 进度：[se-celery](se-celery/)
 
-### SQLAlchemy ORM 深入掌握
-- 类型：技术主题学习（Mastery 三阶段工作流）
-- 来源：面试准备（项目中大量使用但未系统掌握）
-- 紧急程度：高
-- 关键词：模型关系映射、查询优化、lazy loading、eager loading、异步 Session、事务管理、性能陷阱
-- 说明：系统学习 SQLAlchemy ORM，涵盖：模型关系映射（一对多/多对多）、查询优化（lazy loading vs eager loading）、异步 Session、事务管理、常见性能陷阱
-- 进度：[se-sqlalchemy](se-sqlalchemy/)
+### ~~SQLAlchemy ORM 深入掌握~~ → 已归档至 closed/
 
 ### 爬虫反检测与验证码识别技术
 - 类型：技术主题学习
