@@ -17,7 +17,7 @@
 
 | Section | 状态 | 掌握程度 |
 |---------|------|---------|
-| Section 1: 数据结构底层实现（SDS / ziplist / skiplist / hashtable） | ⏳ | — |
+| Section 1: 数据结构底层实现（SDS / ziplist / skiplist / hashtable） | 🔄 进行中 | — |
 | Section 2: 持久化策略（RDB / AOF / 混合持久化） | ⏳ | — |
 | Section 3: 缓存三大问题（雪崩 / 穿透 / 击穿） | ⏳ | — |
 | Section 4: 分布式锁（单节点锁 / Redlock / 项目应用） | ⏳ | — |
