@@ -70,4 +70,6 @@
 - [awesome-claude-code](https://github.com/hesreallyhim/awesome-claude-code) — 社区最热门的 Claude Code 资源精选合集（38.8k stars），涵盖 Skills、Hooks、Slash Commands 等，适合发现和探索社区产出的优质技能。
 - [3Blue1Brown - Attention in Transformers](https://www.3blue1brown.com/lessons/attention) — 通过精美动画逐步可视化讲解 Transformer 中 Attention 机制的运作原理（Query、Key、Value、Attention Pattern、Multi-Head Attention），直观易懂，适合配合 Attention Is All You Need 论文一起学习。
 - [计算机视觉研究院](https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI0NTE0ODA5MA==) — 微信公众号，专注计算机视觉领域，持续分享 CV 前沿论文解读、技术实践和行业动态，适合跟踪 CV 方向的最新进展。
+- [learn-claude-code](https://github.com/shareAI-lab/learn-claude-code) — Claude Code Harness 工程逆向教学。12 个递进章节，从最小 agent loop 开始逐步拆解 Claude Code 架构机制：工具调度、计划分解、子代理隔离、按需知识加载、上下文压缩、任务持久化、后台执行、多代理协作、自治取任务和工作树隔离。
+- [claw0](https://github.com/shareAI-lab/claw0) — 从零到一构建 AI Agent Gateway。10 个递进章节，每章一个可独立运行的 Python 文件，从 agent loop 开始逐步构建到生产级网关，涵盖工具调用、会话管理、多 IM 渠道、网关路由、智能体个性与记忆、心跳与定时任务、可靠投递、弹性容错和并发控制。
 
