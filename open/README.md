@@ -66,11 +66,12 @@
 - 说明：系统学习大模型的线上服务化部署方案，涵盖：① vLLM 推理引擎（PagedAttention、continuous batching）② Triton Inference Server（多框架支持、dynamic batching）③ 模型格式转换（PyTorch→ONNX→TensorRT）④ 量化策略（FP16/INT8）⑤ API 服务封装（FastAPI + 限流 + 监控）⑥ Docker/K8s 容器化部署与自动扩缩容
 
 ### 机器学习基础算法（决策树/随机森林/SVM）
-- 类型：技术主题学习
+- 类型：技术主题学习（Mastery 三阶段工作流）
 - 来源：经典机器学习算法系统学习
-- 紧急程度：中
-- 关键词：决策树、随机森林、SVM、KNN、朴素贝叶斯、梯度提升、XGBoost、过拟合、正则化、交叉验证
-- 说明：系统学习经典机器学习算法的原理和应用场景，重点掌握：① 决策树（信息增益/基尼系数、剪枝策略）② 集成学习（Bagging→随机森林、Boosting→XGBoost/LightGBM）③ SVM（核函数、间隔最大化、软间隔）④ 模型评估（混淆矩阵、ROC-AUC、交叉验证）⑤ 防过拟合策略（正则化、早停、Dropout）
+- 紧急程度：高
+- 关键词：决策树、随机森林、SVM、CART、Gini、熵、信息增益、Bagging、Boosting、核函数、RBF、剪枝、OOB、GridSearchCV
+- 说明：系统学习经典机器学习算法的原理和 sklearn 实现。Phase 1 AI 笔记已生成。重点掌握：① 决策树（分裂准则推导、预剪枝 vs 后剪枝、CART 算法）② 随机森林（Bootstrap + 随机特征双重随机、Bagging 降方差、OOB 验证、MDI 特征重要性及其陷阱）③ SVM（间隔最大化、核技巧、RBF 的 C-γ 调参、对偶问题、多分类 ovo vs ovr 策略）
+- 进度：[ml-basic-algorithms](ml-basic-algorithms/)
 
 ### 游戏 AI 应用场景
 - 类型：技术主题学习
@@ -196,7 +197,7 @@ https://github.com/CMU-Perceptual-Computing-Lab/openpose
 - 来源：系统学习 Redis 核心原理
 - 紧急程度：高
 - 关键词：SDS、ziplist、skiplist、hashtable、RDB、AOF、缓存雪崩/穿透/击穿、Redlock、Sentinel
-- 说明：系统学习 Redis 核心原理，涵盖 5 大主题：数据结构底层实现、持久化策略、缓存三大问题、分布式锁、哨兵集群。
+- 说明：系统学习 Redis 核心原理，涵盖 5 大主题：数据结构底层实现、持久化策略、缓存三大问题、分布式锁、哨兵集群
 - 进度：[se-redis](se-redis/)
 
 ### FastAPI 深入掌握
