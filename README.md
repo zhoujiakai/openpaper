@@ -6,7 +6,7 @@
 
 ```
 ├── README.md               # 项目说明
-├── memory.md               # AI 上下文记忆
+├── CLAUDE.md               # AI 上下文记忆
 ├── open/                   # 待看的技术资源
 │   └── README.md
 ├── processing/             # 进行中的技术资源
