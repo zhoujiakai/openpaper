@@ -40,6 +40,7 @@ openpaper/
 - 论文和知识主题按 `ai-<topic>/`、`se-<topic>/` 命名
 - Git 分支策略：单分支 `main`，直接提交
 - 移动主题目录（`open/` → `processing/` 或 `processing/` → `closed/`）时，同步将对应 `README.md` 中的 section 移动到目标目录的 `README.md`，避免重复或断链
+- personal-notes.md 里程碑（🎉）：只在章节实际达到的自然取整百分比处设置（如 25%、50%、75%、100%），间隔 ≥20%，不要每 10% 都放。emoji 数 = floor(X/10)，文本用实际百分比。
 
 ## 最近提交
 

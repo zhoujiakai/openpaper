@@ -63,3 +63,21 @@
   5. 倒立摆系统设计、实现、自动起摆
 - 笔记：[ctrl-江协PID倒立摆/](ctrl-江协PID倒立摆/)
 - 开始日期：2026-05-17
+
+## 软件工程
+
+### Claude Code 源码
+
+- 类型：开源项目源码学习
+- 来源：https://github.com/shareAI-lab/learn-claude-code
+- 进度：已完成 5/12 章，第 6 章待学习
+- 说明：从零实现自己的 Claude Code（Anthropic 推出的终端 AI 编程助手，可直接编辑文件、执行命令、管理 Git 等工作流），包含 claw0 等模块。
+- 笔记：[se-ClaudeCode源码/](se-ClaudeCode源码/)
+
+### OpenClaw 源码
+
+- 类型：开源项目源码学习
+- 来源：https://github.com/shareAI-lab/claw0
+- 主语言：Python（教学实现）
+- 说明：通过 claw0 教学仓库学习 OpenClaw 架构。claw0 从零开始，每节一个可运行的 Python 文件（~7000 行），10 个 section 逐步构建 AI Agent Gateway：Agent Loop → Tool Use → Sessions → Channels → Gateway → Intelligence → Heartbeat → Delivery → Resilience → Concurrency。学完即可阅读 OpenClaw 生产代码。
+- 笔记：[se-OpenClaw源码/](se-OpenClaw源码/)
