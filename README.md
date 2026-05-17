@@ -45,8 +45,6 @@
 
 - [zjk-mastery](https://github.com/zhoujiakai/openskill/tree/main/zjk-mastery) — 技术知识精通学习工作流，三阶段闭环（输入→思考→输出），支持内容发现、AI 笔记生成、苏格拉底式问答、模拟题测试、A4 默写检验、间隔重复回测（周/月/年）
 - [zjk-openpaper](https://github.com/zhoujiakai/openskill/tree/main/zjk-openpaper) — 个人知识库浏览器与管理工具，浏览、搜索、管理本仓库中的学习资源
-- [zjk-kanban](https://github.com/zhoujiakai/openskill/tree/main/zjk-kanban) — 纯 Markdown 看板任务管理，围绕聚焦目标组织
-- [zjk-offer](https://github.com/zhoujiakai/openskill/tree/main/zjk-offer) — 求职全流程管理，从 JD 分析到拿 offer
 
 > 提示：搭配 [Typeless](https://www.typeless.com/zh-cn) 语音输入使用体验更佳，口述回答比打字更轻松自然。
 

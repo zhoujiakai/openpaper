@@ -11,9 +11,9 @@
   - NeurIPS: https://proceedings.neurips.cc/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html
 - 被引用数：171,777+（Semantic Scholar，截止2026年4月6日）
 - 阅读日期：2026-04-19（周日）~ 2026-04-20（周一）
-- 笔记：[ai-attention-is-all-you-need/](ai-attention-is-all-you-need/)（含中文翻译、精读笔记、学习对话记录）
+- 笔记：[ai-transformer/](ai-transformer/)
 
-## AI 知识精通
+## AI 知识
 
 **Transformer**
 - 掌握度：82%（周测 2026-04-29）
@@ -34,6 +34,8 @@
 - 掌握度：82%（周测 2026-04-29）
 - 完成日期：2026-04-25
 - 笔记：[ai-agent/](ai-agent/)（AI笔记、题库、进度、掌握度报告、个人笔记）
+
+## 后端知识
 
 **微服务架构**
 - 掌握度：88%（周测 2026-04-29）
