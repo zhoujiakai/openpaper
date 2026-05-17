@@ -7,11 +7,11 @@
 ```
 ├── README.md               # 项目说明
 ├── memory.md               # AI 上下文记忆
-├── open/                   # 待看
+├── open/                   # 待看的技术资源
 │   └── README.md
-├── processing/             # 进行中
+├── processing/             # 进行中的技术资源
 │   └── README.md
-├── closed/                 # 已完成
+├── closed/                 # 已完成的技术资源
 │   └── README.md
 └── more/                   # 书籍与播客
     ├── README.md           # 正在读
