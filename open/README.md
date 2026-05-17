@@ -161,14 +161,6 @@ https://github.com/CMU-Perceptual-Computing-Lab/openpose
 - 被引用数：28,000+（Google Scholar，截止2026年4月6日）
 - 说明：两阶段目标检测开山之作，后续发展出 Fast R-CNN、Faster R-CNN、Mask R-CNN
 
-## 英语
-
-### 刘晓燕《考研英语你还在背单词吗》
-- 类型：词汇学习笔记
-- 作者：刘晓燕
-- 链接：https://appfb9e4aqm2459.h5.xiaoeknow.com/p/course/column/p_678b5352e4b0694ca04c5f27
-- 说明：基于《考研英语你还在背单词吗》整理的词汇笔记，按 Lesson 分组，标注重点词汇
-
 ## 软件工程
 
 ### 剑指 Offer（50 道）

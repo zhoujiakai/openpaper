@@ -7,6 +7,7 @@
 - 类型：网课
 - 讲师：Andrew Ng（吴恩达）
 - 链接：https://www.bilibili.com/video/BV16jyuBBEom
+- 材料：https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes
 - 来源：经典网课
 - 开始日期：2026-05-17
 - 进度：01:34:46 / 19:36:58，第 13 / 142 集，约 8%
@@ -63,6 +64,15 @@
   5. 倒立摆系统设计、实现、自动起摆
 - 笔记：[ctrl-江协PID倒立摆/](ctrl-江协PID倒立摆/)
 - 开始日期：2026-05-17
+
+## 英语
+
+### 刘晓燕《考研英语你还在背单词吗》
+- 类型：词汇学习笔记
+- 作者：刘晓燕
+- 链接：https://appfb9e4aqm2459.h5.xiaoeknow.com/p/course/column/p_678b5352e4b0694ca04c5f27
+- 说明：基于《考研英语你还在背单词吗》整理的词汇笔记，按 Lesson 分组，标注重点词汇
+- 笔记：[eng-刘晓燕英语/](eng-刘晓燕英语/)
 
 ## 软件工程
 
