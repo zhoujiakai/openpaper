@@ -29,7 +29,7 @@
 └── more/                  # 书籍与播客
     ├── README.more.open.md    # 待看书籍与播客
     ├── README.more.closed.md  # 已看书籍与播客
-    └── mao-selected-works/    # 毛泽东选集读书笔记
+    └── 毛泽东选集/            # 毛泽东选集读书笔记
 ```
 
 ## 使用方式

@@ -11,7 +11,7 @@
 - 发表时间：1938年5月26日至6月3日（延安抗日战争研究会演讲），同年7月发表于《解放》周刊
 - 全文链接：[马克思主义文库](https://www.marxists.org/chinese/maozedong/marxist.org-chinese-mao-193805b.htm)
 - 说明：抗日战争初期，国内存在"亡国论"与"速胜论"两种错误观点。毛泽东在此文中系统批驳了这两种论调，科学论证抗日战争是持久战、最后胜利属于中国，并提出了战略防御、战略相持、战略反攻三个阶段的战略总方针，是中国共产党领导抗日战争的纲领性文献。
-- 读书笔记：[mao-selected-works/mao-selected-works.md](mao-selected-works/mao-selected-works.md)
+- 读书笔记：[毛泽东选集/personal-notes.md](毛泽东选集/personal-notes.md)
 
 <!-- 格式参考：
 **书名**
