@@ -13,7 +13,7 @@
 │   └── README.md
 ├── closed/                 # 已完成的技术资源
 │   └── README.md
-└── more/                   # 书籍与播客
+└── more/                   # 非技术的书籍与播客
     ├── README.md           # 正在读
     ├── README.open.md      # 待读
     ├── README.closed.md    # 已读
