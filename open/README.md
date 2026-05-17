@@ -65,14 +65,6 @@
 - 关键词：vLLM、Triton Inference Server、模型量化、ONNX、dynamic batching、PagedAttention、推理优化、容器化部署
 - 说明：系统学习大模型的线上服务化部署方案，涵盖：① vLLM 推理引擎（PagedAttention、continuous batching）② Triton Inference Server（多框架支持、dynamic batching）③ 模型格式转换（PyTorch→ONNX→TensorRT）④ 量化策略（FP16/INT8）⑤ API 服务封装（FastAPI + 限流 + 监控）⑥ Docker/K8s 容器化部署与自动扩缩容
 
-### 机器学习基础算法（决策树/随机森林/SVM）
-- 类型：技术主题学习（Mastery 三阶段工作流）
-- 来源：sklearn 官方文档 + MIT 讲义 + GeeksforGeeks 面试题
-- 紧急程度：高
-- 关键词：决策树、随机森林、SVM、CART、Gini、熵、信息增益、Bagging、Boosting、核函数、RBF、剪枝、OOB、GridSearchCV
-- 说明：从零基础出发，面试+实战两用。核心三件套：① 决策树（分裂准则 Gini/熵、预剪枝 vs 后剪枝、CART 二叉树）② 随机森林（Bootstrap + 随机特征双重随机、Bagging 降方差原理、OOB 误差估计、MDI 特征重要性及其局限）③ SVM（间隔最大化直觉、支持向量定义、Hard/Soft Margin、核技巧、C-γ 调参）
-- 进度：[ml-机器学习基础](../processing/ml-机器学习基础/) — AI 笔记已重新生成（2026-05-09），进入阶段 2 互动学习
-
 ### 游戏 AI 应用场景
 - 类型：技术主题学习
 - 来源：AI 技术在行业场景中的落地实践
@@ -208,8 +200,6 @@ https://github.com/CMU-Perceptual-Computing-Lab/openpose
 - 关键词：Worker/Broker/Backend、任务调度策略、结果存储、重试与幂等、RabbitMQ 集成、Celery vs asyncio
 - 说明：系统学习 Celery 异步任务队列，涵盖：架构原理（Worker/Broker/Backend）、任务调度策略、结果存储、重试与幂等、与 RabbitMQ 集成、Celery vs asyncio 场景选择
 - 进度：[se-celery](se-celery/)
-
-### ~~SQLAlchemy ORM 深入掌握~~ → 已归档至 closed/
 
 ### 爬虫反检测与验证码识别技术
 - 类型：技术主题学习

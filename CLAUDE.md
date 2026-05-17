@@ -12,13 +12,13 @@
 openpaper/
 ├── README.md               # 项目说明
 ├── memory.md               # AI 上下文记忆（本文件）
-├── open/                   # 待看
+├── open/                   # 待看的技术资源
 │   └── README.md
-├── processing/             # 进行中
+├── processing/             # 进行中的技术资源
 │   └── README.md
-├── closed/                 # 已完成
+├── closed/                 # 已完成的技术资源
 │   └── README.md
-└── more/                   # 书籍与播客
+└── more/                   # 非技术的书籍与播客
     ├── README.md           # 正在读
     ├── README.open.md      # 待读
     ├── README.closed.md    # 已读
@@ -37,8 +37,9 @@ openpaper/
 - `processing/` = 进行中，`open/` = 待看，`closed/` = 已完成，`more/` = 书籍、播客、公众号
 - 使用三级标题（`###`）标识资源条目，代替加粗（`**`）
 - 书/播客/公众号用带前缀的子目录存放笔记：`书-`、`播客-`、`公众号-`
-- 论文和知识精通主题按 `ai-<topic>/`、`se-<topic>/` 命名
+- 论文和知识主题按 `ai-<topic>/`、`se-<topic>/` 命名
 - Git 分支策略：单分支 `main`，直接提交
+- 移动主题目录（`open/` → `processing/` 或 `processing/` → `closed/`）时，同步将对应 `README.md` 中的 section 移动到目标目录的 `README.md`，避免重复或断链
 
 ## 最近提交
 
