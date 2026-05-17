@@ -5,39 +5,20 @@
 ## 目录结构
 
 ```
-├── README.md              # 项目说明
-├── MEMORY.md              # AI 上下文记忆，供 AI 助手快速加载仓库信息
-├── open/                  # 待看资源
-│   ├── README.md          # 待看资源列表（Web3 / AI / CV / 英语 / 软件工程）
-│   ├── web3-bitcoin/               # 比特币白皮书（原文、中英对照、学习指南）
-│   ├── web3-learn-blockchains-by-building-one/  # Python 区块链实践项目
-│   ├── ai-bert/                    # BERT 论文
-│   ├── ai-claude-skill-guide/      # Claude Code Skills 构建官方教程
-│   ├── cv-yolov1/                  # YOLOv1 论文 + CV 学习路线
-│   ├── cv-rcnn/                    # R-CNN 论文
-│   ├── cv-openpose/                # OpenPose 论文
-│   ├── cv-deepsort/                # DeepSORT 论文
-│   ├── eng-liuxiaoyan-vocab-book/  # 刘晓燕《考研英语你还在背单词吗》词汇笔记
-│   └── se-leetcode-top-100-liked/  # LeetCode 热题100 题解（Python 3，17 主题）
-├── closed/                # 已完成
-│   ├── README.md          # 已看论文列表
-│   ├── ai-attention-is-all-you-need/ # Transformer 论文精读（原文、翻译、笔记）
-│   ├── ai-transformer/             # Transformer 知识精通（掌握度 90%）
-│   ├── ai-prompt-engineering/      # Prompt Engineering 知识精通（掌握度 85%）
-│   ├── ai-rag/                     # RAG 知识精通（掌握度 80%）
-│   └── ai-agent/                   # Agent 与工作流 知识精通（掌握度 75%）
-└── more/                  # 书籍与播客
-    ├── README.more.open.md    # 待看书籍与播客
-    ├── README.more.closed.md  # 已看书籍与播客
-    └── 毛泽东选集/            # 毛泽东选集读书笔记
+├── README.md               # 项目说明
+├── memory.md               # AI 上下文记忆
+├── open/                   # 待看
+│   └── README.md
+├── processing/             # 进行中
+│   └── README.md
+├── closed/                 # 已完成
+│   └── README.md
+└── more/                   # 书籍与播客
+    ├── README.md           # 正在读
+    ├── README.open.md      # 待读
+    ├── README.closed.md    # 已读
+    └── README.recommend.md # 推荐
 ```
-
-## 使用方式
-
-- [待看论文](open/README.md) — 计划阅读的论文
-- [已看论文](closed/README.md) — 已完成阅读的论文及笔记
-- [待看书籍与播客](more/README.more.open.md) — 计划看的书籍和播客
-- [已看书籍与播客](more/README.more.closed.md) — 已完成阅读的书籍和播客
 
 ## Claude Code Skills
 
@@ -46,7 +27,7 @@
 - [zjk-mastery](https://github.com/zhoujiakai/openskill/tree/main/zjk-mastery) — 技术知识精通学习工作流，三阶段闭环（输入→思考→输出），支持内容发现、AI 笔记生成、苏格拉底式问答、模拟题测试、A4 默写检验、间隔重复回测（周/月/年）
 - [zjk-openpaper](https://github.com/zhoujiakai/openskill/tree/main/zjk-openpaper) — 个人知识库浏览器与管理工具，浏览、搜索、管理本仓库中的学习资源
 
-> 提示：搭配 [Typeless](https://www.typeless.com/zh-cn) 语音输入使用体验更佳，口述回答比打字更轻松自然。
+> 提示：搭配 [Typeless](https://www.typeless.com/zh-cn) 语音输入使用体验更佳。
 
 ## 工具推荐
 
