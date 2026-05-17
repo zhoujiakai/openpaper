@@ -71,7 +71,7 @@
 - 紧急程度：高
 - 关键词：决策树、随机森林、SVM、CART、Gini、熵、信息增益、Bagging、Boosting、核函数、RBF、剪枝、OOB、GridSearchCV
 - 说明：从零基础出发，面试+实战两用。核心三件套：① 决策树（分裂准则 Gini/熵、预剪枝 vs 后剪枝、CART 二叉树）② 随机森林（Bootstrap + 随机特征双重随机、Bagging 降方差原理、OOB 误差估计、MDI 特征重要性及其局限）③ SVM（间隔最大化直觉、支持向量定义、Hard/Soft Margin、核技巧、C-γ 调参）
-- 进度：[ml-basic-algorithms](ml-basic-algorithms/) — AI 笔记已重新生成（2026-05-09），进入阶段 2 互动学习
+- 进度：[ml-机器学习基础](../processing/ml-机器学习基础/) — AI 笔记已重新生成（2026-05-09），进入阶段 2 互动学习
 
 ### 游戏 AI 应用场景
 - 类型：技术主题学习
