@@ -4,6 +4,42 @@
 
 > 《考研英语你还在背单词吗》—— 刘晓燕
 
+# PART 01 词以群记·抓核心
+
+# Unit 1（共29个词群）
+
+## Lesson 1
+
+## Lesson 2
+
+## Lesson 3
+
+## Lesson 4
+
+# Unit 2（共26个词群）
+
+## Lesson 5
+
+## Lesson 6
+
+## Lesson 7
+
+## Lesson 8
+
+
+
+# Unit 3（共23个词群）
+
+## Lesson 9
+
+## Lesson 10
+
+## Lesson 11
+
+## Lesson 12
+
+# Unit 4（共30个词群）
+
 ## Lesson 13
 
 ### 079: patience相关
@@ -42,7 +78,7 @@ equipment：装备
 
 <span style="color: red">mechanism：机械装置</span>
 
-081 “我和他”相关
+### 081 “我和他”相关
 
 melt：融化，熔化
 
@@ -522,6 +558,8 @@ principal：主要的，校长
 
 principle：法则，道德原则
 
+# Unit 5（共24个词群）
+
 ## Lesson 17
 
 ### 109 “延伸”相关
@@ -635,8 +673,6 @@ site：地点，场所
 cite：引用，引证
 
 quote：引文，引用
-
-
 
 ## Lesson 18
 
@@ -892,8 +928,6 @@ phrase：短语，词组
 
 sponsor：发起人，赞助
 
-
-
 ## Lesson 20
 
 ### 129 “可行、可能”相关
@@ -902,27 +936,79 @@ feasible
 
 
 
+# Unit 6（共22个词群）
+
+## Lesson 21
+
+## Lesson 22
+
+## Lesson 23
+
+## Lesson 24
+
+# Unit 7（共30个词群）
+
+## Lesson 25
+
+## Lesson 26
+
+## Lesson 27
+
+## Lesson 28
 
 
 
+# Unit 8（共33个词群）
 
+## Lesson 29
 
+## Lesson 30
 
+## Lesson 31
 
+## Lesson 32
 
+# Unit 9（共18个词群）
 
+## Lesson 33
 
+## Lesson 34
 
+## Lesson 35
 
+## Lesson 36
 
+# Unit 10（共21个词群）
 
+## Lesson 37
 
+## Lesson 38
 
+## Lesson 39
 
+## Lesson 40
 
+# PART 02 词以组记·刷基础
 
+# Unit 11
 
+## Lessons 41~50
 
+# Unit 12
 
+## Lessons 51~60
 
+# PART 03 词以序记·扩词量
+
+# Unit 13
+
+## A~Z
+
+## 附录
+
+- 附录Ⅰ 部分国家（或地区）名称及相关信息
+- 附录Ⅱ 洲名
+- 附录Ⅲ 月份名称表
+- 附录Ⅳ 星期名称表
+- 附录Ⅴ 索引
 
