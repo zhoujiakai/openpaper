@@ -1,5 +1,9 @@
 正在看视频，先花2天时间将20个小时的视频刷一遍。
 
-想要给课程交钱支持一下优质资源的，只是课程官方平台大陆用户使用起来稍显麻烦，b站有完整视频课程，github有完整材料，就这么用吧。这个课程貌似本来就是免费的？不清楚。
+想要给课程交钱支持一下优质资源的，只是课程官方平台大陆用户使用起来稍显麻烦，b站有完整视频课程，github有完整材料，就这么用吧。这个课程貌似本来就是免费的？不想花时间去搞清楚状况，能简单用就简单用。
 
-https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes  材料在这里，已经下载到本地了。
+b站网课视频在这里：https://www.bilibili.com/video/BV16jyuBBEom
+
+材料在这里：https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes
+
+材料已经下载到本地了。

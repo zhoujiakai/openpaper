@@ -932,9 +932,79 @@ sponsor：发起人，赞助
 
 ### 129 “可行、可能”相关
 
-feasible
+- [x] 20260518周一
 
+feasible：可行的，行得通的
 
+likely：可能的，有希望的
+
+likelihood：可能性
+
+unlike：不同的
+
+alike：相像的
+
+<span style="color: red">likewise：同样地</span>
+
+### 130 一组形近词
+
+- [x] 20260518周一
+
+reckon：估算，估计
+
+reckless：鲁莽的
+
+check：检查
+
+### 131 “mate”相关
+
+- [x] 20260518周一
+
+estimate：估计，估价
+
+<span style="color: red">intimate：亲密的，亲近的</span>
+
+<span style="color: red">ultimate：最后的，最终的</span>
+
+<span style="color: red">ultimately：最终，最后</span>
+
+<span style="color: red">approximate：近似的，大约的</span>
+
+### 132 “环境、氛围”相关
+
+- [x] 20260518周一
+
+climate：气候，环境氛围
+
+surround：包围，环绕
+
+surroundings：环境
+
+atmosphere：大气层
+
+mood：情绪，气氛
+
+sentiment：情绪
+
+temper：脾气
+
+personality：性格，个性
+
+<span style="color: red">circumstance：条件，环境</span>
+
+circulate：循环
+
+circulation：循环
+
+ventilate：通气
+
+accumulate：积累
+
+calculate：计算
+
+calendar：日历
+
+algorithm：算法
 
 # Unit 6（共22个词群）
 
@@ -987,6 +1057,10 @@ feasible
 ## Lesson 39
 
 ## Lesson 40
+
+### 256 一组逻辑关系词
+
+
 
 # PART 02 词以组记·刷基础
 
