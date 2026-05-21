@@ -2,9 +2,9 @@
 
 > 比起选择从哪获得成就感，人更多需要做的选择是为哪件事痛苦。（by 刘旸）
 
-学习资源收集与笔记。
+技术学习资源分散难追踪，本仓库系统性收集 AI / CV / Web3 / 软件工程等领域的论文、教程等，配合阅读进度管理与 AI 精读工具，构建持续更新的个人知识库。
 
-## 目录结构
+## 结构
 
 ```
 ├── README.md               # 项目说明
@@ -26,13 +26,16 @@
 
 - [Typora](https://typora.io) — 所见即所得的 Markdown 编辑器，轻量流畅，适合日常阅读和编辑 Markdown 笔记
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) — Anthropic 官方 CLI 编程助手，擅长代码编写、文件操作和终端任务，本仓库的 Skills 和学习笔记均借助它完成；Max 套餐 $200/月
+- [zjk-mastery](https://github.com/zhoujiakai/openskill) — Claude Code Skill，技术知识精通学习工具，三阶段学习闭环（输入 → 思考 → 输出）：AI 结构化笔记生成 + 苏格拉底式互动问答 + A4 默写测试，支持间隔重复回测（周/月/年）。安装方式：将 [openskill](https://github.com/zhoujiakai/openskill) 仓库链接发给 Claude Code 并说「帮我安装这个仓库里的 zjk-mastery」
+- [GitHub](https://github.com) — 全球最大的代码托管平台，也可用于管理和版本控制 Markdown 笔记（本仓库即托管于此）
 - [GLM Coding Plan](https://open.bigmodel.cn/dev/howuse/codingplan) — 智谱AI 提供的编程套餐（lite / pro / max），调用 GLM-5.1 大模型 API，供 Claude Code 等 CLI 工具使用；max 套餐 1266.3 元/季度（422 元/月）
 - [Gemini](https://gemini.google.com) — Google 的 AI 助手，内置 Imagen 3 图像生成能力，适合 AI 画图；AI Premium 套餐 $19.99/月
-- [flomo](https://flomoapp.com) — 轻量级卡片笔记，通过标签组织而非文件夹，支持微信输入，适合随手记录灵感和碎片想法
-- [GitHub](https://github.com) — 全球最大的代码托管平台，也可用于管理和版本控制 Markdown 笔记（本仓库即托管于此）
 - [百度网盘](https://pan.baidu.com) — 开启同步空间功能后可自动同步本地文件夹到云端，适合多设备间同步笔记和 PDF 等学习资料
+- [flomo](https://flomoapp.com) — 轻量级卡片笔记，通过标签组织而非文件夹，支持微信输入，适合随手记录灵感和碎片想法
 - [即刻](https://m.okjike.com) — 兴趣社区，聚集了大量技术和产品相关话题，适合发现好内容、分享学习心得
 - [Typeless](https://www.typeless.com/zh-cn) — 语音输入工具，支持多语言实时转文字，适合不想打字的场景
+
+# 总结
 
 ## 设备控制
 
@@ -46,11 +49,11 @@
 掌握基本的开发技术。
 
 - Python异步 → [closed/ai-python-async](closed/ai-python-async/)
-- FastAPI → [closed/se-fastapi](closed/se-fastapi/)、SQLAlchemy → [closed/se-sqlalchemy](closed/se-sqlalchemy/)、Pydantic → [closed/se-fastapi](closed/se-fastapi/)
+- FastAPI + Pydantic → [closed/se-fastapi](closed/se-fastapi/)、SQLAlchemy → [closed/se-sqlalchemy](closed/se-sqlalchemy/)
 - Celery 异步任务队列 → [open/se-celery](open/se-celery/)
 - Redis缓存中间件 → [open/se-redis](open/se-redis/)，Python多级缓存架构、分布式锁、缓存雪崩/穿透解决方案、哨兵集群搭建
 - Docker容器化、Nginx反向代理部署
-- MySQL、PostgreSQL 数据库设计和SQL 调优，实践过分库分表、索引优化，使用 SQLAlchemy 进行ORM映射和慢查询分析
+- MySQL、PostgreSQL 数据库设计和 SQL 调优，分库分表、索引优化，使用 SQLAlchemy 进行ORM映射和慢查询分析
 - 理解微服务架构中的概念 → [closed/se-microservice](closed/se-microservice/)
 - 设计模式：装饰器、生成器等
 - 消息队列 RabbitMQ & Kafka → [open/se-message-queue](open/se-message-queue/)
@@ -86,8 +89,8 @@
 
 创建这个仓库的起因，是基于一直以来的困惑：具体学会了哪些知识，学习效率如何，评估方法。
 
-有一个明显的感觉，就是学习效率不高，学习过程看不见摸不着，今天学一点，过几天再学一点，问题在于没有进度条和日志，无法评估掌握程度和学习效率。
+有一个明显的感觉，就是学习效率不高。学习过程看不见摸不着，今天学一点，过几天再学一点。问题在于没有进度条和日志，无法评估掌握程度和学习效率。得益于AI技术工具的发展，现在这些操作的时间被极限压缩。
 
-网上优质的学习教程很多，本仓库中有多处引用并标识。笔者把学习过程和笔记开源，是因为公开学习过程会更加有学习动力。若读者能够从中受益，也是一件喜悦的事情。
+网上优质的教程很多，本仓库中有多处引用并标识。笔者把学习过程和笔记开源，是因为公开学习过程会更加有学习动力。若读者能够从中受益，也是一件喜悦的事情。
 
 本仓库会一直开源，持续构建更新。
