@@ -1,0 +1,1 @@
+[3Blue1Brown - Attention in Transformers](https://www.3blue1brown.com/lessons/attention) — 通过精美动画逐步可视化讲解 Transformer 中 Attention 机制的运作原理（Query、Key、Value、Attention Pattern、Multi-Head Attention），直观易懂，适合配合 Attention Is All You Need 论文一起学习。

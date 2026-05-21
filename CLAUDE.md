@@ -25,13 +25,6 @@ openpaper/
     └── README.recommend.md # 推荐
 ```
 
-## Claude Code 技能
-
-所有 Skill 在独立仓库 [openskill](https://github.com/zhoujiakai/openskill) 中维护。
-
-- [zjk-mastery](https://github.com/zhoujiakai/openskill/tree/main/zjk-mastery) — 技术知识精通学习工作流
-- [zjk-openpaper](https://github.com/zhoujiakai/openskill/tree/main/zjk-openpaper) — 个人知识库浏览器与管理工具
-
 ## 组织约定
 
 - `processing/` = 进行中，`open/` = 待看，`closed/` = 已完成，`more/` = 书籍、播客、公众号
