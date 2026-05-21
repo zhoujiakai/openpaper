@@ -1,4 +1,4 @@
-# waiting
+# Waiting
 
 ## ML
 
@@ -297,3 +297,10 @@ https://github.com/CMU-Perceptual-Computing-Lab/openpose
 - 被引用数：（可选）
 - 说明：
 -->
+
+# Collection
+
+- [Build Your Own X](https://github.com/codecrafters-io/build-your-own-x) — 一个优质开源合集，收集了"通过从零亲手构建技术来理解其原理"的教程，涵盖数据库、编译器、操作系统、Web 服务器、区块链等方向，适合在阅读论文之余通过动手实践加深理解。
+- [ljg-skills](https://github.com/lijigang/ljg-skills) — 李继刚维护的 Claude Code Skills 合集，包含概念解剖、白话引擎、写作引擎、内容铸卡、论文阅读等 15 个技能，设计思路独特，适合扩展 Claude Code 的能力边界。
+- [anthropics/skills](https://github.com/anthropics/skills) — Anthropic 官方 Agent Skills 仓库，提供经过验证的 Claude Code 技能，可通过 `/plugin marketplace add anthropics/skills` 安装。
+- [awesome-claude-code](https://github.com/hesreallyhim/awesome-claude-code) — 社区最热门的 Claude Code 资源精选合集（38.8k stars），涵盖 Skills、Hooks、Slash Commands 等，适合发现和探索社区产出的优质技能。
