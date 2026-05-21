@@ -9,6 +9,6 @@
 - 链接：https://www.bilibili.com/video/BV16jyuBBEom
 - 材料：https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes
 - 来源：经典网课
-- 开始日期：2026-05-17
+- 开始日期：20260517周日
 - 笔记：[ml-吴恩达机器学习/](ml-吴恩达机器学习/)
 
