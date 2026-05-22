@@ -24,16 +24,10 @@
 
 ## 工具
 
-- [Typora](https://typora.io) — 所见即所得的 Markdown 编辑器，轻量流畅，适合日常阅读和编辑 Markdown 笔记
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) — Anthropic 官方 CLI 编程助手，擅长代码编写、文件操作和终端任务，本仓库的 Skills 和学习笔记均借助它完成；Max 套餐 $200/月
-- [zjk-mastery](https://github.com/zhoujiakai/openskill) — Claude Code Skill，技术知识学习工具，三阶段学习闭环（输入 → 思考 → 输出）：AI 结构化笔记生成 + 苏格拉底式互动问答 + A4 默写测试，支持间隔重复回测（周/月/年）。安装方式：将 [openskill](https://github.com/zhoujiakai/openskill) 仓库链接发给 Claude Code 并说「帮我安装这个仓库里的 zjk-mastery」
-- [GitHub](https://github.com) — 全球最大的代码托管平台，也可用于管理和版本控制 Markdown 笔记（本仓库即托管于此）
-- [GLM Coding Plan](https://open.bigmodel.cn/dev/howuse/codingplan) — 智谱AI 提供的编程套餐（lite / pro / max），调用 GLM-5.1 大模型 API，供 Claude Code 等 CLI 工具使用；max 套餐 1266.3 元/季度（422 元/月）
-- [Gemini](https://gemini.google.com) — Google 的 AI 助手，内置 Imagen 3 图像生成能力，适合 AI 画图；AI Premium 套餐 $19.99/月
-- [百度网盘](https://pan.baidu.com) — 开启同步空间功能后可自动同步本地文件夹到云端，适合多设备间同步笔记和 PDF 等学习资料
-- [flomo](https://flomoapp.com) — 轻量级卡片笔记，通过标签组织而非文件夹，支持微信输入，适合随手记录灵感和碎片想法
-- [即刻](https://m.okjike.com) — 兴趣社区，聚集了大量技术和产品相关话题，适合发现好内容、分享学习心得
-- [Typeless](https://www.typeless.com/zh-cn) — 语音输入工具，支持多语言实时转文字，适合不想打字的场景
+- [Typora](https://typora.io) — 所见即所得的 Markdown 编辑器，轻量流畅，适合日常阅读和编辑 Markdown 笔记。
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) — Anthropic 官方 CLI 编程助手，擅长代码编写、文件操作和终端任务，本仓库的 Skills 和学习笔记均借助它完成。
+- [zjk-mastery](https://github.com/zhoujiakai/openskill) — Claude Code Skill，技术知识学习工具，三阶段学习闭环（输入 → 思考 → 输出）：AI 结构化笔记生成 + 苏格拉底式互动问答 + A4 默写测试，支持间隔重复回测（周/月/年）。安装方式：将 [openskill](https://github.com/zhoujiakai/openskill) 仓库链接发给 Claude Code 并说「帮我安装这个仓库里的 zjk-mastery」。
+- [Gemini](https://gemini.google.com) — Google 的 AI 助手，内置 Imagen 3 图像生成能力，适合 AI 画图。
 
 # 地图
 
