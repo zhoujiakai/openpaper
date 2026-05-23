@@ -1,4 +1,4 @@
-# OpenPaper
+# <p align="center">OpenPaper
 
 > 比起选择从哪获得成就感，人更多需要做的选择是为哪件事痛苦。（by 刘旸）
 
@@ -28,7 +28,7 @@
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) — Anthropic 官方 CLI 编程助手，擅长代码编写、文件操作和终端任务，本仓库的 Skills 和学习笔记均借助它完成。
 - [zjk-mastery](https://github.com/zhoujiakai/openskill) — Claude Code Skill，技术知识学习工具，三阶段学习闭环（输入 → 思考 → 输出）：AI 结构化笔记生成 + 苏格拉底式互动问答 + A4 默写测试，支持间隔重复回测（周/月/年）。安装方式：将 [openskill](https://github.com/zhoujiakai/openskill) 仓库链接发给 Claude Code 并说「帮我安装这个仓库里的 zjk-mastery」。
 
-# 地图
+# <p align="center">地图
 
 ## 设备控制
 
@@ -70,7 +70,7 @@
 - 周志华机器学习西瓜书 → [open/ml-周志华机器学习](open/ml-周志华机器学习/)
 - 吴恩达机器学习网课 → [processing/ml-吴恩达机器学习](processing/ml-吴恩达机器学习/)
 
-# 后记
+# <p align="center">后记
 
 回顾一下笔者的后端学习历程。
 
@@ -88,6 +88,6 @@
 
 本仓库会一直开源，持续构建更新。
 
-## 许可证
+#### <p align="center">许可证
 
-MIT
+<p align="center">MIT
