@@ -88,6 +88,6 @@
 
 本仓库会一直开源，持续构建更新。
 
-#### <p align="center">许可证
+## 许可证
 
-<p align="center">MIT
+MIT
