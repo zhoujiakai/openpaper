@@ -26,7 +26,7 @@
 
 - [Typora](https://typora.io) — 所见即所得的 Markdown 编辑器，轻量流畅，适合日常阅读和编辑 Markdown 笔记。
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) — Anthropic 官方 CLI 编程助手，擅长代码编写、文件操作和终端任务，本仓库的 Skills 和学习笔记均借助它完成。
-- [zjk-mastery](https://github.com/zhoujiakai/openskill) — Claude Code Skill，技术知识学习工具，三阶段学习闭环（输入 → 思考 → 输出）：AI 结构化笔记生成 + 苏格拉底式互动问答 + A4 默写测试，支持间隔重复回测（周/月/年）。安装方式：将 [openskill](https://github.com/zhoujiakai/openskill) 仓库链接发给 Claude Code 并说「帮我安装这个仓库里的 zjk-mastery」。
+- [zjk-mastery](https://github.com/zhoujiakai/openskill) — Claude Code Skill，技术知识学习工具，三阶段学习闭环（输入 → 思考 → 输出）：AI 结构化笔记生成 + 苏格拉底式互动问答 + A4 默写测试，支持间隔重复回测（周/月/年）。
 
 # <p align="center">地图
 
