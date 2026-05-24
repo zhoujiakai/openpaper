@@ -85,7 +85,7 @@ cell state 更新完后，内容还在传送带上，不直接对外可见。输
 
 ## 关键公式
 
-** Forget Gate（遗忘门）**
+**Forget Gate（遗忘门）**
 
 算的是"旧记忆保留多少"。
 
@@ -93,13 +93,13 @@ $$f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f)$$
 
 $[h_{t-1}, x_t]$ 是把上一步隐藏状态和当前输入拼在一起。$\sigma$ 把结果压到 0 到 1 之间。接近 1 = 保留，接近 0 = 遗忘。
 
-** Input Gate（输入门）**
+**Input Gate（输入门）**
 
 算的是"新信息批准多少"。
 
 $$i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i)$$
 
-** Candidate（候选记忆）**
+**Candidate（候选记忆）**
 
 算的是"我想写什么新内容"。
 
@@ -107,19 +107,19 @@ $$\tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)$$
 
 用 tanh 是因为新内容可能是正向信号也可能是负向信号，范围 -1 到 1。
 
-** Cell State 更新（核心）**
+**Cell State 更新（核心）**
 
 $$C_t = f_t \odot C_{t-1} + i_t \odot \tilde{C}_t$$
 
 $\odot$ 是逐元素相乘。旧的按遗忘门比例保留，新的按输入门比例加入。这是**加法**更新。
 
-** Output Gate（输出门）**
+**Output Gate（输出门）**
 
 算的是"当前对外展示多少"。
 
 $$o_t = \sigma(W_o \cdot [h_{t-1}, x_t] + b_o)$$
 
-** Hidden State**
+**Hidden State**
 
 $$h_t = o_t \odot \tanh(C_t)$$
 
