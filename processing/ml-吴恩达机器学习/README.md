@@ -30,6 +30,8 @@ star最高的老课程的作业：https://github.com/fengdu78/Coursera-ML-Andrew
 
 
 
+学了7天，学完了70.4%，剩下第三门课。我刚发现这三门课里面不讲LSTM。还是先学完吧，然后找其他资源学一下LSTM。
+
 
 
 ## 循环
