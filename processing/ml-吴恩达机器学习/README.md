@@ -26,9 +26,9 @@ star最高的老课程的作业：https://github.com/fengdu78/Coursera-ML-Andrew
 
 
 
-今天一定突破70%，剩下100%留到明天突破。这样就用一周时间完成一刷。
-
 吴恩达怎么那么厉害？
+
+
 
 
 
