@@ -1,101 +1,46 @@
-# 已完成学习
-
-## AI 论文
-
-- **Attention is all you need**：[ai-transformer/](ai-transformer/)
-
-    - 类型：论文，2017年6月 arXiv 首发
-
-    - 作者：Ashish Vaswani、Illia Polosukhin（Google Brain 团队）等
-
-    - 来源：NeurIPS 2017 (Conference on Neural Information Processing Systems)
-        - 链接：
-          - arXiv: https://arxiv.org/abs/1706.03762
-          - NeurIPS: https://proceedings.neurips.cc/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html
+# <p align="center">已完成学习
 
 
-    - 被引用数：171,777+（Semantic Scholar，截止2026年4月6日）
+## 开发技术
 
-    - 阅读日期：2026-04-19（周日）~ 2026-04-20（周一）
-
-
-## AI 知识
-
-- **Transformer**
-
-    - 掌握度：82%（周测 2026-04-29）
-
-    - 完成日期：2026-04-24
-
-    - 笔记：[ai-transformer/](ai-transformer/)（AI笔记、题库、进度、掌握度报告、个人笔记）
-
-
-- **Prompt Engineering**
-
-    - 掌握度：85%（周测 2026-04-29）
-
-    - 完成日期：2026-04-24
-
-    - 笔记：[ai-prompt-engineering/](ai-prompt-engineering/)（AI笔记、题库、进度、掌握度报告、个人笔记）
-
-
-- **RAG（检索增强生成）**
-
-    - 掌握度：83%（周测 2026-04-29）
-
-    - 完成日期：2026-04-24
-
-    - 笔记：[ai-rag/](ai-rag/)（AI笔记、题库、进度、掌握度报告、个人笔记）
-
-
-- **Agent 与工作流**
-
-    - 掌握度：82%（周测 2026-04-29）
-
-    - 完成日期：2026-04-25
-
-    - 笔记：[ai-agent/](ai-agent/)（AI笔记、题库、进度、掌握度报告、个人笔记）
-
-
-## 后端知识
-
-- **微服务架构**
-
-    - 掌握度：88%（周测 2026-04-29）
-
-    - 完成日期：2026-04-28
-
-    - 笔记：[se-microservice/](se-microservice/)（AI笔记、题库、进度、掌握度报告、个人笔记）
-
-
-- **Python 异步**
-
+- **微服务架构**：[se-microservice/](se-microservice/)
+    - 类型：zjk-mastery skill
+    - 掌握度：88%
+    - 首次完成：20260428周二
+    - 等待：月测，20260529周五
+- **Python 异步**：[se-python-async/](se-python-async/)
+    - 类型：zjk-mastery skill
     - 掌握度：85%
-
-    - 完成日期：2026-04-26
-
-    - 笔记：[ai-python-async/](ai-python-async/)（AI笔记、题库、进度、掌握度报告）
-
-    - 周测：2026-05-03
-
-
-- **FastAPI**
-
+    - 首次完成：20260426周日
+    - 等待：周测，20260503周日
+- **FastAPI**：[se-fastapi/](se-fastapi/)
+    - 类型：zjk-mastery skill
     - 掌握度：85%
-
-    - 完成日期：2026-05-03
-
-    - 笔记：[se-fastapi/](se-fastapi/)（AI笔记、个人笔记、进度）
-
-    - 周测：2026-05-10
-
-
-- **SQLAlchemy ORM**
-
+    - 首次完成：20260503周日
+    - 等待：周测，20260510周日
+- **SQLAlchemy ORM**：[se-sqlalchemy/](se-sqlalchemy/)
+    - 类型：zjk-mastery skill
     - 掌握度：82%
+    - 首次完成：20260504周一
+    - 等待：周测，20260511周一
+- **Transformer**：[ai-transformer/](ai-transformer/)
+    - 类型：zjk-mastery skill
+    - 掌握度：82%
+    - 首次完成：20260424周五
+    - 等待：月测，20260529周五
+- **Prompt Engineering**：[ai-prompt-engineering/](ai-prompt-engineering/)
+    - 类型：zjk-mastery skill
+    - 掌握度：85%
+    - 首次完成：20260424周五
+    - 等待：月测，20260529周五
+- **RAG**：[ai-rag/](ai-rag/)
+    - 类型：zjk-mastery skill
+    - 掌握度：83%
+    - 首次完成：20260424周五
+    - 等待：月测，20260529周五
+- **Agent 与工作流**：[ai-agent/](ai-agent/)
+    - 类型：zjk-mastery skill
+    - 掌握度：82%
+    - 首次完成：20260425周六
+    - 等待：月测，20260529周五
 
-    - 完成日期：2026-05-04
-
-    - 笔记：[se-sqlalchemy/](se-sqlalchemy/)（AI笔记、个人笔记、进度）
-
-    - 周测：2026-05-11
