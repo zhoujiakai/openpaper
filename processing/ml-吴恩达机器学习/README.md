@@ -1,14 +1,18 @@
 b站网课视频在这里：https://www.bilibili.com/video/BV16jyuBBEom
 
-star最高的老课程的作业：https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes
+star最高的老课程的作业（黄海广）：https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes
 
 最新版材料：在百度网盘，b站视频客服微信发过来的：2024吴恩达资料。材料已经下载到本地了。
 
 
 
+黄海广对每个视频做了音频转录的Markdown文档包含一些适当的截图，视频看不下去可以看markdown：`/Users/zhoujk/Downloads/repos/local/Coursera-ML-AndrewNg-Notes/markdown`
+
+
+
 比起选择从哪获得成就感，人更多需要做的选择是为哪件事痛苦。（by 刘旸）
 
-只为执行而痛苦。
+
 
 每20分钟视频观看、消化、笔记 = 1小时。
 
@@ -41,6 +45,10 @@ star最高的老课程的作业：https://github.com/fengdu78/Coursera-ML-Andrew
 - 来源：经典网课
 - 开始日期：20260517周日
 - 笔记：[ml-吴恩达机器学习/](ml-吴恩达机器学习/)
+
+
+
+第三门课数学公式好多、好难理解，还得问着AI才能理解吴恩达数学部分在讲什么。学习时间可能得直接视频时长x6，一个10分钟的小节学60分钟。
 
 
 
