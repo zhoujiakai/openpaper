@@ -1,14 +1,4 @@
-b站网课视频在这里：https://www.bilibili.com/video/BV16jyuBBEom
-
-star最高的老课程的作业（黄海广）：https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes
-
-最新版材料：在百度网盘，b站视频客服微信发过来的：2024吴恩达资料。材料已经下载到本地了。
-
-
-
-黄海广对每个视频做了音频转录的Markdown文档包含一些适当的截图，视频看不下去可以看markdown：`/Users/zhoujk/Downloads/repos/local/Coursera-ML-AndrewNg-Notes/markdown`
-
-
+课程的实验还需要运行一下。
 
 比起选择从哪获得成就感，人更多需要做的选择是为哪件事痛苦。（by 刘旸）
 
@@ -78,6 +68,33 @@ star最高的老课程的作业（黄海广）：https://github.com/fengdu78/Cou
 
 
 终于一刷了，实验代码还没有看过。印象深刻的有房价预测还是什么实验，以及最后的月球着陆器实验。还是需要运行一下的。
+
+## 课程实验
+
+b站视频客服微信发过来的的材料里：
+
+- 第一门课的实验位置：[本地位置](/Users/zhoujk/Downloads/repos/local/A最新版 吴恩达机器学习Deeplearning.ai/第一课 Supervised Machine Learning Regression and Classification) 
+
+- 第二门课的实验位置：[本地位置](/Users/zhoujk/Downloads/repos/local/A最新版 吴恩达机器学习Deeplearning.ai/第二课 Advanced Learning Algorithms) 
+
+- 第三门课的实验位置：[本地位置](/Users/zhoujk/Downloads/repos/local/A最新版 吴恩达机器学习Deeplearning.ai/第三课 Unsupervised learning recommenders reinforcement learning) 
+
+## 网课材料
+
+- 网课视频b站：https://www.bilibili.com/video/BV16jyuBBEom
+
+- 老课程作业，star最高（黄海广）：https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes
+    - 黄海广对每个视频做了音频转录的Markdown文档包含一些适当的截图，视频看不下去可以看markdown：`/Users/zhoujk/Downloads/repos/local/Coursera-ML-AndrewNg-Notes/markdown`
+
+- 最新版课程材料：上面b站视频客服微信发过来的：在百度网盘：2024吴恩达资料。材料已经下载到本地了。
+
+## 官方网站
+
+吴恩达的deeplearning.ai 网站上有点东西，值得探索一下，上面有几本电子书：
+
+- 《How to Build a Career in AI》，是吴恩达的机器学习工作分享。https://home-wordpress.deeplearning.ai/wp-content/uploads/2022/10/eBook-How-to-Build-a-Career-in-AI.pdf
+
+- 吴恩达的机器学习调优经验电子书：https://home-wordpress.deeplearning.ai/wp-content/uploads/2022/03/andrew-ng-machine-learning-yearning.pdf
 
 
 
