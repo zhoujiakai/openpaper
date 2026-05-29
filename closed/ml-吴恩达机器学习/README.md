@@ -1,3 +1,27 @@
+# 吴恩达机器学习
+
+将实验代码借助 claude code 翻译成中文，看起来轻松多了。文件有点多，第一课 有 21 个 ipynb ， claude code 只要我提一嘴，就能够自动创建多个子 agent 并行执行翻译任务，牛！ claude code 真是太牛了。
+
+
+
+coursera上的网课好像是2012年的旧版课程
+
+- 不太确定是不是2012年旧版本的，试看不了，有中英文字幕。
+- 平台上这门课程免费7天试用，之后49刀/月，可以用银联支付。
+
+- 链接：https://www.coursera.org/specializations/machine-learning-introduction
+
+deeplearning.ai官网网课（2022年新版）
+
+- 链接：https://www.deeplearning.ai/specializations/machine-learning
+
+- deeplearning.ai官网的视频观看是免费的，只有英文字幕。
+- 官网上查看实验代码需要开通会员：25刀/月。
+
+待办：此时20260529周五囊中羞涩，1年之后20270501周六支持deeplearning.ai官网3个月正版。
+
+
+
 课程的实验还需要运行一下。
 
 比起选择从哪获得成就感，人更多需要做的选择是为哪件事痛苦。（by 刘旸）
@@ -120,6 +144,10 @@ while True:
 
 
 ## 日志
+
+**20260529周五**
+
+中午 12:00 开始看实验代码 C1W1Lab1，一直到 17:00 看完第 10 个实验，投入5个小时，实际有效学习时间：10x15/60=2.5 小时
 
 **20260527周三**
 
