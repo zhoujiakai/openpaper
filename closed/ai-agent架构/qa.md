@@ -1,28 +1,28 @@
-# Agent 与工作流 — 个人学习笔记
+# Agent 与工作流 — QA
 
-> 记录学习过程中觉得重要的内容
+> 学习过程中困惑的知识点
 > 创建日期：2026-04-29
 
 ---
 
-## Workflow vs Agent 的核心判断标准
+## Q1：Workflow vs Agent 的核心判断标准
 
 **路径是代码定义的还是 LLM 动态决定的？**
 
 - **Workflow**：路径由代码提前定义。LLM 在路径上的某个节点干活，但走哪条路是代码说了算。即使有循环（如 Evaluator-Optimizer），循环结构也是代码写死的。
 - **Agent**：LLM 自己决定下一步做什么。每一步都可能改变方向，决策权在 LLM 手里。
 
-### Orchestrator-Worker 是 Workflow 不是 Agent
+**Orchestrator-Worker 是 Workflow 不是 Agent**
 
 编排者只做一次决策："拆成几个子任务，分别做什么"。拆完后路径固定（工人执行 → 汇总 → 输出）。不像 Agent 那样在整个过程中持续决策。
 
-### Evaluator-Optimizer 是 Workflow 不是 Agent
+**Evaluator-Optimizer 是 Workflow 不是 Agent**
 
 循环结构是代码写死的（生成 → 评估 → 不通过再来一轮）。LLM 不决定"要不要循环"，代码决定。不像 ReAct 那样每步的行动类型都不确定。
 
 ---
 
-## 五种 Workflow 模式口诀
+## Q2：五种 Workflow 模式口诀
 
 **"串路并编评"**（按路径复杂度递增）
 
@@ -34,7 +34,7 @@
 
 ---
 
-## 选型决策框架完整路径
+## Q3：选型决策框架完整路径
 
 从简到繁 8 步，第 2-6 步和"串路并编评"一一对应：
 
@@ -51,19 +51,19 @@
 
 ---
 
-## Plan-and-Execute 的计划可以改
+## Q4：Plan-and-Execute 的计划可以改
 
 Plan-and-Execute 的计划并不是不能更改。如果执行到某一步发现前提错了，可以回去让规划者重新出方案。它的灵活性不是"不能改"，而是**出错才改**，不像 ReAct 每一步都在调整。
 
 ---
 
-## ReAct 中 Thought 步骤为什么不能省
+## Q5：ReAct 中 Thought 步骤为什么不能省
 
 实验证明，去掉 Thought 只保留 Action，准确率会**明显下降**。原因：生成 Thought 的过程给了 LLM 更多上下文来做出更好的决策，减少盲目行动。这不是笼统的"避免无脑操作"，而是有实验数据支撑的结论，面试时可以直接甩出来。
 
 ---
 
-## Multi-Agent 为什么 Supervisor 模式最常用
+## Q6：Multi-Agent 为什么 Supervisor 模式最常用
 
 实际中 LangGraph 的 Send API 就是实现 Supervisor 模式的标准方式。选择 Supervisor 的原因：
 
@@ -72,7 +72,7 @@ Plan-and-Execute 的计划并不是不能更改。如果执行到某一步发现
 
 ---
 
-## 工具设计的具体教训（来自 Anthropic SWE-bench 实践）
+## Q7：工具设计的具体教训（来自 Anthropic SWE-bench 实践）
 
 **反直觉结论：花在工具设计上的时间比花在 Prompt 上的时间还多。** LLM 调用工具的本质是"读描述 → 决定怎么用"，工具描述和参数设计对 Agent 表现的影响比 Prompt 更大。
 
@@ -88,7 +88,7 @@ Plan-and-Execute 的计划并不是不能更改。如果执行到某一步发现
 
 ---
 
-## 必须用 Agent 而不能用 Workflow 的真实场景
+## Q8：必须用 Agent 而不能用 Workflow 的真实场景
 
 **场景：修复 GitHub Issue**
 
@@ -103,9 +103,3 @@ Plan-and-Execute 的计划并不是不能更改。如果执行到某一步发现
 **补充理解：** 外层流程可以固定成 Workflow（搜索 → 修改 → 检查 → 提交），但每一步内部的执行路径完全不可预测，需要 Agent 自主决策。所以本质是"Workflow 外壳 + Agent 内核"。**关键不是外层框架长什么样，而是执行过程中 LLM 是否需要持续做不可预测的决策。**
 
 ---
-
-<!-- 格式参考：
-### 主题名 / 小标题
-
-内容...
--->
