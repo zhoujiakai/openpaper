@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PID 实验笔记 — 江协科技</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0c10;
+    --surface: #14141c;
+    --surface2: #1a1a26;
+    --surface3: #222230;
+    --text: #cdd0d8;
+    --text-dim: #8888a0;
+    --text-bright: #e8ecf2;
+    --amber: #f0a030;
+    --amber-glow: #f0a03055;
+    --green: #3cf070;
+    --green-dim: #2aa848;
+    --blue: #6098f0;
+    --blue-dim: #4068b0;
+    --red: #f05060;
+    --cyan: #40d8d8;
+    --border: #2a2a38;
+    --border-subtle: #1e1e2c;
+    --radius: 6px;
+    --radius-sm: 3px;
+    --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+    --font-tech: 'Share Tech Mono', monospace;
+    --font-body: 'IBM Plex Sans', -apple-system, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    background: var(--bg);
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--text);
+    background:
+      radial-gradient(ellipse at 50% 0%, #1a1a3060 0%, transparent 70%),
+      radial-gradient(ellipse at 80% 100%, #30201030 0%, transparent 60%),
+      var(--bg);
+    line-height: 1.75;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  /* Subtle grid overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Scanline effect (barely visible, adds texture) */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.03) 2px,
+      rgba(0,0,0,0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.4;
+  }
+
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 28px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ── Header ── */
+  .header {
+    padding: 56px 0 40px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+    position: relative;
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 120px;
+    height: 2px;
+    background: var(--amber);
+    box-shadow: 0 0 12px var(--amber-glow);
+  }
+
+  .header-tag {
+    font-family: var(--font-tech);
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .header-tag::before {
+    content: '⬤';
+    font-size: 0.4rem;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .header h1 {
+    font-family: var(--font-tech);
+    font-size: 2.15rem;
+    font-weight: 400;
+    color: var(--text-bright);
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    margin-bottom: 16px;
+  }
+
+  .header h1 span {
+    color: var(--amber);
+  }
+
+  .header-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    font-family: var(--font-mono);
+  }
+
+  .header-meta .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .header-meta .meta-label {
+    color: var(--text-dim);
+    opacity: 0.7;
+  }
+
+  .header-meta a {
+    color: var(--blue);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .header-meta a:hover {
+    color: var(--amber);
+  }
+
+  /* ── Section Headings ── */
+  h2 {
+    font-family: var(--font-tech);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--amber);
+    letter-spacing: 0.04em;
+    margin: 52px 0 22px;
+    padding-left: 16px;
+    border-left: 3px solid var(--amber);
+    position: relative;
+  }
+
+  h2::after {
+    content: '';
+    position: absolute;
+    left: -3px;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--amber);
+    box-shadow: 0 0 10px var(--amber-glow);
+    border-radius: 1px;
+  }
+
+  h3 {
+    font-family: var(--font-tech);
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--text-bright);
+    letter-spacing: 0.03em;
+    margin: 34px 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-subtle);
+    position: relative;
+  }
+
+  h3::before {
+    content: '// ';
+    color: var(--text-dim);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+  }
+
+  h4 {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--blue);
+    margin: 26px 0 10px;
+    letter-spacing: 0.03em;
+  }
+
+  /* ── Paragraphs & Inline ── */
+  p {
+    margin: 10px 0;
+    color: var(--text);
+  }
+
+  strong {
+    color: var(--amber);
+    font-weight: 600;
+  }
+
+  a {
+    color: var(--blue);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  a:hover {
+    color: var(--amber);
+    border-bottom-color: var(--amber);
+  }
+
+  /* ── Inline Code ── */
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    background: var(--surface2);
+    color: var(--green);
+    padding: 2px 7px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  /* ── Code Blocks ── */
+  pre {
+    background: #0d0d14;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--green-dim);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    overflow-x: auto;
+    margin: 16px 0;
+    position: relative;
+    font-size: 0.84rem;
+    line-height: 1.65;
+    box-shadow: inset 0 0 30px rgba(0,0,0,0.4);
+  }
+
+  pre::before {
+    content: 'CODE';
+    position: absolute;
+    top: 0;
+    right: 16px;
+    font-family: var(--font-tech);
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    color: var(--text-dim);
+    opacity: 0.4;
+    padding: 6px 0;
+  }
+
+  pre code {
+    font-family: var(--font-mono);
+    font-size: 0.84rem;
+    background: transparent;
+    color: #d0d4e0;
+    padding: 0;
+    border: none;
+    white-space: pre;
+    display: block;
+  }
+
+  /* Syntax highlighting via spans */
+  .kw  { color: #c080f0; }  /* keyword */
+  .ty  { color: #f0a030; }  /* type */
+  .fn  { color: #60c0f0; }  /* function */
+  .cm  { color: #6a7088; font-style: italic; } /* comment */
+  .str { color: #40d878; }  /* string */
+  .num { color: #f0a060; }  /* number */
+  .op  { color: #b0b8d0; }  /* operator */
+  .pp  { color: #d880d0; }  /* preprocessor */
+  .co  { color: #6a7088; }  /* constant */
+
+  /* ── Tables ── */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 16px 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    font-family: var(--font-body);
+  }
+
+  thead {
+    background: var(--surface2);
+    border-bottom: 2px solid var(--amber);
+  }
+
+  thead th {
+    padding: 12px 16px;
+    text-align: left;
+    font-family: var(--font-tech);
+    font-weight: 400;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    color: var(--amber);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  tbody td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border-subtle);
+    color: var(--text);
+  }
+
+  tbody tr { transition: background 0.15s; }
+  tbody tr:nth-child(even) { background: rgba(255,255,255,0.012); }
+  tbody tr:hover { background: rgba(255,255,255,0.035); }
+
+  tbody td:first-child {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text-bright);
+    white-space: nowrap;
+  }
+
+  /* ── Lists ── */
+  ul, ol {
+    margin: 12px 0;
+    padding-left: 24px;
+  }
+
+  li {
+    margin: 6px 0;
+    color: var(--text);
+  }
+
+  li::marker {
+    color: var(--text-dim);
+  }
+
+  ul > li::marker { content: '— '; }
+
+  /* ── Blockquote ── */
+  blockquote {
+    background: var(--surface);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 14px 20px;
+    margin: 16px 0;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+  }
+
+  /* ── Diagram / Flow Boxes ── */
+  .flow-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin: 16px 0;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    line-height: 1.8;
+    color: var(--text-dim);
+    position: relative;
+    overflow-x: auto;
+    white-space: pre;
+  }
+
+  .flow-box::before {
+    content: 'DIAGRAM';
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    font-family: var(--font-tech);
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+    opacity: 0.35;
+  }
+
+  /* ── Step Badges ── */
+  .step-list {
+    list-style: none;
+    padding-left: 0;
+    counter-reset: step;
+  }
+
+  .step-list li {
+    counter-increment: step;
+    padding: 10px 0 10px 44px;
+    position: relative;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .step-list li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 28px;
+    height: 28px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-tech);
+    font-size: 0.75rem;
+    color: var(--amber);
+  }
+
+  .step-list li:last-child { border-bottom: none; }
+
+  /* ── Divider ── */
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+    position: relative;
+  }
+
+  hr::after {
+    content: '◆ ◆ ◆';
+    position: absolute;
+    top: -9px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg);
+    padding: 0 16px;
+    font-size: 0.55rem;
+    color: var(--text-dim);
+    letter-spacing: 0.4em;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    margin-top: 64px;
+    padding: 32px 0 48px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-dim);
+  }
+
+  .footer span {
+    color: var(--amber);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 640px) {
+    .container { padding: 0 16px; }
+    .header { padding: 32px 0 28px; }
+    .header h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.2rem; }
+    h3 { font-size: 1rem; }
+    pre { padding: 14px 16px; font-size: 0.76rem; }
+    table { font-size: 0.78rem; }
+    thead th, tbody td { padding: 8px 10px; }
+    .header-meta { flex-direction: column; gap: 6px; }
+  }
+
+  /* ── Animations ── */
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  h2, h3, .table-wrap, pre, .flow-box, p, ul, ol, blockquote {
+    animation: fadeSlideIn 0.5s ease-out both;
+  }
+
+  h2  { animation-delay: 0.05s; }
+  h3  { animation-delay: 0.10s; }
+  p   { animation-delay: 0.15s; }
+  ul  { animation-delay: 0.15s; }
+  ol  { animation-delay: 0.15s; }
+  .table-wrap { animation-delay: 0.18s; }
+  pre  { animation-delay: 0.20s; }
+  .flow-box { animation-delay: 0.22s; }
+  blockquote { animation-delay: 0.15s; }
+
+  /* Print */
+  @media print {
+    body { background: #fff; color: #111; }
+    body::before, body::after { display: none; }
+    pre { background: #f5f5f5; border-color: #ddd; }
+    h2, strong, .header-tag, thead th { color: #b06000; }
+    code { background: #f0f0f0; color: #186018; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ═══════════ HEADER ═══════════ -->
+  <header class="header">
+    <div class="header-tag">Embedded Systems &bull; Control Theory</div>
+    <h1>江协科技 PID 入门教程 <span>— 实验</span></h1>
+    <div class="header-meta">
+      <div class="meta-item"><span class="meta-label">类型</span> 软硬件实验</div>
+      <div class="meta-item"><span class="meta-label">讲师</span> 江协科技</div>
+      <div class="meta-item"><span class="meta-label">来源</span> B 站实战教程</div>
+      <div class="meta-item"><span class="meta-label">生成</span> 2026-05-31</div>
+      <div class="meta-item">
+        <span class="meta-label">链接</span>
+        <a href="https://www.bilibili.com/video/av113576383612352" target="_blank" rel="noopener">bilibili.com/video/av113576383612352</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════ 硬件 ═══════════ -->
+  <h2>硬件</h2>
+
+  <h3>编码电机控制实验平台</h3>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>组件</th><th>作用</th><th>关键参数</th></tr></thead>
+    <tbody>
+      <tr><td>STM32 开发板</td><td>主控 MCU，运行 PID 算法和控制逻辑</td><td>STM32F103 系列，72MHz 主频</td></tr>
+      <tr><td>ST-Link</td><td>程序烧录与在线调试</td><td>V2 克隆版，SWD 接口（SWCLK/SWDIO/GND/3.3V 四线）</td></tr>
+      <tr><td>编码电机</td><td>被控对象，带 AB 相正交编码器</td><td>减速电机，编码器线数决定角度/速度分辨率</td></tr>
+      <tr><td>4 个电位器（旋钮）</td><td>实时调节 PID 参数（Kp、Ki、Kd）和设定目标</td><td>通过 ADC 读取电压，映射到参数范围</td></tr>
+      <tr><td>4 个按钮</td><td>模式切换（定速/定位）、启动/停止、参数保存</td><td>GPIO 输入，需软件去抖</td></tr>
+      <tr><td>TB6612 电机驱动</td><td>H 桥驱动芯片，接收 PWM + 方向信号控制电机</td><td>供电电压 2.5-13.5V，持续电流 1.2A</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>倒立摆实验平台（增量）</h3>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>组件</th><th>作用</th><th>备注</th></tr></thead>
+    <tbody>
+      <tr><td>摆杆</td><td>倒立摆本体，绕支点自由旋转</td><td>质量分布影响控制难度</td></tr>
+      <tr><td>角度传感器</td><td>实时测量摆杆偏离竖直方向的角度</td><td>姿态传感器（MPU6050），I2C 通信，5ms 更新周期</td></tr>
+      <tr><td>导电滑环</td><td>避免摆杆转动时导线缠绕</td><td>将传感器信号从旋转端传到固定端</td></tr>
+      <tr><td>横杆 + 传动结构</td><td>摆杆支点沿横杆移动的机械结构</td><td>法兰联轴器 + 黄铜联轴器 + 金属杆</td></tr>
+      <tr><td>减速电机</td><td>驱动传动结构，控制支点水平移动</td><td>齿轮减速比影响输出力矩和响应速度</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>关键硬件原理</h3>
+  <p><strong>编码器测速原理</strong>：AB 相正交编码器输出两路方波，相位差 90°。STM32 定时器配置为编码器模式，每个脉冲边沿计数一次。转速 = 单位时间计数值 ÷ 编码器线数 ÷ 减速比。</p>
+  <p><strong>角度传感器原理</strong>：MPU6050 内置三轴陀螺仪 + 三轴加速度计。原始数据需融合（互补滤波或 DMP）得到欧拉角。更新周期是 PID 调控周期 T 的下限。</p>
+  <p><strong>导电滑环的必要性</strong>：没有滑环，摆杆转几圈就会把传感器线缆拧断。滑环将电气连接从旋转部件传到固定部件。</p>
+
+  <!-- ═══════════ 代码结构 ═══════════ -->
+  <h2>代码结构</h2>
+
+  <h3>工程文件组织</h3>
+  <pre><code><span class="cm">Project/</span>
+├── <span class="fn">main.c</span>               <span class="cm"># 主函数，系统初始化 + 主循环</span>
+├── <span class="fn">pid.c</span> / <span class="fn">pid.h</span>        <span class="cm"># PID 算法模块（位式 + 增量式）</span>
+├── <span class="fn">motor.c</span> / <span class="fn">motor.h</span>    <span class="cm"># 电机驱动（TB6612 封装）</span>
+├── <span class="fn">encoder.c</span> / <span class="fn">encoder.h</span> <span class="cm"># 编码器读取（定时器编码器模式）</span>
+├── <span class="fn">serialplot.c</span>/.h      <span class="cm"># SerialPlot 数据发送协议</span>
+├── <span class="fn">button.c</span> / <span class="fn">button.h</span>  <span class="cm"># 按钮扫描 + 去抖</span>
+├── <span class="fn">adc.c</span> / <span class="fn">adc.h</span>        <span class="cm"># 电位器 ADC 读取</span>
+├── <span class="fn">timer.c</span> / <span class="fn">timer.h</span>    <span class="cm"># 定时器中断（调控周期 T）</span>
+└── <span class="fn">mpu6050.c</span> / <span class="fn">.h</span>       <span class="cm"># 角度传感器驱动（倒立摆专用）</span></code></pre>
+
+  <h3>程序执行流程</h3>
+  <div class="flow-box">启动
+ ├─ 初始化：时钟、GPIO、定时器、ADC、UART、电机驱动
+ ├─ 主循环：
+ │   ├─ 扫描按钮 → 切换模式 / 启停 / 保存参数
+ │   ├─ 读取 4 路 ADC → 映射到 Kp、Ki、Kd、目标值
+ │   ├─ 根据当前模式显示状态（LED / 串口）
+ │   └─ 等待定时器标志位
+ │
+ └─ 定时器中断（调控周期 T = 10ms）：
+     ├─ 1. 读编码器 → 当前速度 / 位置
+     ├─ 2. 读角度传感器 → 当前角度（倒立摆）
+     ├─ 3. 计算误差 error = 目标值 - 当前值
+     ├─ 4. 调用 PID_Compute() → 输出 u
+     ├─ 5. 限幅：u 映射到 PWM 占空比范围（0~1000）
+     ├─ 6. Motor_SetOutput(u) → 更新 PWM
+     └─ 7. SerialPlot_Send(target, actual, u) → 串口发送数据</div>
+
+  <h3>调控周期 T 的选择</h3>
+  <ul>
+    <li>编码电机定速/定位：<strong>T = 10ms</strong>（编码器分辨率够，电机响应速度合适）</li>
+    <li>倒立摆：<strong>T = 5ms</strong>（姿态传感器更新周期的下限，系统不稳定需要快响应）</li>
+    <li>T 不能小于传感器更新周期，否则读取的是旧数据</li>
+  </ul>
+
+  <h3>三种程序架构的权衡</h3>
+  <p>课程演示了三种写法，实际选用<strong>定时器中断</strong>方案（方案 2）：</p>
+  <ul>
+    <li>方案 1（主循环 delay）：简单但有时间漂移</li>
+    <li>方案 2（定时器中断）：精确，业内标准。注意 ISR 里不能调用非重入函数</li>
+    <li>方案 3（中断置标志，主循环轮询）：灵活但可能被主循环阻塞</li>
+  </ul>
+
+  <!-- ═══════════ 设备驱动 ═══════════ -->
+  <h2>设备驱动</h2>
+
+  <h3>电机驱动 — TB6612</h3>
+  <div class="flow-box">控制真值表（一路为例）：
+AIN1=0, AIN2=0 → 刹车（停止）
+AIN1=1, AIN2=0 → 正转，PWMA 控制占空比
+AIN1=0, AIN2=1 → 反转，PWMA 控制占空比
+AIN1=1, AIN2=1 → 刹车</div>
+  <ul>
+    <li>PWM 频率：10-20kHz（高于人耳听觉范围，避免啸叫）</li>
+    <li>STM32 定时器输出 PWM：TIMx CH1/CH2，PWM 模式 1</li>
+    <li>GPIO 控制方向脚：两个推挽输出</li>
+    <li>封装接口：<code>Motor_SetSpeed(int16_t speed)</code>，正值为正转，负值为反转，内部处理方向和占空比</li>
+  </ul>
+
+  <h3>编码器读取</h3>
+  <ul>
+    <li>STM32 定时器配置为<strong>编码器模式</strong>（Encoder Mode）</li>
+    <li>输入脚：TIMx CH1 (A 相) + CHx CH2 (B 相)，GPIO 配置为浮空输入</li>
+    <li>编码器模式 3：TI1 和 TI2 的每个边沿都计数，四倍频，最高分辨率</li>
+    <li>计数值直接读取 <code>TIMx->CNT</code></li>
+    <li>速度计算：每 T 时间读取一次 CNT，<code>speed = (cnt_current - cnt_last) / T / encoder_lines / gear_ratio</code></li>
+    <li>位置计算：直接累计 CNT 差值，<code>position = cumulative_counts / encoder_lines / gear_ratio * 360°</code></li>
+  </ul>
+
+  <h3>SerialPlot 数据发送</h3>
+  <p>SerialPlot 是 PC 端开源工具，通过串口接收数据并实时绘制波形，用于 PID 调参可视化。</p>
+  <p><strong>通信协议</strong>：自定义二进制帧格式</p>
+  <div class="flow-box">帧头(2B) | 通道数(1B) | 数据类型(1B) | 数据(4B×N) | 帧尾(2B)</div>
+  <p>典型发送 3 条曲线（目标值、实际值、输出量）：</p>
+  <pre><code><span class="cm">// 每调控周期发送一次</span>
+<span class="kw">typedef</span> <span class="kw">struct</span> {
+    <span class="ty">uint8_t</span> header[<span class="num">2</span>];   <span class="cm">// 0xAA 0xAA</span>
+    <span class="ty">uint8_t</span> channels;    <span class="cm">// 3</span>
+    <span class="ty">uint8_t</span> type;        <span class="cm">// float = 4</span>
+    <span class="ty">float</span> data[<span class="num">3</span>];       <span class="cm">// target, actual, output</span>
+    <span class="ty">uint8_t</span> tail[<span class="num">2</span>];     <span class="cm">// 0x55 0x55</span>
+} <span class="ty">SerialPlotFrame</span>;</code></pre>
+  <p>SerialPlot 配置：串口号 + 波特率（115200/256000），导入帧格式定义文件。</p>
+  <p>调试价值：你能直观看到 PID 调参对阶跃响应的影响 —— 超调量、调节时间、稳态误差，肉眼可见。</p>
+
+  <h3>电位器（旋钮）ADC 读取</h3>
+  <ul>
+    <li>4 路 ADC，轮询或 DMA 模式</li>
+    <li>12 位分辨率（0-4095），映射到 Kp/Ki/Kd/目标值 的取值范围</li>
+    <li>Kp: 0.0 ~ 50.0，Ki: 0.0 ~ 5.0，Kd: 0.0 ~ 20.0</li>
+    <li>目标值：定速 0 ~ 最高转速，定位 0 ~ 360°（或 -180° ~ 180°）</li>
+  </ul>
+
+  <h3>按钮处理</h3>
+  <ul>
+    <li>GPIO 输入，配置内部上拉（按下为低电平）</li>
+    <li>软件去抖：连续两次读取（间隔 20ms）均检测到按下才算有效</li>
+    <li>功能分配：模式切换、启停、参数保存/加载</li>
+  </ul>
+
+  <h3>角度传感器（MPU6050）— 倒立摆专用</h3>
+  <ul>
+    <li>I2C 通信（SCL/SDA），地址 0x68</li>
+    <li>读取加速度计和陀螺仪原始数据</li>
+    <li>互补滤波融合得到角度：<code>angle = 0.98 * (angle + gyro*dt) + 0.02 * acc_angle</code></li>
+    <li>更新周期 ~5ms，是倒立摆调控周期 T 的下限</li>
+  </ul>
+
+  <!-- ═══════════ 实验一：电机定速控制 ═══════════ -->
+  <h2>实验：电机定速控制</h2>
+
+  <h3>目标</h3>
+  <p>让编码电机稳定在用户设定的目标转速，旋钮实时改变目标，电机跟随。</p>
+
+  <h3>控制策略</h3>
+  <p><strong>PI 控制</strong>（不需要 D）。定速控制不存在"冲过头"的问题 —— 速度低于目标就一直低于目标，不会反弹震荡。所以只用到 PI 两个参数。</p>
+
+  <h3>实验步骤</h3>
+  <ol class="step-list">
+    <li><strong>硬件连接</strong>：ST-Link 接 STM32，TB6612 供电和电机接线，编码器接入定时器 GPIO</li>
+    <li><strong>驱动验证</strong>：不跑 PID，直接用固定 PWM 驱动电机，用 SerialPlot 观察空载转速是否正确被读到，确认编码器方向正负一致</li>
+    <li><strong>基础 PI 调参</strong>：先只调 P（从 0 逐步增大 Kp，观察速度逼近目标；Kp 太小 → 速度上不去，Kp 太大 → 速度波动大）；再加 I（加入 Ki 消除稳态误差，观察 Ki 从小到大时速度如何从"差一点"变成"刚好贴上"）</li>
+    <li><strong>旋钮在线调参</strong>：用 4 个旋钮分别控制 Kp、Ki、目标速度。实时拧动，观察 SerialPlot 波形变化</li>
+    <li><strong>验证</strong>：快速扭转目标旋钮，观察阶跃响应 —— 上升时间、超调（PI 不应该有明显超调）、稳态精度</li>
+  </ol>
+
+  <h3>预期现象</h3>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>参数情况</th><th>SerialPlot 波形表现</th><th>原因</th></tr></thead>
+    <tbody>
+      <tr><td>Kp 太小</td><td>实际速度远低于目标，差距很大</td><td>P 项力量不够推动电机克服摩擦</td></tr>
+      <tr><td>Kp 合适，Ki=0</td><td>实际速度接近目标但始终差 2-3%</td><td>稳态误差，P 项在误差很小时输出太小</td></tr>
+      <tr><td>Kp+Ki 合适</td><td>实际速度快速追上目标并稳定</td><td>PI 配合到位</td></tr>
+      <tr><td>Ki 太大</td><td>速度超调后缓慢回落</td><td>I 项累积过多</td></tr>
+      <tr><td>Kp 太大</td><td>速度在目标附近明显抖动</td><td>比例增益过大，放大了编码器的微小误差</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>关键代码模式</h3>
+  <pre><code><span class="cm">// 定时器中断中执行（每 10ms）</span>
+<span class="kw">void</span> <span class="fn">PID_SpeedControl</span>(<span class="kw">void</span>) {
+    <span class="cm">// 1. 读当前速度</span>
+    <span class="kw">float</span> current_speed = <span class="fn">Encoder_ReadSpeed</span>();  <span class="cm">// 单位：转/分钟</span>
+
+    <span class="cm">// 2. 读目标速度（旋钮 ADC）</span>
+    <span class="kw">float</span> target_speed = <span class="fn">ADC_ReadTargetSpeed</span>();
+
+    <span class="cm">// 3. PI 计算</span>
+    <span class="kw">float</span> error = target_speed - current_speed;
+    <span class="kw">float</span> output = <span class="fn">PID_Compute</span>(&amp;pid_speed, error);
+
+    <span class="cm">// 4. 输出限幅并驱动</span>
+    <span class="ty">int16_t</span> pwm = (<span class="ty">int16_t</span>)<span class="fn">CLAMP</span>(output, -<span class="num">1000</span>, <span class="num">1000</span>);
+    <span class="fn">Motor_SetSpeed</span>(pwm);
+
+    <span class="cm">// 5. 发给 SerialPlot 画图</span>
+    <span class="fn">SerialPlot_Send</span>(target_speed, current_speed, output);
+}</code></pre>
+
+  <!-- ═══════════ 实验二：电机定位控制 ═══════════ -->
+  <h2>实验：电机定位控制</h2>
+
+  <h3>目标</h3>
+  <p>让编码电机转到并停在指定的角度位置（如 180°），旋钮改变目标位置。</p>
+
+  <h3>控制策略</h3>
+  <p><strong>PID 控制</strong>（需要 D 项）。位置控制会有"冲过头"的问题 —— 电机惯性会让它冲过目标位置再倒回来，产生震荡。D 项提供阻尼，抑制震荡。</p>
+
+  <h3>与定速控制的区别</h3>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>维度</th><th>定速控制</th><th>定位控制</th></tr></thead>
+    <tbody>
+      <tr><td>控制对象</td><td>速度</td><td>位置（编码器脉冲累计）</td></tr>
+      <tr><td>被控量来源</td><td>单位时间内的编码器增量</td><td>编码器累积计数值</td></tr>
+      <tr><td>所需 PID 项</td><td>PI</td><td><strong>PID</strong>（需要 D 项抑制震荡）</td></tr>
+      <tr><td>误差特征</td><td>速度误差，不会自然震荡</td><td>位置误差，惯性导致冲过目标并反弹</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>实验步骤</h3>
+  <ol class="step-list">
+    <li><strong>位置计算</strong>：用编码器累积计数值换算角度。<code>position = (float)total_counts / lines / gear_ratio * 360.0</code></li>
+    <li><strong>零点校准</strong>：启动时当前位置记为 0°，或手动触发校准</li>
+    <li><strong>调参顺序（P → D → I）</strong>：先调 P（设 180° 目标，观察电机行为）；加 D（冲过去又倒回来 → 加入 D 抑制震荡，逐步增大直到震荡消失）；加 I（停在 178° 不动 → 加入 I 消除稳态误差）</li>
+    <li><strong>阶跃测试</strong>：快速切换目标（如 0° → 180°），观察响应曲线</li>
+    <li><strong>验证精度</strong>：多次重复定位，记录最终位置偏差</li>
+  </ol>
+
+  <h3>预期现象</h3>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>现象</th><th>原因</th><th>对策</th></tr></thead>
+    <tbody>
+      <tr><td>冲过目标，来回摆几次才停</td><td>Kp 太大 / 缺 D 项</td><td>降低 Kp，或增大 Kd</td></tr>
+      <tr><td>停在目标附近但差一点</td><td>缺 I 项，有稳态误差</td><td>增大 Ki</td></tr>
+      <tr><td>修正很慢，过很久才到位</td><td>Kp 太小</td><td>增大 Kp</td></tr>
+      <tr><td>在目标点附近高频抖动</td><td>Kd 太大（放大了噪声）</td><td>降低 Kd，或加低通滤波</td></tr>
+      <tr><td>不动</td><td>误差过小被死区过滤 / P 太小</td><td>检查死区阈值，增大 Kp</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>关键代码模式</h3>
+  <pre><code><span class="cm">// 定时器中断中执行（每 10ms）</span>
+<span class="kw">void</span> <span class="fn">PID_PositionControl</span>(<span class="kw">void</span>) {
+    <span class="cm">// 1. 读当前位置（累计角度）</span>
+    <span class="kw">float</span> current_pos = <span class="fn">Encoder_ReadPosition</span>();  <span class="cm">// 单位：度</span>
+
+    <span class="cm">// 2. 读目标位置</span>
+    <span class="kw">float</span> target_pos = <span class="fn">ADC_ReadTargetPosition</span>();
+
+    <span class="cm">// 3. PID 计算</span>
+    <span class="kw">float</span> error = target_pos - current_pos;
+    <span class="kw">float</span> output = <span class="fn">PID_Compute</span>(&amp;pid_position, error);
+
+    <span class="cm">// 4. 输出限幅并驱动</span>
+    <span class="ty">int16_t</span> pwm = (<span class="ty">int16_t</span>)<span class="fn">CLAMP</span>(output, -<span class="num">1000</span>, <span class="num">1000</span>);
+    <span class="fn">Motor_SetSpeed</span>(pwm);  <span class="cm">// 位置环输出直接给电机</span>
+
+    <span class="cm">// 5. 发给 SerialPlot</span>
+    <span class="fn">SerialPlot_Send</span>(target_pos, current_pos, output);
+}</code></pre>
+
+  <!-- ═══════════ 实验三：倒立摆双环 PID 控制 ═══════════ -->
+  <h2>实验：倒立摆双环 PID 控制</h2>
+
+  <h3>目标</h3>
+  <p>让倒立摆维持直立状态，并能在外力扰动下自动恢复。进阶目标：从自然下垂状态自动摆起。</p>
+
+  <h3>为什么需要双环</h3>
+  <p>单环 PID 控制一个量。倒立摆有两个相互耦合的目标：<strong>角度（要竖直）</strong> 和 <strong>位置（不能跑偏）</strong>。</p>
+  <p>你只有一个执行器（减速电机控制支点水平移动），却要同时满足两个目标。双环的解决方案是嵌套：</p>
+  <div class="flow-box">外层（角度环）的 PID 输出 → 作为内层（速度环）的目标值</div>
+  <p>逻辑链：</p>
+  <ol>
+    <li>摆杆右倾 → 角度环说"支点需要向右加速跟上"</li>
+    <li>角度环输出一个速度指令 → 给速度环</li>
+    <li>速度环驱动电机执行</li>
+  </ol>
+
+  <h3>控制框图</h3>
+  <div class="flow-box">目标角度(0°) ─→ [角度 PID] ─→ 目标速度 ─→ [速度 PID] ─→ PWM ─→ 电机 ─→ 支点移动
+              ↑ 当前角度（MPU6050）             ↑ 当前速度（编码器）</div>
+
+  <ul>
+    <li><strong>外环（角度环）</strong>：输入 = 目标角度 0° - 当前角度，输出 = 目标速度。<strong>这个环用了 P + D</strong>。角度环需要 D 项预测角度变化趋势，提前"接住"摆杆。一般不需要 I（积分会把摆杆推偏）。</li>
+    <li><strong>内环（速度环）</strong>：输入 = 目标速度 - 当前速度，输出 = PWM。<strong>这个环用了 PI</strong>。同定速控制，不需要 D。</li>
+  </ul>
+
+  <h3>硬件搭建要点</h3>
+  <ol>
+    <li><strong>摆杆自由旋转</strong>：支点用轴承，尽量减小摩擦</li>
+    <li><strong>导电滑环走线</strong>：MPU6050 固定在摆杆上，信号线经滑环接到 STM32。滑环的接触电阻会影响 I2C 通信质量，注意走线尽量短</li>
+    <li><strong>角度传感器安装</strong>：MPU6050 装在摆杆质心上方或下方均可，只要初始化时标定好零角度（竖直向上）</li>
+    <li><strong>机械平衡检查</strong>：不加控制时，摆杆自然下垂。支点在导轨上应平滑移动，无明显卡滞</li>
+  </ol>
+
+  <h3>实验步骤</h3>
+
+  <h4>第一阶段：角度环单独调试</h4>
+  <ol>
+    <li>MPU6050 驱动验证：用 SerialPlot 观察角度读数，手动摆动摆杆，确认读数连续无跳变</li>
+    <li>角度环 PD 调参：Kp（角度 P）—— 摆杆倾斜 10°，电机应明显在"扶"它；Kd（角度 D）—— 加入后摆杆回正时不应有大幅度超调；手动推一下摆杆，观察恢复过程</li>
+  </ol>
+
+  <h4>第二阶段：双环联调</h4>
+  <ol start="3">
+    <li>速度环 PI 调参：同定速控制实验</li>
+    <li>双环级联运行：摆杆直立，观察是否能在零点附近稳定；轻推摆杆，观察恢复速度和震荡情况</li>
+    <li>抗扰动测试：用手指轻点摆杆，观察恢复过程</li>
+  </ol>
+
+  <h4>第三阶段：自动启摆（进阶）</h4>
+  <ol start="6">
+    <li>启摆策略：摆杆从自然下垂状态开始，系统先做一个大幅度的周期摆动（能量注入），当摆动幅度接近直立时，切换到双环 PID 控制</li>
+    <li>能量判断：当 <code>|angle - 180°|</code>（偏离下垂位置的角度）超过某个阈值（如 150°），意味着摆杆已经摆到了接近直立的位置，切入控制</li>
+  </ol>
+
+  <h3>预期现象</h3>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>现象</th><th>原因</th><th>对策</th></tr></thead>
+    <tbody>
+      <tr><td>摆杆直立但缓慢漂移</td><td>角度环缺 I 或角度传感器有偏置</td><td>检查 MPU6050 零点标定</td></tr>
+      <tr><td>摆杆在零点附近高频抖动</td><td>角度环 Kd 太大，放大传感器噪声</td><td>降低 Kd，或加不完全微分</td></tr>
+      <tr><td>摆杆倒了电机还在转</td><td>角度环 Kp 不够大，无法克服重力</td><td>增大角度环 Kp</td></tr>
+      <tr><td>支点跑偏，摆杆直立但一直在移动</td><td>角度环输出无 I 导致的自然漂移</td><td>接受（双环不需要位置锁定），或再加外层位置环</td></tr>
+      <tr><td>自动启摆失败</td><td>能量不足或切换时机不对</td><td>增大启摆幅度，调整切换阈值</td></tr>
+      <tr><td>摆杆恢复了但震荡很久</td><td>角度环 Kd 太小</td><td>增大 Kd</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>关键代码模式</h3>
+  <pre><code><span class="cm">// 定时器中断中执行（每 5ms）</span>
+<span class="kw">void</span> <span class="fn">InvertedPendulum_Control</span>(<span class="kw">void</span>) {
+    <span class="cm">// 1. 读传感器</span>
+    <span class="kw">float</span> current_angle = <span class="fn">MPU6050_ReadAngle</span>();   <span class="cm">// 摆杆角度</span>
+    <span class="kw">float</span> current_speed = <span class="fn">Encoder_ReadSpeed</span>();    <span class="cm">// 支点速度</span>
+
+    <span class="cm">// 2. 外环 — 角度 PD（目标角度 = 0°，即竖直向上）</span>
+    <span class="kw">float</span> angle_error = TARGET_ANGLE - current_angle;  <span class="cm">// TARGET_ANGLE = 0</span>
+    <span class="kw">float</span> target_speed = <span class="fn">PID_Angle_Compute</span>(angle_error); <span class="cm">// 输出作为速度环目标</span>
+
+    <span class="cm">// 3. 内环 — 速度 PI</span>
+    <span class="kw">float</span> speed_error = target_speed - current_speed;
+    <span class="kw">float</span> output = <span class="fn">PID_Speed_Compute</span>(speed_error);
+
+    <span class="cm">// 4. 输出到电机</span>
+    <span class="ty">int16_t</span> pwm = (<span class="ty">int16_t</span>)<span class="fn">CLAMP</span>(output, -<span class="num">1000</span>, <span class="num">1000</span>);
+    <span class="fn">Motor_SetSpeed</span>(pwm);
+}</code></pre>
+
+  <h3>调参经验</h3>
+  <p>倒立摆调参的难点在角度环。经验顺序：</p>
+  <ol>
+    <li>先锁定内环（速度 PI）：单独调好，确保速度响应又快又稳</li>
+    <li>再调外环（角度 PD）：从小到大加角度 Kp，直到摆杆能"站住"（哪怕抖）</li>
+    <li>加角度 Kd：抑制抖动，加到摆杆稳定且恢复快</li>
+    <li>微调：轻推摆杆，如果恢复太慢加角度 Kp，如果震荡加角度 Kd</li>
+  </ol>
+
+  <hr>
+
+  <div class="footer">
+    <p>笔记覆盖范围：<span>江协科技 PID 入门教程</span> 实验部分（课程 1-3 至 1-4 节，3-1 至 3-4 节）</p>
+    <p style="margin-top:8px;opacity:0.5">Generated 2026-05-31 &bull; AI Notes</p>
+  </div>
+
+</div>
+
+</body>
+</html>

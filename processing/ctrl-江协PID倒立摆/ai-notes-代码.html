@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PID 代码精读 — 驱动 + 定速定位 + 倒立摆双环</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0c10;
+    --surface: #14141c;
+    --surface2: #1a1a26;
+    --surface3: #222230;
+    --text: #cdd0d8;
+    --text-dim: #8888a0;
+    --text-bright: #e8ecf2;
+    --amber: #f0a030;
+    --amber-glow: #f0a03055;
+    --green: #3cf070;
+    --green-dim: #2aa848;
+    --blue: #6098f0;
+    --blue-dim: #4068b0;
+    --red: #f05060;
+    --cyan: #40d8d8;
+    --magenta: #d870f0;
+    --border: #2a2a38;
+    --border-subtle: #1e1e2c;
+    --radius: 6px;
+    --radius-sm: 3px;
+    --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+    --font-tech: 'Share Tech Mono', monospace;
+    --font-body: 'IBM Plex Sans', -apple-system, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    background: var(--bg);
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--text);
+    background:
+      radial-gradient(ellipse at 50% 0%, #1a1a3060 0%, transparent 70%),
+      radial-gradient(ellipse at 80% 100%, #30201030 0%, transparent 60%),
+      var(--bg);
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 48px 24px 120px;
+    line-height: 1.72;
+  }
+
+  /* ─── Typography ─── */
+  h1 {
+    font-family: var(--font-tech);
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--amber);
+    margin: 0 0 6px;
+    letter-spacing: 0.02em;
+  }
+  h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin: 52px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border);
+    letter-spacing: 0.01em;
+  }
+  h2 .num { color: var(--amber); font-family: var(--font-tech); margin-right: 8px; }
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--blue);
+    margin: 36px 0 10px;
+  }
+  h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--cyan);
+    margin: 24px 0 8px;
+  }
+  p { margin: 0 0 12px; }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  strong { color: var(--text-bright); font-weight: 600; }
+  em { color: var(--amber); font-style: normal; }
+
+  .subtitle {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    margin-bottom: 36px;
+  }
+
+  /* ─── Metadata table ─── */
+  .meta {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 4px 16px;
+    font-size: 0.88rem;
+    margin-bottom: 40px;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+  .meta dt { color: var(--text-dim); font-weight: 500; }
+  .meta dd { color: var(--text-bright); }
+
+  /* ─── TOC ─── */
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 36px;
+  }
+  .toc h3 { margin: 0 0 12px; color: var(--amber); font-size: 1rem; }
+  .toc ol { padding-left: 20px; }
+  .toc li {
+    margin: 4px 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  .toc a { color: var(--text); }
+  .toc a:hover { color: var(--amber); }
+
+  /* ─── Code blocks ─── */
+  pre {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    line-height: 1.65;
+    margin: 10px 0 18px;
+    color: var(--text);
+    tab-size: 4;
+  }
+  pre code { font-family: inherit; }
+
+  /* ─── Inline code ─── */
+  :not(pre) > code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: var(--surface3);
+    color: var(--green);
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-subtle);
+  }
+
+  /* ─── Callout boxes ─── */
+  .callout {
+    border-left: 3px solid var(--amber);
+    background: #1a1508;
+    padding: 12px 16px;
+    margin: 14px 0;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 0.9rem;
+  }
+  .callout.info { border-left-color: var(--blue); background: #0c141c; }
+  .callout.warn { border-left-color: var(--red); background: #1c0c0c; }
+  .callout.good { border-left-color: var(--green); background: #0c1c0c; }
+
+  /* ─── Tables ─── */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0;
+    font-size: 0.88rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    text-align: left;
+  }
+  th {
+    background: var(--surface2);
+    color: var(--text-bright);
+    font-weight: 600;
+  }
+  td code { font-size: 0.82rem; }
+
+  /* ─── Lists ─── */
+  ul, ol { margin: 8px 0 12px 20px; }
+  li { margin: 4px 0; }
+
+  /* ─── Diagram ─── */
+  .diagram {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--green);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin: 12px 0;
+    white-space: pre;
+    line-height: 1.4;
+    overflow-x: auto;
+  }
+  .diagram .dim { color: var(--text-dim); }
+
+  /* ─── Divider ─── */
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 32px 0;
+  }
+
+  /* ─── Back to top ─── */
+  .btt {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 8px 12px;
+    border-radius: var(--radius);
+    font-size: 0.82rem;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .btt:hover { color: var(--amber); border-color: var(--amber); }
+
+  /* ─── Step numbers ─── */
+  .step {
+    display: inline-block;
+    background: var(--amber);
+    color: #000;
+    font-weight: 700;
+    font-size: 0.75rem;
+    width: 20px; height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 3px;
+    margin-right: 6px;
+    vertical-align: 1px;
+  }
+
+  /* ─── Flow arrows ─── */
+  .flow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
+    margin: 10px 0;
+  }
+  .flow .box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    color: var(--text-bright);
+  }
+  .flow .box.amber { border-color: var(--amber); color: var(--amber); }
+  .flow .box.blue { border-color: var(--blue-dim); color: var(--blue); }
+  .flow .box.green { border-color: var(--green-dim); color: var(--green); }
+  .flow .arrow { color: var(--text-dim); font-size: 1.1rem; }
+
+  /* syntax highlighting */
+  .kw { color: var(--blue); }
+  .ty { color: var(--cyan); }
+  .fn { color: var(--amber); }
+  .cm { color: var(--text-dim); font-style: italic; }
+  .st { color: var(--green); }
+  .nu { color: var(--magenta); }
+  .pp { color: var(--amber); }
+</style>
+</head>
+<body>
+
+<h1>PID 代码精读笔记</h1>
+<p class="subtitle">驱动层 &middot; 定速定位 &middot; 倒立摆双环 &mdash; 一行一行吃透代码</p>
+
+<dl class="meta">
+  <dt>课程</dt><dd>江协科技 PID 入门教程</dd>
+  <dt>平台</dt><dd>STM32F103 × TB6612 编码电机 × 角度传感器</dd>
+  <dt>生成时间</dt><dd>2026-05-31</dd>
+  <dt>定位</dt><dd>代码逐行精读，面向"我到底在写什么"的彻底理解</dd>
+</dl>
+
+<!-- ─────────────────── TOC ─────────────────── -->
+<nav class="toc">
+  <h3>目录</h3>
+  <ol>
+    <li><a href="#ch0">代码组织结构 — 以倒立摆为例</a>
+      <ol>
+        <li><a href="#ch0-1">顶层：17 个实验的目录全景</a></li>
+        <li><a href="#ch0-2">中层：单实验目录的内部结构</a></li>
+        <li><a href="#ch0-3">底层：倒立摆 main.c 的 #include 依赖链</a></li>
+        <li><a href="#ch0-4">变化层：每个实验到底改了哪些文件</a></li>
+      </ol>
+    </li>
+    <li><a href="#ch1">整体架构：17 个实验的代码演化路径</a></li>
+    <li><a href="#ch2">驱动层代码逐行精读</a>
+      <ol>
+        <li><a href="#ch2-1">PWM 驱动 — 用定时器产生 20kHz 方波</a></li>
+        <li><a href="#ch2-2">Motor 驱动 — 方向脚 + PWM 组成 H 桥控制</a></li>
+        <li><a href="#ch2-3">Encoder 驱动 — 定时器编码器模式 + 四倍频</a></li>
+        <li><a href="#ch2-4">Timer 中断 — 1ms 精确节拍，控制系统的"心跳"</a></li>
+        <li><a href="#ch2-5">RP/A 电位器 — ADC 轮询读取</a></li>
+        <li><a href="#ch2-6">AD 角度传感器 — ADC1 通道 8 读取</a></li>
+      </ol>
+    </li>
+    <li><a href="#ch3">单环 PID：定速控制的代码实现</a>
+      <ol>
+        <li><a href="#ch3-1">位置式 PID 公式在 C 代码中的精确表达</a></li>
+        <li><a href="#ch3-2">误差处理的三个关键步骤</a></li>
+        <li><a href="#ch3-3">实验 02 完整中断代码逐行拆解</a></li>
+        <li><a href="#ch3-4">各变体实验的改进点速览</a></li>
+      </ol>
+    </li>
+    <li><a href="#ch4">双环 PID：定速 + 定位串级控制</a>
+      <ol>
+        <li><a href="#ch4-1">为什么需要双环而不是单环定位</a></li>
+        <li><a href="#ch4-2">实验 12 双环裸写 vs 实验 13 struct 封装</a></li>
+        <li><a href="#ch4-3">PID 结构体封装 &mdash; PID_Update 函数精读</a></li>
+      </ol>
+    </li>
+    <li><a href="#ch5">倒立摆双环 PID 控制</a>
+      <ol>
+        <li><a href="#ch5-1">倒立摆的控制框图</a></li>
+        <li><a href="#ch5-2">角度传感器补偿原理</a></li>
+        <li><a href="#ch5-3">实验 15 代码逐行精读</a></li>
+      </ol>
+    </li>
+    <li><a href="#ch6">自动启摆：有限状态机实现</a>
+      <ol>
+        <li><a href="#ch6-1">启摆策略与状态设计</a></li>
+        <li><a href="#ch6-2">实验 16 关键代码分析</a></li>
+      </ol>
+    </li>
+    <li><a href="#ch7">核心设计模式总结</a></li>
+  </ol>
+</nav>
+
+<!-- ═══════════════ CHAPTER 0: 代码组织结构 ═══════════════ -->
+<h2 id="ch0"><span class="num">00</span>代码组织结构 — 以倒立摆为例</h2>
+
+<p>在逐行读代码之前，先搞清楚<strong>代码文件怎么放的、谁依赖谁、改一处影响哪</strong>。本节以<strong>实验 15 倒立摆</strong>为例，从顶层到底层逐层拆解。</p>
+
+<h3 id="ch0-1">0.1 顶层：17 个实验的目录全景</h3>
+
+<p>课程资料放在独立目录 <code>/PID入门教程资料/程序源码/</code> 下，分<strong>有注释版</strong>和<strong>无注释版</strong>两个平行版本（代码逻辑完全相同，只有注释有无的区别）。以有注释版为例：</p>
+
+<div class="diagram">
+程序源码/程序源码-有注释版/
+├── <span class="dim">00-PID综合测试程序/</span>        ← 全部功能集成版
+├── <span class="dim">01-基础驱动代码/</span>            ← ★ 公共基座，下面所有实验都在此基础上改
+├── <span class="dim">02-位置式PID定速控制/</span>
+├── <span class="dim">03-增量式PID定速控制/</span>
+├── <span class="dim">04-位置式PID定位置控制/</span>
+├── <span class="dim">05-增量式PID定位置控制/</span>
+├── <span class="dim">06~11 各种改进/</span>             ← 积分限幅、积分分离、变速积分等
+├── <span class="dim">12-双环PID定速定位置控制/</span>    ← 双环裸写版
+├── <span class="dim">13-双环PID-代码封装/</span>         ← 双环 struct 封装版
+├── <span class="dim">14-基础驱动代码-角度传感器/</span>    ← 硬件层新增 AD.c/.h
+├── <span class="dim">15-倒立摆/</span>                   ← ★ 本节示例
+└── <span class="dim">16-倒立摆-自动启摆/</span>          ← 加状态机
+</div>
+
+<div class="callout info">
+  <strong>关键认知</strong>：17 个目录不是 17 个独立项目。它们共享完全相同的 <code>Start/</code>（启动文件）、<code>Library/</code>（STM32 标准外设库）、<code>System/</code>（延时+定时器），以及大部分 <code>Hardware/</code>（外设驱动）。唯一的区别在 <code>User/main.c</code>（控制逻辑）以及实验 13+ 新增的 <code>User/PID.c</code> 和实验 14+ 新增的 <code>Hardware/AD.c</code>。
+</div>
+
+<h3 id="ch0-2">0.2 中层：单实验目录的内部结构</h3>
+
+<p>以<strong>实验 15 倒立摆</strong>为例，展开一个典型实验目录：</p>
+
+<div class="diagram">
+<span class="dim">15-倒立摆/</span>
+├── Start/                          <span class="dim">← ① 启动层：全部实验完全相同</span>
+│   ├── startup_stm32f10x_??.s      <span class="dim">启动汇编（分 ld/md/hd/xl 不同容量）</span>
+│   ├── core_cm3.c / .h             <span class="dim">Cortex-M3 内核支持</span>
+│   ├── system_stm32f10x.c / .h     <span class="dim">系统时钟配置（72MHz）</span>
+│   └── stm32f10x.h                 <span class="dim">寄存器地址定义</span>
+│
+├── Library/                        <span class="dim">← ② 库函数层：全部实验完全相同</span>
+│   ├── stm32f10x_gpio.c / .h       <span class="dim">GPIO 外设库</span>
+│   ├── stm32f10x_tim.c / .h        <span class="dim">定时器外设库</span>
+│   ├── stm32f10x_adc.c / .h        <span class="dim">ADC 外设库</span>
+│   ├── stm32f10x_usart.c / .h      <span class="dim">串口外设库</span>
+│   ├── stm32f10x_rcc.c / .h        <span class="dim">时钟外设库</span>
+│   └── ... (共约 30 对文件)         <span class="dim">dma/dac/spi/i2c/exti 等</span>
+│
+├── System/                         <span class="dim">← ③ 系统工具层：基本不变</span>
+│   ├── Delay.c / .h                <span class="dim">毫秒/微秒延时（SysTick 实现）</span>
+│   └── Timer.c / .h                <span class="dim">TIM1 1ms 定时中断初始化 ★</span>
+│
+├── Hardware/                       <span class="dim">← ④ 外设驱动层：实验 14+ 增加 AD.c/.h</span>
+│   ├── PWM.c / .h                  <span class="dim">TIM2 CH1 产生 20kHz PWM</span>
+│   ├── Motor.c / .h                <span class="dim">方向脚 + PWM → 电机控制（依赖 PWM.h）</span>
+│   ├── Encoder.c / .h              <span class="dim">TIM3 编码器模式读取（依赖 TIM 库）</span>
+│   ├── RP.c / .h                   <span class="dim">ADC2 读取 4 个电位器</span>
+│   ├── Key.c / .h                  <span class="dim">非阻塞按键+消抖</span>
+│   ├── LED.c / .h                  <span class="dim">PC13 板载 LED</span>
+│   ├── OLED.c / .h                 <span class="dim">OLED 屏幕驱动</span>
+│   ├── OLED_Data.c / .h            <span class="dim">字库数据（图片数组）</span>
+│   ├── Serial.c / .h               <span class="dim">串口格式化输出（给 SerialPlot 画图）</span>
+│   └── AD.c / .h                   <span class="dim">ADC1 PB0 角度传感器 ★ 实验 14 新增</span>
+│
+└── User/                           <span class="dim">← ⑤ 用户逻辑层 ★ 唯一会变的部分</span>
+    ├── main.c                      <span class="dim">★ 主函数 + 中断服务函数（各实验不同）</span>
+    ├── PID.c / PID.h               <span class="dim">★ 实验 13+ 新增 PID 结构体封装</span>
+    ├── stm32f10x_conf.h            <span class="dim">外设库头文件汇总（固定）</span>
+    └── stm32f10x_it.c / .h         <span class="dim">中断向量表 + 默认中断服务函数（固定）</span>
+</div>
+
+<p>这五层形成一个<strong>依赖层级</strong>，下层不依赖上层：</p>
+
+<div class="diagram">
+<span class="dim">调用方向 ↓</span>
+
+User (main.c + PID.c)
+  ├── 调用 →
+  │   Hardware (Motor, Encoder, RP, AD, Key, LED, OLED, Serial)
+  │     ├── 调用 →
+  │     │   System (Timer, Delay)
+  │     │     └── 调用 →
+  │     │         Library (stm32f10x_*.h)
+  │     │           └── 依赖 →
+  │     │               Start (stm32f10x.h, core_cm3.h)
+  │     └── 调用 →
+  │         Library (stm32f10x_gpio, _tim, _adc, _usart, _rcc...)
+  │           └── 依赖 →
+  │               Start
+  └── 调用 →
+      System (Timer, Delay)
+        └── 调用 →
+            Library → Start
+</div>
+
+<div class="callout">
+  <strong>实战意义</strong>：如果要改倒立摆的控制算法，<strong>只需要改 User/main.c</strong>。如果要加新传感器（如 MPU6050），在 Hardware/ 下新增一个驱动文件，再在 User/main.c 里 #include 进来就行。Start/ 和 Library/ 是 SDK 级代码，完全不需要动。
+</div>
+
+<h3 id="ch0-3">0.3 底层：倒立摆 main.c 的 #include 依赖链</h3>
+
+<p>以实验 15 的 <code>User/main.c</code> 为例，看它的 include 是怎么把整个系统串起来的：</p>
+
+<pre><code><span class="cm">// User/main.c 的头文件包含（实验 15 倒立摆）</span>
+<span class="pp">#include</span> <span class="st">"stm32f10x.h"</span>          <span class="cm">// ← Start 层：寄存器地址定义</span>
+<span class="pp">#include</span> <span class="st">"Delay.h"</span>              <span class="cm">// ← System 层：延时</span>
+<span class="pp">#include</span> <span class="st">"OLED.h"</span>               <span class="cm">// ← Hardware 层：显示屏</span>
+<span class="pp">#include</span> <span class="st">"LED.h"</span>                <span class="cm">// ← Hardware 层：LED</span>
+<span class="pp">#include</span> <span class="st">"Timer.h"</span>              <span class="cm">// ← System 层：1ms 定时中断（TIM1）</span>
+<span class="pp">#include</span> <span class="st">"Key.h"</span>                <span class="cm">// ← Hardware 层：按键</span>
+<span class="pp">#include</span> <span class="st">"RP.h"</span>                 <span class="cm">// ← Hardware 层：电位器旋钮（ADC2）</span>
+<span class="pp">#include</span> <span class="st">"Motor.h"</span>              <span class="cm">// ← Hardware 层：电机控制（依赖 PWM.h）</span>
+<span class="pp">#include</span> <span class="st">"Encoder.h"</span>            <span class="cm">// ← Hardware 层：编码器（TIM3）</span>
+<span class="pp">#include</span> <span class="st">"Serial.h"</span>             <span class="cm">// ← Hardware 层：串口（USART）</span>
+<span class="pp">#include</span> <span class="st">"AD.h"</span>                 <span class="cm">// ← Hardware 层：角度传感器（ADC1，实验 14+）</span>
+<span class="pp">#include</span> <span class="st">"PID.h"</span>                <span class="cm">// ← User 层：PID 结构体+计算函数（实验 13+）</span></code></pre>
+
+<p>把系统想象成<strong>三层嵌套的盒子</strong>，每个盒子封装了一组功能：</p>
+
+<div class="diagram">
+┌─────────────────────────────────────────────────────────────┐
+│  <span class="dim">⑤ User 层：应用逻辑（每个实验不同）</span>                           │
+│                                                             │
+│  main() {                                                   │
+│    OLED_Init(); Key_Init(); Motor_Init(); Encoder_Init();   │
+│    RP_Init(); Serial_Init(); AD_Init(); Timer_Init();       │
+│    ...                                                      │
+│  }                                                          │
+│                                                             │
+│  ┌───────────────────────────────────────────────────────┐ │
+│  │  <span class="dim">④ Hardware 层：外设驱动（实验 14+ 加 AD）</span>             │ │
+│  │                                                       │ │
+│  │  Motor_SetPWM(Out) ─── GPIO方向+PWM   ──→ TB6612     │ │
+│  │  Encoder_Get()     ─── TIM3编码器    ──→ 速度/位置   │ │
+│  │  AD_GetValue()     ─── ADC1          ──→ 角度值      │ │
+│  │  RP_GetValue(n)    ─── ADC2          ──→ Kp/Ki/Kd/Target│ │
+│  │  Serial_Printf()   ─── USART         ──→ SerialPlot   │ │
+│  │                                                       │ │
+│  │  ┌─────────────────────────────────────────────────┐ │ │
+│  │  │  <span class="dim">③ System 层：Timer(1ms中断) + Delay</span>        │ │ │
+│  │  │  ┌───────────────────────────────────────────┐ │ │ │
+│  │  │  │  <span class="dim">② Library：STM32标准外设库</span>              │ │ │ │
+│  │  │  │  ┌─────────────────────────────────────┐ │ │ │ │
+│  │  │  │  │  <span class="dim">① Start：启动+内核+时钟72MHz</span>        │ │ │ │ │
+│  │  │  │  └─────────────────────────────────────┘ │ │ │ │
+│  │  │  └───────────────────────────────────────────┘ │ │ │
+│  │  └─────────────────────────────────────────────────┘ │ │
+│  └───────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────┘
+</div>
+
+<h3 id="ch0-4">0.4 变化层：每个实验到底改了哪些文件</h3>
+
+<p>从实验 01 到 16，只有<strong>两个文件在变化</strong>（14 多一个），其他全部复用：</p>
+
+<table>
+  <tr><th>实验</th><th>User/main.c</th><th>User/PID.c+ .h</th><th>Hardware/AD.c+ .h</th><th>改了什么</th></tr>
+  <tr><td>01 基础驱动</td><td>外设测试（注释切换）</td><td style="color:var(--text-dim)">不存在</td><td style="color:var(--text-dim)">不存在</td><td>全部外设初始化</td></tr>
+  <tr><td>02 位置式定速</td><td><strong>PID 核心代码首次出现</strong></td><td style="color:var(--text-dim)">不存在</td><td style="color:var(--text-dim)">不存在</td><td>Error0/1/Int，PID 公式</td></tr>
+  <tr><td>03</td><td>PID 公式改成增量式</td><td style="color:var(--text-dim)">—</td><td style="color:var(--text-dim)">—</td><td>增量式公式</td></tr>
+  <tr><td>04</td><td>控制位置（Location 累积）</td><td style="color:var(--text-dim)">—</td><td style="color:var(--text-dim)">—</td><td>位置环 + D 项</td></tr>
+  <tr><td>05~11</td><td>PID 局部改进</td><td style="color:var(--text-dim)">—</td><td style="color:var(--text-dim)">—</td><td>积分限幅/分离/变速/微分先行等</td></tr>
+  <tr><td>12 双环裸写</td><td><strong>双套变量 Inner/Outer</strong></td><td style="color:var(--text-dim)">—</td><td style="color:var(--text-dim)">—</td><td>串级 PID</td></tr>
+  <tr><td>13 双环封装</td><td>改用 PID_t + PID_Update</td><td><strong>新增</strong></td><td style="color:var(--text-dim)">—</td><td>结构体封装</td></tr>
+  <tr><td>14 角度传感器</td><td>测试 AD 值</td><td style="color:var(--text-dim)">—</td><td><strong>新增</strong></td><td>角度传感器驱动</td></tr>
+  <tr><td>15 倒立摆</td><td><strong>倒立摆双环控制</strong></td><td>复用 13 的</td><td>复用 14 的</td><td>角度环+位置环+倒下检测</td></tr>
+  <tr><td>16 自动启摆</td><td><strong>加状态机</strong></td><td>复用 13 的</td><td>复用 14 的</td><td>10 状态状态机</td></tr>
+</table>
+
+<p>真正的复用关系图：</p>
+
+<div class="diagram">
+<span class="dim">01 基础驱动：全部 Hardware/ + System/ + Library/ + Start/ 写好</span>
+<span class="dim">    │</span>
+<span class="dim">    ├──→ 02~11：只改 User/main.c（PID 算法演化）</span>
+<span class="dim">    │</span>
+<span class="dim">    ├──→ 12~13：只改 User/main.c（双环结构）+ 新增 User/PID.c/.h</span>
+<span class="dim">    │</span>
+<span class="dim">    └──→ 14：新增 Hardware/AD.c/.h（角度传感器驱动）</span>
+<span class="dim">         │</span>
+<span class="dim">         └──→ 15~16：只改 User/main.c（倒立摆控制+启摆状态机）</span>
+</div>
+
+<div class="callout good">
+  <strong>你只需要理解三个"主菜"</strong>，就能覆盖全部 16 个实验：
+  <ol style="margin-top:8px;">
+    <li><strong>实验 02 的 main.c</strong> — 单环 PID 的标准写法</li>
+    <li><strong>实验 13 的 main.c + PID.c</strong> — 双环 + 结构体封装的标准写法</li>
+    <li><strong>实验 15 的 main.c</strong> — 倒立摆双环的完整实现</li>
+  </ol>
+  实验 01 是驱动验证（测试用），03~11 是 02 的局部变体，12 是 13 的手动版，16 是 15 加状态机。
+</div>
+
+<!-- ═══════════════ CHAPTER 1: 整体架构 ═══════════════ -->
+<h2 id="ch1"><span class="num">01</span>整体架构：17 个实验的代码演化</h2>
+
+<p>课程代码按学习路径排列，核心文件 <strong>逐步叠加</strong>，不是一次性全写出来。理解这个演化关系，比死记代码更重要：</p>
+
+<table>
+  <tr><th>实验</th><th>新增内容</th><th>硬件层变化</th></tr>
+  <tr><td>01 基础驱动</td><td>OLED、LED、Key、RP、Motor、Encoder、Serial 全部初始化 + 独立测试</td><td>全部外设首次连接</td></tr>
+  <tr><td>02 位置式定速</td><td><strong>PID 核心代码首次出现</strong>：Error0/Error1/ErrorInt，限幅，Motor_SetPWM</td><td>同 01</td></tr>
+  <tr><td>03 增量式定速</td><td>PID 公式从位置式改为增量式</td><td>同 01</td></tr>
+  <tr><td>04~11</td><td>积分限幅、积分分离、变速积分、微分先行、不完全微分、死区等改进技术</td><td>同 01</td></tr>
+  <tr><td>12 双环裸写</td><td><strong>Inner/Outer 两个独立 PID 变量组</strong>，串级：Outer.Out → Inner.Target</td><td>同 01</td></tr>
+  <tr><td>13 双环封装</td><td><strong>PID_t 结构体 + PID_Update 函数</strong>，可复用的 PID 模块</td><td>同 01</td></tr>
+  <tr><td>14 角度传感器</td><td>AD.c（ADC1 通道 8，PB0 模拟输入）</td><td>+ 角度传感器</td></tr>
+  <tr><td>15 倒立摆</td><td>角度环 PD + 位置环 PD，倒下自动停止，按键控制横杆转动</td><td>+ 摆杆、滑环</td></tr>
+  <tr><td>16 自动启摆</td><td><strong>有限状态机</strong>（10 个状态）：判断→施力→延时→施力→延时→...→PID</td><td>同 15</td></tr>
+</table>
+
+<p>关键观察：<strong>01 基础驱动是所有实验的公共基础</strong>，02~11 只改中断服务函数中的 PID 逻辑，12~13 改了双环结构，14~16 增加了角度传感器和状态机。</p>
+
+<!-- ═══════════════ CHAPTER 2: 驱动层 ═══════════════ -->
+<h2 id="ch2"><span class="num">02</span>驱动层代码逐行精读</h2>
+
+<p>所有实验都依赖这 6 个驱动模块。它们构成了 "硬件抽象层"，让 PID 逻辑代码完全不用关心底层寄存器。</p>
+
+
+<!-- ─── 2.1 PWM ─── -->
+<h3 id="ch2-1">2.1 PWM 驱动 — 用定时器产生 20kHz 方波</h3>
+
+<p><strong>文件</strong>：<code>Hardware/PWM.c</code> + <code>PWM.h</code></p>
+<p><strong>硬件映射</strong>：TIM2 通道 1 &rarr; PA0（复用推挽输出）</p>
+<p><strong>工程参数计算</strong>：</p>
+
+<ul>
+  <li>系统时钟 72MHz &rarr; PSC = 36-1 &rarr; 定时器计数频率 = 72M / 36 = <strong>2MHz</strong></li>
+  <li>ARR = 100-1 &rarr; PWM 周期 = 100 / 2MHz = <strong>50μs</strong> &rarr; PWM 频率 = <strong>20kHz</strong></li>
+  <li><strong>20kHz 高于人耳听觉上限（~16kHz），电机不会发出啸叫声</strong></li>
+  <li>CR = 0~100 &rarr; 占空比 = CCR / 100，步进 1%</li>
+</ul>
+
+<div class="callout info">
+  <strong>为什么 PSC=36-1 而不是别值？</strong>
+  需要 CCR 范围有足够的粒度（100 级步进），同时 PWM 频率 >16kHz。
+  如果 PSC=72-1，ARR 仍用 100-1，则 PWM 频率 = 10kHz，会听到电机啸叫。
+  如果 ARR=1000-1，则频率降为 2kHz，虽然也能转，但噪声非常大。
+</div>
+
+<p><strong>PWM_Init 关键配置</strong>：</p>
+
+<pre><code><span class="cm">// 1. 时基单元</span>
+TIM_TimeBaseInitStructure.TIM_Period = <span class="nu">100</span> - <span class="nu">1</span>;     <span class="cm">// ARR：决定 PWM 周期</span>
+TIM_TimeBaseInitStructure.TIM_Prescaler = <span class="nu">36</span> - <span class="nu">1</span>;  <span class="cm">// PSC：计数脉冲分频</span>
+
+<span class="cm">// 2. 输出比较</span>
+TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;       <span class="cm">// PWM 模式 1：CNT<CCR 时高电平</span>
+TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High; <span class="cm">// 输出极性：高有效</span>
+TIM_OCInitStructure.TIM_Pulse = <span class="nu">0</span>;                      <span class="cm">// 初始占空比 0%，电机不动</span></code></pre>
+
+<p><strong>PWM_SetCompare1</strong>：封装 <code>TIM_SetCompare1(TIM2, Compare)</code>，参数 0~100 对应 0%~100% 占空比。</p>
+
+<div class="callout">
+  <strong>一句话总结</strong>：PWM 模块 = TIM2_CH1(PA0) 输出 20kHz PWM，占空比由 CCR1 寄存器决定，范围 0~100 对应 0%~100%。
+</div>
+
+
+<!-- ─── 2.2 Motor ─── -->
+<h3 id="ch2-2">2.2 Motor 驱动 — 方向脚 + PWM 组成 H 桥控制</h3>
+
+<p><strong>文件</strong>：<code>Hardware/Motor.c</code> + <code>Motor.h</code></p>
+<p><strong>引脚映射</strong>：</p>
+
+<table>
+  <tr><th>引脚</th><th>功能</th><th>连接</th></tr>
+  <tr><td>PA0 (TIM2_CH1)</td><td>PWM 信号</td><td>TB6612 的 PWMA 脚</td></tr>
+  <tr><td>PB12</td><td>GPIO 推挽输出</td><td>TB6612 的 AIN1 脚（方向控制）</td></tr>
+  <tr><td>PB13</td><td>GPIO 推挽输出</td><td>TB6612 的 AIN2 脚（方向控制）</td></tr>
+</table>
+
+<p><strong>Motor_SetPWM 的 H 桥控制真值表</strong>：</p>
+
+<table>
+  <tr><th>Motor_SetPWM(n)</th><th>PB12 (AIN1)</th><th>PB13 (AIN2)</th><th>PWMA 占空比</th><th>电机状态</th></tr>
+  <tr><td>n &gt; 0</td><td>0（低）</td><td>1（高）</td><td>n%</td><td>正转，转速正比于 n</td></tr>
+  <tr><td>n = 0</td><td>0</td><td>0</td><td>0%</td><td>刹车停止</td></tr>
+  <tr><td>n &lt; 0</td><td>1（高）</td><td>0（低）</td><td>|n|%</td><td>反转，转速正比于 |n|</td></tr>
+  <tr><td>n=100（正满）</td><td>0</td><td>1</td><td>100%</td><td>正转最高速</td></tr>
+  <tr><td>n=-100（反满）</td><td>1</td><td>0</td><td>100%</td><td>反转最高速</td></tr>
+</table>
+
+<div class="callout info">
+  <strong>为什么 n=0 时不设置为 0，1（正转且占空比 0%）？</strong>
+  因为占空比 0% 时 PWM 输出恒低，AIN=0,1 + PWM恒低 = 电机一端接地一端高阻，不会刹车。
+  AIN=0,0 是 TB6612 的显式刹车状态，电机会快速停止。对于 PID 停止控制，刹车比自然滑行更好。
+</div>
+
+<p><strong>代码拆解</strong>：</p>
+
+<pre><code><span class="kw">void</span> <span class="fn">Motor_SetPWM</span>(<span class="ty">int8_t</span> PWM)
+{
+    <span class="kw">if</span> (PWM &gt;= <span class="nu">0</span>)                            <span class="cm">// 正转或停止</span>
+    {
+        GPIO_ResetBits(GPIOB, GPIO_Pin_12); <span class="cm">// AIN1 = 0</span>
+        GPIO_SetBits(GPIOB, GPIO_Pin_13);   <span class="cm">// AIN2 = 1</span>
+        PWM_SetCompare1(PWM);               <span class="cm">// 占空比 = PWM/100</span>
+    }
+    <span class="kw">else</span>                                    <span class="cm">// 反转</span>
+    {
+        GPIO_SetBits(GPIOB, GPIO_Pin_12);   <span class="cm">// AIN1 = 1</span>
+        GPIO_ResetBits(GPIOB, GPIO_Pin_13); <span class="cm">// AIN2 = 0</span>
+        PWM_SetCompare1(-PWM);              <span class="cm">// 占空比 = |PWM|/100</span>
+    }
+}</code></pre>
+
+<p>注意参数类型是 <code>int8_t</code>，范围 -128~127。上层 PID 限幅到 ±100，正好匹配。</p>
+
+
+<!-- ─── 2.3 Encoder ─── -->
+<h3 id="ch2-3">2.3 Encoder 驱动 — 定时器编码器模式 + 四倍频</h3>
+
+<p><strong>文件</strong>：<code>Hardware/Encoder.c</code> + <code>Encoder.h</code></p>
+<p><strong>硬件映射</strong>：TIM3 CH1 (PA6) = A 相，TIM3 CH2 (PA7) = B 相</p>
+<p><strong>编码器工作原理（四倍频）</strong>：</p>
+
+<p>AB 相编码器输出两路相位差 90° 的方波。STM32 定时器在编码器模式下，通过检测 A、B 两路的上升沿和下降沿来计数：</p>
+
+<ul>
+  <li><strong>每转脉冲数</strong> = 编码器线数（物理线数）&times; 4（四倍频）</li>
+  <li>如果编码器线数是 1024，则每转计数 4096</li>
+  <li>向上计数 = 正转，向下计数 = 反转（取决于接线）</li>
+</ul>
+
+<p><strong>初始化关键配置</strong>：</p>
+
+<pre><code><span class="kw">void</span> <span class="fn">Encoder_Init</span>(<span class="kw">void</span>)
+{
+    <span class="cm">// 1. 时基单元 — ARR 设最大值，防止溢出重置</span>
+    TIM_TimeBaseInitStructure.TIM_Period = <span class="nu">65536</span> - <span class="nu">1</span>;<span class="cm">// 16 位计数器最大值</span>
+    TIM_TimeBaseInitStructure.TIM_Prescaler = <span class="nu">1</span> - <span class="nu">1</span>;  <span class="cm">// 不分频，用原始编码器脉冲</span>
+
+    <span class="cm">// 2. 输入滤波 — 0xF 最大滤波，抑制编码器信号毛刺</span>
+    TIM_ICInitStructure.TIM_ICFilter = <span class="nu">0xF</span>;
+
+    <span class="cm">// 3. 编码器模式 3：A、B 两路的所有边沿都计数（四倍频）</span>
+    TIM_EncoderInterfaceConfig(TIM3,
+        TIM_EncoderMode_TI12,       <span class="cm">// 两路全用</span>
+        TIM_ICPolarity_Rising,      <span class="cm">// A 相不反相</span>
+        TIM_ICPolarity_Falling);    <span class="cm">// B 相不反相</span>
+}</code></pre>
+
+<div class="callout info">
+  <strong>TIM_ICPolarity_Rising/Falling 在编码器模式下的真实含义</strong>：
+  这里的 Rising/Falling 已经<em>不再表示边沿极性</em>，而是表示是否对输入信号反相。
+  Rising = 不反相，Falling = 反相。如果电机正转时计数值在减小，把 B 相的参数改成 Rising 即可翻转计数方向。
+</div>
+
+<p><strong>Encoder_Get — 增量读取</strong>：</p>
+
+<pre><code><span class="ty">int16_t</span> <span class="fn">Encoder_Get</span>(<span class="kw">void</span>)
+{
+    <span class="ty">int16_t</span> Temp;
+    Temp = TIM_GetCounter(TIM3);  <span class="cm">// 读取当前计数值</span>
+    TIM_SetCounter(TIM3, <span class="nu">0</span>);    <span class="cm">// 立即清零，下次读取的是增量</span>
+    <span class="kw">return</span> Temp;
+}</code></pre>
+
+<p><strong>这是整个系统中最重要的设计之一</strong>：</p>
+
+<ul>
+  <li>返回值不是"累计转了多少圈"，而是<strong>"自上次读取以来转了多少刻度"</strong></li>
+  <li>如果每隔 40ms 读取一次，返回值就<strong>正比于转速</strong>（单位时间的位移 = 速度）</li>
+  <li>电机的标准转速换算：<code>Speed_rps = Encoder_Get() / 408.0 / 0.04</code>（转/秒）</li>
+  <li>注意 <code>Temp</code> 是 <code>int16_t</code>（有符号），正转返回正数，反转返回负数</li>
+</ul>
+
+<div class="callout">
+  <strong>为什么是 int16_t？</strong>
+  40ms 内电机最大转速对应的编码器增量不会超过 ±32767。使用 int16_t 刚好合适，且自动处理正反转符号。
+  如果读取周期更长（如 100ms），需要改用 int32_t 防止溢出。
+</div>
+
+<p><strong>速度 → 位置的转换</strong>（不在 Encoder 模块中，但依赖 Encoder_Get）：</p>
+
+<pre><code>Speed = Encoder_Get();      <span class="cm">// 获取速度（单位：编码器刻度/40ms）</span>
+Location += Speed;          <span class="cm">// 位置 = 累积速度（单位：编码器刻度）</span></code></pre>
+
+<p>这里的位置是"相对初始位置的编码器刻度数"，电机转一圈约 408 个刻度（取决于具体编码器线数和减速比）。</p>
+
+<!-- ─── 2.4 Timer 中断 ─── -->
+<h3 id="ch2-4">2.4 Timer 中断 — 1ms 精确节拍</h3>
+
+<p><strong>文件</strong>：<code>System/Timer.c</code> + <code>Timer.h</code></p>
+<p><strong>硬件</strong>：TIM1 高级定时器，更新中断，1ms 周期</p>
+<p><strong>计算</strong>：72MHz / 72(PSC) / 1000(ARR) = <strong>1000Hz = 1ms 间隔</strong></p>
+
+<pre><code>TIM_TimeBaseInitStructure.TIM_Period = <span class="nu">1000</span> - <span class="nu">1</span>;   <span class="cm">// ARR = 999</span>
+TIM_TimeBaseInitStructure.TIM_Prescaler = <span class="nu">72</span> - <span class="nu">1</span>;  <span class="cm">// PSC = 71</span></code></pre>
+
+<p><strong>中断服务函数的模板</strong>：</p>
+
+<pre><code><span class="kw">void</span> <span class="fn">TIM1_UP_IRQHandler</span>(<span class="kw">void</span>)
+{
+    <span class="kw">if</span> (TIM_GetITStatus(TIM1, TIM_IT_Update) == SET)  <span class="cm">// 检查更新中断标志</span>
+    {
+        <span class="cm">/* 你的控制代码写在这里，每 1ms 执行一次 */</span>
+
+        TIM_ClearITPendingBit(TIM1, TIM_IT_Update);      <span class="cm">// 必须清除中断标志</span>
+    }
+}</code></pre>
+
+<p><strong>中断里能做什么，不能做什么</strong>：</p>
+
+<ul>
+  <li><strong>能做</strong>：读传感器（编码器、ADC）、算 PID、写 PWM 寄存器</li>
+  <li><strong>不能做</strong>：长时间延时（阻塞中断）、<code>printf</code>等重入函数、大数组栈分配</li>
+</ul>
+
+<p><strong>计次分频（software timer）</strong>是课程中最重要的中断编程技巧：</p>
+
+<pre><code><span class="kw">static</span> <span class="ty">uint16_t</span> Count;       <span class="cm">// static 保留值，默认 0</span>
+
+Count ++;                       <span class="cm">// 每 1ms 自增</span>
+<span class="kw">if</span> (Count &gt;= <span class="nu">40</span>)             <span class="cm">// 满 40 次 = 40ms</span>
+{
+    Count = <span class="nu">0</span>;                <span class="cm">// 清零重计</span>
+    <span class="cm">/* 每 40ms 执行一次的控制代码 */</span>
+}</code></pre>
+
+<p>这样只用了一个 1ms 定时器，就获得了 5ms、40ms、50ms 等多个控制周期。</p>
+
+
+<!-- ─── 2.5 RP 电位器 ─── -->
+<h3 id="ch2-5">2.5 RP 电位器 — ADC2 四路轮询</h3>
+
+<p><strong>文件</strong>：<code>Hardware/RP.c</code> + <code>RP.h</code></p>
+<p><strong>引脚</strong>：PA2/PA3/PA4/PA5 = ADC2 通道 2/3/4/5</p>
+<p><strong>设计关键</strong>：同一时刻只能读取一个通道。RP_GetValue(n) 中动态切换规则组通道，然后触发一次转换。</p>
+
+<pre><code><span class="ty">uint16_t</span> <span class="fn">RP_GetValue</span>(<span class="ty">uint8_t</span> n)
+{
+    <span class="kw">if</span> (n == <span class="nu">1</span>)
+        ADC_RegularChannelConfig(ADC2, ADC_Channel_2, <span class="nu">1</span>, ...);
+    <span class="kw">else if</span> (n == <span class="nu">2</span>)
+        ADC_RegularChannelConfig(ADC2, ADC_Channel_3, <span class="nu">1</span>, ...);
+    <span class="cm">// ... 3, 4 同理</span>
+
+    ADC_SoftwareStartConvCmd(ADC2, ENABLE);             <span class="cm">// 触发一次转换</span>
+    <span class="kw">while</span> (ADC_GetFlagStatus(ADC2, ADC_FLAG_EOC) == RESET);<span class="cm">// 等待完成</span>
+    <span class="kw">return</span> ADC_GetConversionValue(ADC2);               <span class="cm">// 返回 0~4095</span>
+}</code></pre>
+
+<p><strong>在主循环中的参数映射</strong>（3 个旋钮调 Kp/Ki/Kd，1 个设目标值）：</p>
+
+<pre><code>Kp = RP_GetValue(<span class="nu">1</span>) / <span class="nu">4095.0</span> * <span class="nu">2</span>;              <span class="cm">// 范围 0~2</span>
+Ki = RP_GetValue(<span class="nu">2</span>) / <span class="nu">4095.0</span> * <span class="nu">2</span>;              <span class="cm">// 范围 0~2</span>
+Kd = RP_GetValue(<span class="nu">3</span>) / <span class="nu">4095.0</span> * <span class="nu">2</span>;              <span class="cm">// 范围 0~2</span>
+Target = RP_GetValue(<span class="nu">4</span>) / <span class="nu">4095.0</span> * <span class="nu">300</span> - <span class="nu">150</span>;<span class="cm">// 范围 -150~150</span></code></pre>
+
+
+<!-- ─── 2.6 AD 角度传感器 ─── -->
+<h3 id="ch2-6">2.6 AD 角度传感器 — PB0 模拟电压读取</h3>
+
+<p><strong>文件</strong>：<code>Hardware/AD.c</code> + <code>AD.h</code></p>
+<p><strong>硬件</strong>：PB0 = ADC1 通道 8，模拟输入</p>
+
+<p>注意：PID 课程中使用的角度传感器<strong>不是 MPU6050</strong>，而是一个<strong>电位器式角度传感器</strong>（通过 AD 采样摆杆角度）。只有更进阶的版本才会用 MPU6050 做 IMU 姿态融合。</p>
+
+<p>AD_GetValue 与 RP_GetValue 功能相同——软件触发单次 AD 转换，返回 0~4095。摆杆竖直时 AD 值约为 1900~2200（课程代码中用 CENTER_ANGLE=2010）。</p>
+
+
+<!-- ═══════════════ CHAPTER 3: 单环 PID 定速 ═══════════════ -->
+<h2 id="ch3"><span class="num">03</span>单环 PID：定速控制的代码实现</h2>
+
+<h3 id="ch3-1">3.1 位置式 PID 公式在 C 代码中的精确表达</h3>
+
+<p>位置式 PID 的数学公式：</p>
+
+<div class="diagram">
+                        k
+u(k) = Kp·e(k) + Ki·∑ e(j) + Kd·[e(k) - e(k-1)]
+                       j=0
+</div>
+
+<p>在 C 代码中的<strong>精确对应</strong>：</p>
+
+<pre><code><span class="cm">// 位置式 PID 公式的 C 语言翻译</span>
+Out = Kp * Error0                          <span class="cm">// 比例项：当前误差 × Kp</span>
+    + Ki * ErrorInt                        <span class="cm">// 积分项：累积误差 × Ki</span>
+    + Kd * (Error0 - Error1);              <span class="cm">// 微分项：误差变化率 × Kd</span></code></pre>
+
+<table>
+  <tr><th>变量</th><th>数学含义</th><th>C 变量名</th><th>更新方式</th></tr>
+  <tr><td>e(k)</td><td>当前周期误差</td><td><code>Error0</code></td><td><code>Error0 = Target - Actual</code></td></tr>
+  <tr><td>e(k-1)</td><td>上一周期误差</td><td><code>Error1</code></td><td><code>Error1 = Error0</code>（在上次）</td></tr>
+  <tr><td>∑e</td><td>误差累积</td><td><code>ErrorInt</code></td><td><code>ErrorInt += Error0</code></td></tr>
+  <tr><td>u(k)</td><td>控制器输出</td><td><code>Out</code></td><td>公式计算得出</td></tr>
+</table>
+
+<div class="callout info">
+  <strong>位置式 vs 增量式的区别</strong>：
+  <ul>
+    <li><strong>位置式</strong>：输出 = 公式直接算出的绝对 PWM 值。代码如上面的公式。</li>
+    <li><strong>增量式</strong>：输出 = 上次输出 + 增量。代码 <code>Out += Kp*(Error0-Error1) + Ki*Error0 + Kd*(Error0-2*Error1+Error2)</code></li>
+  </ul>
+  位置式更直观，课程以位置式为主线。增量式的优势是无积分饱和，但需要小心输出累积。
+</div>
+
+<h3 id="ch3-2">3.2 误差处理的三个关键步骤</h3>
+
+<p>每个 PID 周期执行六个步骤，缺一不可：</p>
+
+<pre><code><span class="cm">// 步骤 1：获取实际值（从传感器读）</span>
+Actual = Encoder_Get();         <span class="cm">// 编码器增量 = 当前速度</span>
+
+<span class="cm">// 步骤 2：更新误差历史</span>
+Error1 = Error0;                <span class="cm">// 上次误差 ← 当前误差</span>
+Error0 = Target - Actual;       <span class="cm">// 当前误差 = 目标 - 实际</span>
+
+<span class="cm">// 步骤 3：误差积分（带 Ki 保护）</span>
+<span class="kw">if</span> (Ki != <span class="nu">0</span>)                   <span class="cm">// 仅当积分项启用时</span>
+    ErrorInt += Error0;         <span class="cm">// 累加当前误差</span>
+<span class="kw">else</span>
+    ErrorInt = <span class="nu">0</span>;                <span class="cm">// Ki=0 时清零积分，防止积压</span>
+
+<span class="cm">// 步骤 4：PID 计算</span>
+Out = Kp * Error0 + Ki * ErrorInt + Kd * (Error0 - Error1);
+
+<span class="cm">// 步骤 5：输出限幅</span>
+<span class="kw">if</span> (Out &gt; <span class="nu">100</span>) { Out = <span class="nu">100</span>; }    <span class="cm">// 防止 PWM 超限</span>
+<span class="kw">if</span> (Out &lt; -<span class="nu">100</span>) { Out = -<span class="nu">100</span>; }  <span class="cm">// 负方向同理</span>
+
+<span class="cm">// 步骤 6：执行控制</span>
+Motor_SetPWM(Out);              <span class="cm">// 输出到电机</span></code></pre>
+
+<h3 id="ch3-3">3.3 实验 02 完整中断代码逻辑</h3>
+
+<div class="diagram">
+<span class="dim">═══════════════ 定速控制中断流程（1ms 基准，40ms 控制周期） ═══════════════</span>
+
+TIM1_UP_IRQHandler() 每 1ms 进入一次
+  │
+  ├─ Key_Tick()                        <span class="dim">← 按键消抖 tick</span>
+  │
+  ├─ Count++                           <span class="dim">← 计次分频器</span>
+  │  └─ if Count >= 40               <span class="dim">← 40ms 才进入控制循环</span>
+  │     │
+  │     ├─ Actual = Encoder_Get()     <span class="dim">← 读编码器增量（速度）</span>
+  │     ├─ Error1 = Error0            <span class="dim">← 迭代误差历史</span>
+  │     ├─ Error0 = Target - Actual   <span class="dim">← 计算当前误差</span>
+  │     ├─ ErrorInt += Error0         <span class="dim">← 积分累积（Ki≠0时）</span>
+  │     ├─ Out = Kp*Error0 + Ki*ErrorInt + Kd*(Error0-Error1)   <span class="dim">← PID</span>
+  │     ├─ Out 限幅到 [-100, 100]     <span class="dim">← 保护</span>
+  │     └─ Motor_SetPWM(Out)          <span class="dim">← 执行</span>
+  │
+  └─ TIM_ClearITPendingBit()           <span class="dim">← 清除标志</span>
+</div>
+
+<p><strong>为什么控制周期选 40ms？</strong></p>
+<ul>
+  <li>40ms 内电机正常转速下编码器增量约 50~150（可分辨）</li>
+  <li>太短（如 5ms）：编码器增量太小，信号噪声占比大，微分项会放大噪声</li>
+  <li>太长（如 100ms）：控制延迟大，系统响应慢，容易震荡</li>
+</ul>
+
+<h3 id="ch3-4">3.4 各变体实验的改进点速览</h3>
+
+<table>
+  <tr><th>实验</th><th>改了什么</th><th>代码变化</th></tr>
+  <tr><td>02 位置式定速</td><td>基础 PID 公式</td><td><code>Out = Kp*Error0 + Ki*ErrorInt + Kd*(Error0-Error1)</code></td></tr>
+  <tr><td>03 增量式定速</td><td>改用增量式公式</td><td><code>Out += Kp*(Error0-Error1) + Ki*Error0 + Kd*(Error0-2*Error1+Error2)</code></td></tr>
+  <tr><td>04 位置式定位</td><td>控制位置（累积编码器值）</td><td><code>Actual = Location</code>（而非 Speed），需要 D 项</td></tr>
+  <tr><td>06 积分限幅</td><td>积分和加幅值上限</td><td>加 <code>if (ErrorInt > 100) ErrorInt = 100</code></td></tr>
+  <tr><td>07 积分分离</td><td>大误差时不积积分</td><td>加 <code>if (|Error0| &lt; 阈值) ErrorInt += Error0</code></td></tr>
+  <tr><td>08 变速积分</td><td>积分速度随误差变化</td><td><code>ErrorInt += f(Error0) * Error0</code>，f 随误差增大而减小</td></tr>
+  <tr><td>09 微分先行</td><td>只对实际值微分（不对目标）</td><td><code>Kd * (ActualLast - Actual)</code> 而非 <code>Kd*(Error0-Error1)</code></td></tr>
+  <tr><td>10 不完全微分</td><td>微分项加一阶低通</td><td>加 <code>Dout = Dout*α + Kd*(Error0-Error1)*(1-α)</code></td></tr>
+  <tr><td>11 死区 + 偏移</td><td>小误差不控制 + 输出偏置</td><td>加 if(|Error0|&lt;deadband) Error0=0; 加 Out += Bias</td></tr>
+</table>
+
+<div class="callout good">
+  <strong>学习建议</strong>：先吃透 02 和 04，理解位置式定速和定位的区别（速度环 PI 就够了，位置环需要 D 抑制震荡）。其他变体都是在这两个基础上的局部改进。
+</div>
+
+
+<!-- ═══════════════ CHAPTER 4: 双环串级 ═══════════════ -->
+<h2 id="ch4"><span class="num">04</span>双环 PID：定速 + 定位串级控制</h2>
+
+<h3 id="ch4-1">4.1 为什么需要双环而不是单环定位</h3>
+
+<p><strong>单环定位的问题</strong>：位置环输出直接给电机 PWM，外环输出变化剧烈（从 100 瞬间跳到 -100）。电机响应跟不上，结果要么冲过头很远，要么到达后震荡。</p>
+
+<p><strong>双环串级的思路</strong>：</p>
+
+<div class="diagram">
+                        ┌──────────┐      ┌──────────┐
+ 目标位置 ──→[外环 位置 PID]──→ 目标速度 ──→[内环 速度 PID]──→ PWM ──→ 电机
+            ↑  实际位置               ↑  实际速度
+            │                        │
+        编码器累积               编码器增量
+</div>
+
+<p>外环思考"要往哪转、转多快"，内环负责"怎么转到这个速度"。外环输出被限幅到 ±20，意味着电机不会超过 20% 满速去追踪位置，<strong>大大减少了冲过头</strong>。</p>
+
+<h3 id="ch4-2">4.2 实验 12 双环裸写 vs 实验 13 struct 封装</h3>
+
+<p>实验 12 的代码用两套独立变量实现了双环，实验 13 改用 <code>PID_t</code> 结构体 + <code>PID_Update</code> 函数封装。对比一下代码变化：</p>
+
+<p><strong>实验 12（裸写）— 内环变量</strong>：</p>
+<pre><code><span class="kw">float</span> InnerTarget, InnerActual, InnerOut;
+<span class="kw">float</span> InnerKp, InnerKi, InnerKd;
+<span class="kw">float</span> InnerError0, InnerError1, InnerErrorInt;</code></pre>
+
+<p><strong>实验 13（封装）— 替换为</strong>：</p>
+<pre><code>PID_t Inner = {
+    .Kp = 0.3, .Ki = 0.3, .Kd = 0,
+    .OutMax = 100, .OutMin = -100
+};
+
+PID_t Outer = {
+    .Kp = 0.3, .Ki = 0, .Kd = 0.4,
+    .OutMax = 20, .OutMin = -20   <span class="cm">// 外环输出限幅更小，控制速度上限</span>
+};</code></pre>
+
+<p><strong>核心的串级连接</strong>（唯一的"让两个环连起来"的代码）：</p>
+<pre><code>Inner.Target = Outer.Out;    <span class="cm">// 外环输出 → 内环目标值</span></code></pre>
+
+<p>中断中的执行流程（12 和 13 逻辑相同，只是 13 用 <code>PID_Update</code> 替代了手动计算）：</p>
+
+<div class="diagram">
+<span class="dim">每 40ms 执行一次（内环计数器触发）</span>
+  Speed = Encoder_Get()
+  Location += Speed
+
+  <span class="dim">── 内环（速度环）</span>
+  Inner.Actual = Speed
+  PID_Update(&amp;Inner)         <span class="dim">← 自动完成 Error0/1、积分、PID 计算、限幅</span>
+  Motor_SetPWM(Inner.Out)
+
+<span class="dim">每 40ms 执行一次（外环计数器触发，与内环同频）</span>
+  <span class="dim">── 外环（位置环）</span>
+  Outer.Actual = Location
+  PID_Update(&amp;Outer)         <span class="dim">← 同上</span>
+  Inner.Target = Outer.Out   <span class="dim">← ★ 串级连接点</span>
+</div>
+
+
+<h3 id="ch4-3">4.3 PID 结构体封装 — PID_Update 函数精读</h3>
+
+<p><strong>PID.h 结构体定义</strong>：</p>
+
+<pre><code><span class="kw">typedef</span> <span class="kw">struct</span> {
+    <span class="kw">float</span> Target;        <span class="cm">// 目标值（可被外部修改）</span>
+    <span class="kw">float</span> Actual;        <span class="cm">// 实际值（每周期由中断写入）</span>
+    <span class="kw">float</span> Out;           <span class="cm">// PID 输出值（计算得出）</span>
+
+    <span class="kw">float</span> Kp;            <span class="cm">// 比例系数</span>
+    <span class="kw">float</span> Ki;            <span class="cm">// 积分系数</span>
+    <span class="kw">float</span> Kd;            <span class="cm">// 微分系数</span>
+
+    <span class="kw">float</span> Error0;        <span class="cm">// 本次误差 e(k)</span>
+    <span class="kw">float</span> Error1;        <span class="cm">// 上次误差 e(k-1)</span>
+    <span class="kw">float</span> ErrorInt;      <span class="cm">// 累积误差 ∑e</span>
+
+    <span class="kw">float</span> OutMax;        <span class="cm">// 输出上限</span>
+    <span class="kw">float</span> OutMin;        <span class="cm">// 输出下限</span>
+} PID_t;</code></pre>
+
+<p><strong>PID_Update 函数全景</strong>：</p>
+
+<pre><code><span class="kw">void</span> <span class="fn">PID_Update</span>(PID_t *p)
+{
+    <span class="cm">// ① 误差更新</span>
+    p-&gt;Error1 = p-&gt;Error0;                    <span class="cm">// 上次 ← 当前</span>
+    p-&gt;Error0 = p-&gt;Target - p-&gt;Actual;       <span class="cm">// 当前 ← 目标 − 实际</span>
+
+    <span class="cm">// ② 积分累积（带 Ki 保护，避免调试时积分爆炸）</span>
+    <span class="kw">if</span> (p-&gt;Ki != <span class="nu">0</span>)
+        p-&gt;ErrorInt += p-&gt;Error0;            <span class="cm">// 启用积分时累加</span>
+    <span class="kw">else</span>
+        p-&gt;ErrorInt = <span class="nu">0</span>;                      <span class="cm">// Ki=0 时清零积分</span>
+
+    <span class="cm">// ③ 位置式 PID 公式</span>
+    p-&gt;Out = p-&gt;Kp * p-&gt;Error0
+            + p-&gt;Ki * p-&gt;ErrorInt
+            + p-&gt;Kd * (p-&gt;Error0 - p-&gt;Error1);
+
+    <span class="cm">// ④ 输出限幅</span>
+    <span class="kw">if</span> (p-&gt;Out &gt; p-&gt;OutMax) { p-&gt;Out = p-&gt;OutMax; }
+    <span class="kw">if</span> (p-&gt;Out &lt; p-&gt;OutMin) { p-&gt;Out = p-&gt;OutMin; }
+}</code></pre>
+
+<div class="callout info">
+  <strong>Ki 保护的设计智慧</strong>：调试时会把 Ki 设 0 先调 PD，此时如果 ErrorInt 一直累加，哪怕调到 Ki 不为 0，之前积累的巨大积分值也会瞬间输出满幅 PWM，电机失控。所以 <code>if (Ki != 0) ... else ErrorInt = 0</code> 是防止"历史债"的正确做法。
+</div>
+
+<p><strong>使用方式总结</strong>：</p>
+
+<pre><code><span class="cm">// 中断里调用，以倒立摆角度环为例</span>
+AnglePID.Actual = Angle;       <span class="cm">// ① 写入实际值</span>
+PID_Update(&amp;AnglePID);         <span class="cm">// ② 一次完成 PID 计算（Target 已在 main 设置）</span>
+Motor_SetPWM(AnglePID.Out);    <span class="cm">// ③ 读取输出并执行</span></code></pre>
+
+
+<!-- ═══════════════ CHAPTER 5: 倒立摆双环 ═══════════════ -->
+<h2 id="ch5"><span class="num">05</span>倒立摆双环 PID 控制</h2>
+
+<h3 id="ch5-1">5.1 倒立摆的控制框图</h3>
+
+<p>倒立摆有两个被控量：<strong>角度</strong>（摆杆要竖直）和<strong>位置</strong>（横杆不能跑偏）。课程代码用<strong>双环串级</strong>结构：</p>
+
+<div class="diagram">
+<span class="dim">┌──────────────── 倒立摆双环控制结构 ────────────────┐</span>
+<span class="dim">│</span>
+<span class="dim">│</span>  位置目标 ──→ [位置环 PD] ──→ 角度偏移 ──→ [角度环 PID] ──→ PWM ──→ 电机
+<span class="dim">│</span>              ↑  横杆实际位置           ↑  摆杆实际角度
+<span class="dim">│</span>              │                         │
+<span class="dim">│</span>          编码器累积           角度传感器 AD_GetValue()
+<span class="dim">│</span>
+<span class="dim">│</span>  串级连接：AnglePID.Target = CENTER_ANGLE - LocationPID.Out
+<span class="dim">│</span>  含义：位置环的输出是 "偏离中心角度 Δ"
+<span class="dim">│</span>         正输出 → 角度目标下降 → 摆杆左倾 → 横杆右移
+<span class="dim">│</span>         负输出 → 角度目标上升 → 摆杆右倾 → 横杆左移
+<span class="dim">└────────────────────────────────────────────────────┘</span>
+</div>
+
+<p><strong>角度环目标值的含义</strong>：</p>
+
+<pre><code>AnglePID.Target = CENTER_ANGLE - LocationPID.Out;
+<span class="cm">// 当 位置环 Out = 0  →  角度目标 = 中心角度（竖直）</span>
+<span class="cm">// 当 位置环 Out > 0  →  角度目标 &lt; 中心角度（摆杆略倾）</span>
+<span class="cm">//                       电机为纠正摆杆角度而移动横杆</span></code></pre>
+
+<div class="callout">
+  <strong>为什么是 CENTER_ANGLE - LocationPID.Out 而不是 +？</strong>
+  这取决于角度传感器的安装方向。如果位置环输出正数时想让横杆向右移动，需要让摆杆右倾（角度传感器值减小），所以是减号。如果实际效果方向反了，把减号改加号或调整 Kp 符号即可。本质上是<strong>符号约定</strong>问题。
+</div>
+
+<h3 id="ch5-2">5.2 角度传感器补偿原理</h3>
+
+<p>课程中的角度传感器是<strong>电位器式</strong>，通过 AD 值直接判断摆杆位置：</p>
+
+<table>
+  <tr><th>摆杆位置</th><th>AD 值范围</th><th>说明</th></tr>
+  <tr><td>中心竖直</td><td>~1900~2200</td><td>CENTER_ANGLE 需要标定</td></tr>
+  <tr><td>左倾</td><td>&lt; CENTER_ANGLE</td><td>值越小越往左倒</td></tr>
+  <tr><td>右倾</td><td>&gt; CENTER_ANGLE</td><td>值越大越往右倒</td></tr>
+  <tr><td>超出中心区间</td><td>偏差 &gt; CENTER_RANGE(500)</td><td>判定为倒下，停止 PID</td></tr>
+</table>
+
+<h3 id="ch5-3">5.3 实验 15 代码逐行精读</h3>
+
+<p><strong>双环的 PID 参数对比</strong>：</p>
+
+<table>
+  <tr><th>参数</th><th>角度环（内环）</th><th>位置环（外环）</th><th>原因</th></tr>
+  <tr><td>Kp</td><td>0.3</td><td>0.4</td><td>角度环决定了"扶住"摆杆的力度</td></tr>
+  <tr><td>Ki</td><td>0.01（很小）</td><td>0（不用）</td><td>位置环不需要消除稳态误差，位置精度不重要</td></tr>
+  <tr><td>Kd</td><td>0.4</td><td>4（很大）</td><td>位置环需要强微分来抑制横杆漂移的速度</td></tr>
+  <tr><td>OutMax/Min</td><td>±100</td><td>±100</td><td>内环直接驱动 PWM（限 ±100）</td></tr>
+  <tr><td>控制周期</td><td>5ms</td><td>50ms</td><td>内环需要快响应稳住摆杆，外环变化慢</td></tr>
+</table>
+
+<div class="callout info">
+  <strong>控制周期不同是倒立摆双环的关键特征</strong>：角度环 5ms 比位置环 50ms 快 10 倍。这是合理的——摆杆角度变化很快（不稳定系统），而横杆位置变化慢得多。内环必须足够快才能"接住"摆杆。
+</div>
+
+<p><strong>倒下自动停止</strong>：</p>
+
+<pre><code><span class="kw">if</span> (! (Angle &gt; CENTER_ANGLE - CENTER_RANGE   <span class="cm">// 500</span>
+    &amp;&amp; Angle &lt; CENTER_ANGLE + CENTER_RANGE))
+{
+    RunState = <span class="nu">0</span>;           <span class="cm">// 角度超出安全范围 → 停止 PID</span>
+}</code></pre>
+
+<p>当 RunState 为 0 时，中断中执行的是 <code>Motor_SetPWM(0)</code>，电机停止。不是简单的 "停止 PID 计算"，而是 "停止 PID + 停止电机 + 继续采样显示"。</p>
+
+<p><strong>按键控制横杆位置</strong>：</p>
+
+<pre><code><span class="kw">if</span> (KeyNum == <span class="nu">2</span>)                              <span class="cm">// K2 按下 → 横杆正转一圈</span>
+{
+    LocationPID.Target += <span class="nu">408</span>;              <span class="cm">// 目标位置 +408（一个编码器刻度/圈）</span>
+    <span class="kw">if</span> (LocationPID.Target &gt; <span class="nu">4080</span>)          <span class="cm">// 最多正转 10 圈</span>
+        LocationPID.Target = <span class="nu">4080</span>;
+}
+<span class="kw">if</span> (KeyNum == <span class="nu">3</span>)                              <span class="cm">// K3 按下 → 横杆反转一圈</span>
+{
+    LocationPID.Target -= <span class="nu">408</span>;              <span class="cm">// 目标位置 -408</span>
+    <span class="kw">if</span> (LocationPID.Target &lt; -<span class="nu">4080</span>)         <span class="cm">// 最多反转 10 圈</span>
+        LocationPID.Target = -<span class="nu">4080</span>;
+}</code></pre>
+
+<p>改变的是外环目标值。外环 PD 侦测到位置偏差后，控制横杆移动到目标位置。因为外环输出 + 角度环偏移的串级结构，<strong>摆杆在横杆移动过程中保持直立</strong>。</p>
+
+
+<!-- ═══════════════ CHAPTER 6: 自动启摆 ═══════════════ -->
+<h2 id="ch6"><span class="num">06</span>自动启摆：有限状态机实现</h2>
+
+<h3 id="ch6-1">6.1 启摆策略与状态设计</h3>
+
+<p>实验 16 的核心是用<strong>有限状态机</strong>实现自动启摆。摆杆从自然下垂状态开始，通过周期性地给电机施加瞬时驱动力，<strong>用共振原理</strong>逐步增大摆杆摆动幅度，直到摆杆进入直立区间后切入 PID 控制。</p>
+
+<p><strong>完整状态转移图</strong>：</p>
+
+<div class="diagram">
+<span class="dim">     停止状态(0)</span>
+<span class="dim">         │ K1 按下</span>
+<span class="dim">         ▼</span>
+<span class="dim">  ┌──→ 判断状态(1) ←──────────────────────────┐</span>
+<span class="dim">  │      │                                       │</span>
+<span class="dim">  │      ├── 右侧最高点 → 21 左转_START_PWM ──→ 22 延时_START_TIME ──→ 23 右转_-START_PWM ──→ 24 延时_START_TIME ──→ 电机停 → 1</span>
+<span class="dim">  │      │</span>
+<span class="dim">  │      ├── 左侧最高点 → 31 右转_-START_PWM ──→ 32 延时_START_TIME ──→ 33 左转_START_PWM ──→ 34 延时_START_TIME ──→ 电机停 → 1</span>
+<span class="dim">  │      │</span>
+<span class="dim">  │      └── 进入中心区间 → 4 PID控制</span>
+<span class="dim">  │                              │</span>
+<span class="dim">  └──────────────────────────────┘ 摆杆倒下 → 0</span>
+</div>
+
+<p><strong>状态编码</strong>：0=停止，1=判断，21-24=左施力序列，31-34=右施力序列，4=PID 控制。</p>
+
+<div class="callout info">
+  <strong>为什么状态码是 21-24 而不是 2-5？</strong>
+  编码设计：十位数表示方向（十位=2 是左施力，十位=3 是右施力），个位数是序列中的步骤（1=施力，2=延时，3=反向施力，4=结束延时）。这是一种工程上的自文档化技巧——看到状态码就知道它在做什么。
+</div>
+
+<h3 id="ch6-2">6.2 实验 16 关键代码分析</h3>
+
+<p><strong>判断摆杆是否到达最高点</strong>是启摆逻辑的核心：</p>
+
+<pre><code><span class="cm">/* 每 40ms 判断一次 */</span>
+<span class="cm">/* 连续采样 3 次角度值，以 40ms 为间隔 */</span>
+Angle2 = Angle1;            <span class="cm">// 120ms 前的角度</span>
+Angle1 = Angle0;            <span class="cm">// 80ms 前的角度</span>
+Angle0 = Angle;             <span class="cm">// 当前角度</span>
+
+<span class="cm">/* 判断右侧最高点：3次角度都在右侧区间，且中间值最小 */</span>
+<span class="kw">if</span> (Angle0 &gt; CENTER_ANGLE + CENTER_RANGE
+ &amp;&amp; Angle1 &gt; CENTER_ANGLE + CENTER_RANGE
+ &amp;&amp; Angle2 &gt; CENTER_ANGLE + CENTER_RANGE
+ &amp;&amp; Angle1 &lt; Angle0
+ &amp;&amp; Angle1 &lt; Angle2)
+{
+    RunState = <span class="nu">21</span>;   <span class="cm">// 在右侧最高点 → 向左施加驱动力</span>
+}</code></pre>
+
+<p>这是一个<strong>三样本峰值检测器</strong>。Angle1 是中间值，如果它比 Angle0 和 Angle2 都小，说明摆杆经过了角度最小值（最高点），此时给一个同方向的瞬时推力，就能<strong>在共振点注入能量</strong>。</p>
+
+<p><strong>施力序列（以左侧施力 31→34 为例）</strong>：</p>
+
+<pre><code><span class="cm">// 状态 31：立刻向右转</span>
+Motor_SetPWM(-START_PWM);       <span class="cm">// 右转，力度由 START_PWM(35) 决定</span>
+CountTime = START_TIME;         <span class="cm">// 计时器初始化为 START_TIME(100)</span>
+RunState = <span class="nu">32</span>;                <span class="cm">// 自动转入延时</span>
+
+<span class="cm">// 状态 32：延时 100ms</span>
+CountTime --;                   <span class="cm">// 每 1ms 减 1</span>
+<span class="kw">if</span> (CountTime == <span class="nu">0</span>) RunState = <span class="nu">33</span>;
+
+<span class="cm">// 状态 33：立刻向左转</span>
+Motor_SetPWM(START_PWM);
+CountTime = START_TIME;
+RunState = <span class="nu">34</span>;
+
+<span class="cm">// 状态 34：延时 100ms</span>
+CountTime --;
+<span class="kw">if</span> (CountTime == <span class="nu">0</span>)
+{
+    Motor_SetPWM(<span class="nu">0</span>);           <span class="cm">// 施力结束，电机停</span>
+    RunState = <span class="nu">1</span>;              <span class="cm">// 回到判断状态</span>
+}</code></pre>
+
+<p>每个施力周期=100ms 右转 + 100ms 左转 = 200ms = <strong>5Hz</strong>。这个频率需要匹配摆杆的自然摆动频率（由摆杆长度决定）。实际调试时通过修改 START_TIME 来匹配。</p>
+
+<p><strong>判断进入直立区间</strong>：</p>
+
+<pre><code><span class="cm">/* 连续 2 次角度都在中心区间内，就认为稳定在直立位置附近 */</span>
+<span class="kw">if</span> (Angle0 &gt; CENTER_ANGLE - <span class="nu">500</span> &amp;&amp; Angle0 &lt; CENTER_ANGLE + <span class="nu">500</span>
+ &amp;&amp; Angle1 &gt; CENTER_ANGLE - <span class="nu">500</span> &amp;&amp; Angle1 &lt; CENTER_ANGLE + <span class="nu">500</span>)
+{
+    Location = <span class="nu">0</span>;                  <span class="cm">// 重置位置参考</span>
+    AnglePID.ErrorInt = <span class="nu">0</span>;          <span class="cm">// 清积分，防止启摆累积的误差积分干扰</span>
+    LocationPID.ErrorInt = <span class="nu">0</span>;
+    RunState = <span class="nu">4</span>;                  <span class="cm">// 切入 PID 控制</span>
+}</code></pre>
+
+
+<!-- ═══════════════ CHAPTER 7: 总结 ═══════════════ -->
+<h2 id="ch7"><span class="num">07</span>核心设计模式总结</h2>
+
+<h3>7.1 代码中用到的关键技术模式</h3>
+
+<table>
+  <tr><th>模式</th><th>出现在哪里</th><th>为什么用</th></tr>
+  <tr><td><strong>计次分频</strong></td><td>所有实验的中断</td><td>用一个 1ms 定时器生成 5/40/50ms 多种周期，不需要多个定时器</td></tr>
+  <tr><td><strong>结构体封装</strong></td><td>PID_t + PID_Update</td><td>一个结构体 = 一个 PID 实例，多环复用同一函数</td></tr>
+  <tr><td><strong>Ki 保护</strong></td><td>PID_Update 中</td><td>Ki=0 时清零积分，防止调试时积分债问题</td></tr>
+  <tr><td><strong>输出限幅</strong></td><td>PID_Update 末尾</td><td>PID 计算的 Out 理论上无限大，必须限制到 PWM 范围（±100）</td></tr>
+  <tr><td><strong>串级连接</strong></td><td>Inner.Target = Outer.Out</td><td>外环的输出作为内环的目标，两个独立 PID 实例通过一行代码串联</td></tr>
+  <tr><td><strong>有限状态机</strong></td><td>实验 16 启摆</td><td>10 种状态覆盖停止→启摆→判断→PID 全流程</td></tr>
+  <tr><td><strong>三样本峰值检测</strong></td><td>实验 16 判断最高点</td><td>连续 3 次采样判别摆杆加速度方向，在共振点注入能量</td></tr>
+</table>
+
+<h3>7.2 数据流动全景图</h3>
+
+<div class="diagram">
+<span class="dim">── 输入层 ──</span>
+  AD_GetValue()      → Angle     <span class="dim">(0~4095，摆杆角度)</span>
+  Encoder_Get()      → Speed     <span class="dim">(int16_t，编码器增量 = 速度)</span>
+  RP_GetValue(1-4)   → Kp,Ki,Kd,Target  <span class="dim">(旋钮调参)</span>
+  Key_GetNum()       → 模式切换  <span class="dim">(按键)</span>
+
+<span class="dim">── 处理层（1ms 中断+计次分频）──</span>
+  Speed 累加 → Location
+  Angle/ Speed/Location → PID_t.Actual
+  PID_Update(p)       → p->Out
+
+<span class="dim">── 串级连接 ──</span>
+  位置环.Out → 角度环.Target  <span class="dim">(倒立摆模式)</span>
+  位置环.Out → 速度环.Target  <span class="dim">(电机定位模式)</span>
+
+<span class="dim">── 输出层 ──</span>
+  Motor_SetPWM(Out)   → GPIO方向+PWM占空比 → TB6612 → 电机转动
+  Serial_Printf(...)  → 串口数据 → SerialPlot 可视化
+  OLED_Printf(...)    → 实时数据显示
+</div>
+
+<h3>7.3 文件依赖图</h3>
+
+<div class="diagram">
+main.c
+ ├── Delay.h
+ ├── OLED.h          <span class="dim">← OLED_Data.c</span>
+ ├── LED.h
+ ├── Timer.h         <span class="dim">← TIM1 1ms 中断基础</span>
+ ├── Key.h           <span class="dim">← 按键去抖</span>
+ ├── RP.h            <span class="dim">← ADC2 旋钮读取</span>
+ ├── Motor.h         <span class="dim">← PWM.h + GPIO 方向脚</span>
+ ├── Encoder.h       <span class="dim">← TIM3 编码器模式</span>
+ ├── Serial.h        <span class="dim">← UART 串口输出</span>
+ ├── AD.h            <span class="dim">← ADC1 角度传感器 (实验14+)</span>
+ └── PID.h           <span class="dim">← PID_t结构体 + PID_Update (实验13+)</span>
+</div>
+
+<hr>
+
+<p style="color: var(--text-dim); font-size: 0.85rem; text-align: center; margin-top: 36px;">
+本笔记基于江协科技 PID 入门教程全部 17 个实验的源代码（有注释版）编写。<br>
+代码文件来自课程资料 <code>程序源码/程序源码-有注释版/</code> 目录。<br>
+生成时间：2026-05-31 &middot; 格式：HTML
+</p>
+
+<a href="#" class="btt">返回顶部</a>
+
+</body>
+</html>
