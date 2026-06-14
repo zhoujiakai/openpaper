@@ -1235,7 +1235,7 @@ LSTM有三个门+独立c和a：(1)遗忘门Γ_f=σ(W_f[a^<t-1>,x^<t>]+b_f)→决
 ## 175 — 2.8GloVe 词向量（11:09）
 - [x] 90.6%
 
-GloVe（Global Vectors for Word Representation）：利用全局共现统计矩阵X_ij（词j出现在词i上下文中的次数）。目标函数：最小化Σ f(X_ij)·(θ_iᵀe_j+b_i+b̃_j-log X_ij)²，f为权重函数截断极端高频词。GloVe=矩阵分解方法，利用所有共现统计→训练速度快且词向量质量好。Word2Vec和GloVe效果相当，可根据具体需求和数据选择。
+GloVe（Global Vectors for Word Representation）：利用全局共现统计矩阵 $X_{ij}$（词j出现在词i上下文中的次数）。目标函数：最小化 $Σ f(X_ij)·(θ_iᵀe_j+b_i+b̃_j-log X_ij)²$，f为权重函数截断极端高频词。GloVe=矩阵分解方法，利用所有共现统计→训练速度快且词向量质量好。Word2Vec和GloVe效果相当，可根据具体需求和数据选择。
 
 ## 176 — 2.9情感分类（07:38）
 - [x] 91.1%
