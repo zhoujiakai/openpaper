@@ -235,3 +235,14 @@ GPIOC->ODR = 0x00000000;
 - 若想灭灯，写 `GPIOC->ODR = 0x00002000;`（bit13 置 1 输出高电平）。
 
 **总结**：开时钟 → 配引脚模式 → 写输出电平，三步即可。
+
+## Q7：Vdd 和 Vss 是什么
+
+> 日期：20260617周三
+
+- **Vdd**（Voltage Drain-to-Drain）：**正电源引脚**，接正电压。STM32F103C8T6 工作电压 3.3V，VDDA 模拟电源引脚可接 2.4V～3.6V。
+- **Vss**（Voltage Source-to-Source）：**接地引脚**，接 0V / GND。
+
+两者命名源自 MOS 管的漏极（drain）和源极（source）。历史上单电源时代曾用 Vcc/Vee，但现代 CMOS 电路统一使用 Vdd/Vss。
+
+原理图中有多对 Vdd/Vss 引脚属正常设计，用于电源去耦——每对 Vdd 旁边配一个 0.1μF 去耦电容，多个电源引脚并联供电以降低阻抗。
