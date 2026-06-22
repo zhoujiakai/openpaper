@@ -1,6 +1,6 @@
 # 江协科技 STM32 入门教程
 
-> 课程来源：[B站 — STM32入门教程-2023版](https://www.bilibili.com/video/BV1th411z7sn/)（免费、中文字幕），UP主：江协科技。
+> 课程来源：[B站 — STM32入门教程-2023版](https://www.bilibili.com/video/BV1th411z7sn/)（免费、开源、中文），UP主：江协科技。
 
 ## 设备控制方向
 
