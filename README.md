@@ -47,7 +47,7 @@
     - 类型：zjk-mastery skill。
     - 学习时长：阅读 AI 笔记 = 2.5 小时。
     - 目标：掌握 C语言 的核心概念，指针与内存管理等。
-- **PID**：[processing/ctrl-江协PID倒立摆](processing/ctrl-江协PID倒立摆/)
+- **PID**：[processing/ctrl-江协PID](processing/ctrl-江协PID/)
     - 类型：网课，8小时，江协科技的PID基础教程。
     - 学习时长：观看视频 + 写笔记 + 写代码 = 24小时。
     - 目标：掌握PID算法应用，具体实践控制编码电机的实验。
