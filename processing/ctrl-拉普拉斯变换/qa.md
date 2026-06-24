@@ -61,3 +61,35 @@ damping = 阻尼 = 阻力（摩擦力、空气阻力……一切让它慢下来�
 
 视频 1 里 3b1b 调那个 $\mu$ 滑块就是演示这个——阻尼从小到大，s 平面上的根从虚轴往左走，合并，然后分开。根在虚轴上→纯振荡（无阻尼）；有虚部→会晃（欠阻尼）；碰到实轴→刚好不晃（临界）；实轴上两棵分开→晃不动了（过阻尼）。那个动画看懂了，一辈子忘不了。
 
+
+---
+
+### Q3: 为什么 $|e^{i\theta}| = |\cos\theta + i\sin\theta|$？
+
+> 时间：20260624周三
+>
+> 位置：视频 1 — 序言 — 用物理方法理解欧拉公式
+
+因为**欧拉公式**说它们就是**同一个数**，模长当然相等：
+
+$$
+e^{i\theta} = \cos\theta + i\sin\theta
+$$
+
+左右两边只是同一个复数的两种写法而已。从泰勒展开可以看清楚为什么它们相等：
+
+$$
+\begin{aligned}
+e^{i\theta} &= 1 + i\theta - \frac{\theta^2}{2!} - i\frac{\theta^3}{3!} + \frac{\theta^4}{4!} + i\frac{\theta^5}{5!} - \cdots \\[4pt]
+&= \underbrace{\left(1 - \frac{\theta^2}{2!} + \frac{\theta^4}{4!} - \cdots\right)}_{\cos\theta}
++ i\underbrace{\left(\theta - \frac{\theta^3}{3!} + \frac{\theta^5}{5!} - \cdots\right)}_{\sin\theta}
+\end{aligned}
+$$
+
+**实部正好是 $\cos\theta$ 的泰勒级数，虚部正好是 $\sin\theta$ 的泰勒级数**，所以 $e^{i\theta} = \cos\theta + i\sin\theta$ 是恒等式。
+
+因此：
+
+- $|e^{i\theta}| = |\cos\theta + i\sin\theta|$ 成立，因为左右是同一个数
+- 进一步：$|\cos\theta + i\sin\theta| = \sqrt{\cos^2\theta + \sin^2\theta} = 1$，所以 $|e^{i\theta}| = 1$
+- 几何直觉：$e^{i\theta}$ 在单位圆上转，模长始终为 1
