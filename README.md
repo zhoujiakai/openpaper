@@ -1,6 +1,4 @@
 # <p align="center">OpenPaper
-> <p align="center">开卷有益。好好学习，天天向上。
-
 技术学习资源零散难追踪，学习过程缺少进度反馈与日志积累，难以衡量掌握程度与学习效率。AI 工具的成熟让这些环节的成本被大幅压缩。
 
 本仓库系统性收录 AI / CV / Web3 / 软件工程等领域的论文与教程，配合阅读进度管理与 AI 精读工具，持续构建一个不断迭代的知识库。既是个人学习笔记及日志，也是一份可复用的路径参考。
@@ -18,129 +16,12 @@
 │   └── README.md
 ├── deprecated/             # 已弃用的资源
 │   └── README.md
-└── more/                   # 非技术资源
-    ├── README.md           # 正在读
-    ├── README.open.md      # 待读
-    ├── README.closed.md    # 已读
-    └── README.recommend.md # 推荐
 ```
 
 ## 工具
 
 - [Typora](https://typora.io) — 所见即所得的 Markdown 编辑器，轻量流畅，适合日常阅读和编辑 Markdown 笔记。
 - [Codex](https://openai.com/codex/) — AI 桌面版编程助手，擅长代码编写、文件操作和终端任务，本仓库的学习笔记均借助它完成。
- - [zjk-mastery](https://github.com/zhoujiakai/openskill) — Codex Skill，技术知识学习工具，三阶段学习闭环（输入 → 思考 → 输出）：AI 结构化笔记生成 + 苏格拉底式互动问答 + A4 默写测试，支持间隔重复回测（周/月/年）。
-
-# <p align="center">地图
-
-整理各技术方向的学习路线，预估每个资源的学习投入。
-
-## 设备控制
-
-> 总共学习时长：237 小时
-
-包括 4 个方向的学习：机器学习、编程语言、嵌入式开发、自动控制。以下路线仍在迭代，仅供参考。
-
-- **机器学习**：[ml-吴恩达机器学习](processing/ml-吴恩达机器学习/)
-    - 类型：网课，20小时，吴恩达经典的机器学习。
-    - 学习时长：观看视频 +复述 + 实验 + 讲述 = 20x(2+1+0.5+0.3)=76 小时，讲述 30000 字。
-    - 目标：掌握经典机器学习算法的原理与实现，能够独立完成数据预处理、模型选择、训练调优与误差分析的完整流程。
-- **深度学习**：[ml-吴恩达深度学习](processing/ml-吴恩达深度学习/)
-    - 类型：网课，28.5 小时，吴恩达经典的深度学习。
-    - 学习时长：观看视频 +复述 + 实验 + 讲述 = 28.5x(2+1+0.5+0.3)=108.3 小时，讲述 40000 字。
-    - 目标：掌握深度神经网络、CNN、RNN、LSTM、Transformer等核心架构，能够使用深度学习框架完成图像分类、序列建模等任务。
-- **C语言**：[se-C语言/](processing/se-C语言/)
-    - 类型：zjk-mastery skill，2小时。
-    - 学习时长：阅读 ai 笔记 + ai 问答 + 测试题 = 2x(1+0.5+0.5)=4 小时。
-    - 目标：掌握 C语言 的核心概念，指针与内存管理等。
-- **STM32**：[ctrl-江协STM32](processing/ctrl-江协STM32/)
-    - 类型：网课，33.5 小时，江协科技 STM32 入门教程（2023版），共 50 集。
-    - 学习范围：看前 14 个视频，8 小时。
-    - 学习时长：观看视频 +复述 + 写代码 + 讲述 = 8x(1+1+1+0.3)=26.4 小时，讲述 5000 字。
-    - 目标：掌握设备控制方向上嵌入式开发最基本的上下文，包括嵌入式项目的流程、嵌入式硬件的概念、嵌入式软件的概念，完成外部中断和定时器控制设备的实验。
-- **PID**：[ctrl-江协PID](processing/ctrl-江协PID/)
-    - 类型：网课，8 小时，江协科技的PID基础教程。
-    - 学习范围：看第 1、2、3、5 集，3 小时。
-    - 学习时长：观看视频 +复述 + 写代码 + 讲述 = 3x(1+1+1+0.3)=9.9 小时，讲述 2000 字。
-    - 目标：掌握基本的 PID 算法原理，并完成 PID 闭环控制电机的实验。
-- **拉普拉斯变换**：[ctrl-拉普拉斯变换](processing/ctrl-拉普拉斯变换/)
-    - 类型：视频，1.5 小时，3blue1brown的视频
-    - 学习范围：全部视频，1.5 小时。
-    - 学习时长：0.75倍速观看视频 +复述 + 补齐背景知识 + 讲述 = 1.5/0.75x(2+1+2+0.3)=10.6 小时。
-    - 目标：掌握拉普拉斯变换的技巧，是控制理论的基本方法。
-- **控制理论**：[ctrl-Advanced控制理论](processing/ctrl-Advanced控制理论/)
-    - 类型：网课，6 小时，DR_CAN 的控制理论入门教程
-    - 学习范围：第 1、2、3 小节，0.5 小时。
-    - 学习时长：0.75倍速观看视频 +复述 + 补齐背景知识 + 讲述 = 0.5/0.75x(2+1+2+0.3)=3.533 小时。
-    - 目标：掌握控制理论的符号标记法和术语，为 MPC、模糊控制内容的学习做铺垫。
-- **MPC**：[ctrl-MPC模型预测控制器](processing/ctrl-MPC模型预测控制器/)
-    - 类型：视频，1 小时，DR_CAN 讲解 MPC
-    - 学习范围：全部视频，1小时。
-    - 学习时长：观看视频 +复述 + 写代码 + 讲述 = 1x(2+1+1+0.3)=4.3 小时。
-    - 目标：掌握 MPC 基本原理、预测模型、滚动优化与约束处理，理解最优控制在实际系统中的应用框架。
-- **模糊控制**：[ctrl-模糊控制](processing/ctrl-模糊控制/)
-    - 类型：视频，20min，模糊控制讲解
-    - 学习范围：全部视频，20min。
-    - 学习时长：观看视频 +复述 + 讲述 = 0.33x(2+1+0.3)=1.089 小时。
-    - 目标：对模糊控制有基本概念。
-- **PHM**：[ctrl-PHM故障预测与健康管理](processing/ctrl-PHM故障预测与健康管理/)
-    - 类型：视频，2 小时，天泽智云发布的视频教程
-    - 学习范围：全部视频，2 小时
-    - 学习时长：观看视频 +复述 + 讲述 = 2x(1+1+0.3)=4.6 小时。
-    - 目标：了解 PHM 的项目周期，明确各阶段的目标，了解使用到的算法。
-- **LSTM**：[ml-LSTM用电负荷预测](processing/ml-LSTM用电负荷预测)
-
-    - 类型：视频，5 小时，24集
-    - 学习范围：第17～24小节，2.5 小时
-    - 学习时长：观看视频 +复述 + 写代码 + 讲述 = 2.5x(1+1+1+0.3)=8.25 小时。
-    - 目标：构建 LSTM 模型实践用电负荷预测的项目。
-
-- **算法题**：[al-LeetCode热题100/](al-LeetCode热题100/)
-
-    - 类型：算法题，Python3
-
-    - 学习范围：全部题目
-    - 学习时长：解题 = 100x20/60=33 小时。
-
-    - 目标：熟悉 17 个主题的编程题（哈希、双指针、滑动窗口、子串、数组、矩阵、链表、二叉树、图论、回溯、二分查找、栈、堆、贪心、动态规划、多维动态规划、技巧）。
-
-
-## 开发技术
-
-以下路线仍在迭代，仅供参考。
-
-掌握基本的开发技术。
-
-- Python异步 → [closed/ai-python-async](closed/ai-python-async/)
-- FastAPI + Pydantic → [closed/se-fastapi](closed/se-fastapi/)、SQLAlchemy → [closed/se-sqlalchemy](closed/se-sqlalchemy/)
-- Celery 异步任务队列 → [open/se-celery](open/se-celery/)
-- Redis缓存中间件 → [open/se-redis](open/se-redis/)，Python多级缓存架构、分布式锁、缓存雪崩/穿透解决方案、哨兵集群搭建
-- Docker容器化、Nginx反向代理部署
-- MySQL、PostgreSQL 数据库设计和 SQL 调优，分库分表、索引优化，使用 SQLAlchemy 进行ORM映射和慢查询分析
-- 理解微服务架构中的概念 → [closed/se-microservice](closed/se-microservice/)
-- 设计模式：装饰器、生成器等
-- 消息队列 RabbitMQ & Kafka → [open/se-message-queue](open/se-message-queue/)
-
-掌握一些AI应用的技术。
-
-- Transformer的原理 → [closed/ai-transformer](closed/ai-transformer/)
-- Prompt Engineering → [closed/ai-prompt-engineering](closed/ai-prompt-engineering/)
-- RAG → [closed/ai-rag](closed/ai-rag/)
-- Agent与工作流 → [closed/ai-agent](closed/ai-agent/)
-- Claude Code源码 → [open/se-ClaudeCode源码](open/se-ClaudeCode源码/)
-- OpenClaw源码 → [open/se-OpenClaw源码](open/se-OpenClaw源码/)
-- LangChain、LangGraph、LangSmith
-- Python爬虫 → [open/se-web-scraping-anti-detection](open/se-web-scraping-anti-detection/)
-
-## 算法
-
-以下路线仍在迭代，仅供参考。
-
-- LeetCode热题100 → [open/al-LeetCode热题100](open/al-LeetCode热题100/)
-- 剑指offer50道题
-- 深度优先&广度优先算法等
-- 周志华机器学习西瓜书 → [open/ml-周志华机器学习](open/ml-周志华机器学习/)
-- 吴恩达机器学习网课 → [closed/ml-吴恩达机器学习](closed/ml-吴恩达机器学习/)
 
 ## 许可证
 
